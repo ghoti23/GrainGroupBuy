@@ -1,225 +1,47 @@
 <?php
-class GroupBuy implements JsonSerializable {
-	private $name;
-	private $owner;
-	private $ID;
-	private $orders = array();
-	private $startDate;
-	private $endDate;
-	private $notes;
-	private $quote;
-	private $orderSpreadsheet;
-	private $catalog;
-	private $tax;
-	private $shipping;
-	private $hopsOnly;
-	private $grainOnly;
-	private $allowSplit;
-	private $splitAmt;
+class GroupBuy implements JsonSerializable
+{
+    private $name;
+    private $owner;
+    private $ID;
+    private $orders = array();
+    private $startDate;
+    private $endDate;
+    private $notes;
+    private $quote;
+    private $orderSpreadsheet;
+    private $catalog;
+    private $tax;
+    private $shipping;
+    private $hopsOnly;
+    private $grainOnly;
+    private $allowSplit;
+    private $splitAmt;
     private $supplier;
     private $markup;
 
-    public function setMarkup($markup)
+    static function load($results)
     {
-        $this->markup = $markup;
-    }
-
-    public function getMarkup()
-    {
-        return $this->markup;
-    }
-
-    public function setID($ID)
-    {
-        $this->ID = $ID;
-    }
-
-    public function getID()
-    {
-        return $this->ID;
-    }
-
-    public function setAllowSplit($allowSplit)
-    {
-        $this->allowSplit = $allowSplit;
-    }
-
-    public function getAllowSplit()
-    {
-        return $this->allowSplit;
-    }
-
-    public function setCatalog($catalog)
-    {
-        $this->catalog = $catalog;
-    }
-
-    public function getCatalog()
-    {
-        return $this->catalog;
-    }
-
-    public function setEndDate($endDate)
-    {
-        $this->endDate = $endDate;
-    }
-
-    public function getEndDate()
-    {
-        return $this->endDate;
-    }
-
-    public function setGrainOnly($grainOnly)
-    {
-        $this->grainOnly = $grainOnly;
-    }
-
-    public function getGrainOnly()
-    {
-        return $this->grainOnly;
-    }
-
-    public function setHopsOnly($hopsOnly)
-    {
-        $this->hopsOnly = $hopsOnly;
-    }
-
-    public function getHopsOnly()
-    {
-        return $this->hopsOnly;
-    }
-
-    public function setNotes($notes)
-    {
-        $this->notes = $notes;
-    }
-
-    public function getNotes()
-    {
-        return $this->notes;
-    }
-
-    public function setOrderSpreadsheet($orderSpreadsheet)
-    {
-        $this->orderSpreadsheet = $orderSpreadsheet;
-    }
-
-    public function getOrderSpreadsheet()
-    {
-        return $this->orderSpreadsheet;
-    }
-
-    public function setOrders($orders)
-    {
-        $this->orders = $orders;
-    }
-
-    public function getOrders()
-    {
-        return $this->orders;
-    }
-
-    public function setOwner($owner)
-    {
-        $this->owner = $owner;
-    }
-
-    public function getOwner()
-    {
-        return $this->owner;
-    }
-
-    public function setQuote($quote)
-    {
-        $this->quote = $quote;
-    }
-
-    public function getQuote()
-    {
-        return $this->quote;
-    }
-
-    public function setShipping($shipping)
-    {
-        $this->shipping = $shipping;
-    }
-
-    public function getShipping()
-    {
-        return $this->shipping;
-    }
-
-    public function setSplitAmt($splitAmt)
-    {
-        $this->splitAmt = $splitAmt;
-    }
-
-    public function getSplitAmt()
-    {
-        return $this->splitAmt;
-    }
-
-    public function setStartDate($startDate)
-    {
-        $this->startDate = $startDate;
-    }
-
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    public function setTax($tax)
-    {
-        $this->tax = $tax;
-    }
-
-    public function getTax()
-    {
-        return $this->tax;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setSupplier($supplier)
-    {
-        $this->supplier = $supplier;
-    }
-
-    public function getSupplier()
-    {
-        return $this->supplier;
-    }
-
-
-
-    static function load($results) {
         $groupBuy = GroupBuy::loadMultiple($results);
         return $groupBuy[0];
     }
 
-    static function loadMultiple($results) {
+    static function loadMultiple($results)
+    {
         $groupBuys = array();
-        $x=0;
+        $x = 0;
         if ($results != null) {
             foreach ($results as $row) {
                 $groupBuy = GroupBuy::mapRow($row);
-                $groupBuys[$x]=$groupBuy;
+                $groupBuys[$x] = $groupBuy;
                 $x++;
             }
         }
         return $groupBuys;
     }
 
-    static function mapRow ($row) {
+    static function mapRow($row)
+    {
         $groupBuy = new GroupBuy();
         if (!empty($row["id"])) {
             $groupBuy->setId($row["id"]);
@@ -276,21 +98,46 @@ class GroupBuy implements JsonSerializable {
         }
         return $groupBuy;
     }
-	
-	function allowSplit($numOfSplits) {
-		if ($this->allowSplit) {
-			if ( empty($this->splitAmt) ) {
-				return true;
-			} else if ( ($this->splitAmt > $numOfSplits)  ) {
-				return true;
-			} else {
-			return false;
-			}
-		}
-		return false;
-	}
 
-    public function jsonSerialize() {
+    public function isActive()
+    {
+        $now = time();
+        if (strtotime($this -> getStartDate()) < $now && strtotime($this -> getEndDate()) >= $now) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getDaysRemaining()
+    {
+        $now = time();
+        $start = strtotime($this -> getStartDate());
+        $end = strtotime($this -> getEndDate());
+
+        if ($start < $now && $end >= $now) {
+            return floor(abs($now - $end) / (60 * 60 * 24));
+        }
+
+        return floor(abs($now - $start) / (60 * 60 * 24));
+    }
+
+    function allowSplit($numOfSplits)
+    {
+        if ($this->allowSplit) {
+            if (empty($this->splitAmt)) {
+                return true;
+            } else if (($this->splitAmt > $numOfSplits)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public function jsonSerialize()
+    {
         return [
             'id' => $this->getId(),
             'owner' => $this->getOwner(),
@@ -313,5 +160,186 @@ class GroupBuy implements JsonSerializable {
         ];
     }
 
+    public function getID()
+    {
+        return $this->ID;
+    }
+
+    public function setID($ID)
+    {
+        $this->ID = $ID;
+    }
+
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    public function setOrders($orders)
+    {
+        $this->orders = $orders;
+    }
+
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+    }
+
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+    }
+
+    public function getQuote()
+    {
+        return $this->quote;
+    }
+
+    public function setQuote($quote)
+    {
+        $this->quote = $quote;
+    }
+
+    public function getOrderSpreadsheet()
+    {
+        return $this->orderSpreadsheet;
+    }
+
+    public function setOrderSpreadsheet($orderSpreadsheet)
+    {
+        $this->orderSpreadsheet = $orderSpreadsheet;
+    }
+
+    public function getCatalog()
+    {
+        return $this->catalog;
+    }
+
+    public function setCatalog($catalog)
+    {
+        $this->catalog = $catalog;
+    }
+
+    public function getTax()
+    {
+        return $this->tax;
+    }
+
+    public function setTax($tax)
+    {
+        $this->tax = $tax;
+    }
+
+    public function getShipping()
+    {
+        return $this->shipping;
+    }
+
+    public function setShipping($shipping)
+    {
+        $this->shipping = $shipping;
+    }
+
+    public function getSupplier()
+    {
+        return $this->supplier;
+    }
+
+    public function setSupplier($supplier)
+    {
+        $this->supplier = $supplier;
+    }
+
+    public function getSplitAmt()
+    {
+        return $this->splitAmt;
+    }
+
+    public function setSplitAmt($splitAmt)
+    {
+        $this->splitAmt = $splitAmt;
+    }
+
+    public function getAllowSplit()
+    {
+        return $this->allowSplit;
+    }
+
+    public function setAllowSplit($allowSplit)
+    {
+        $this->allowSplit = $allowSplit;
+    }
+
+    public function getHopsOnly()
+    {
+        return $this->hopsOnly;
+    }
+
+    public function setHopsOnly($hopsOnly)
+    {
+        $this->hopsOnly = $hopsOnly;
+    }
+
+    public function getGrainOnly()
+    {
+        return $this->grainOnly;
+    }
+
+    public function setGrainOnly($grainOnly)
+    {
+        $this->grainOnly = $grainOnly;
+    }
+
+    public function getMarkup()
+    {
+        return $this->markup;
+    }
+
+    public function setMarkup($markup)
+    {
+        $this->markup = $markup;
+    }
+
 }
+
 ?>

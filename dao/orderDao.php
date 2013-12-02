@@ -229,22 +229,6 @@ class orderDao {
         }
     }
 
-    public function insertProduct($groupBuy_ID, $amount, $product_ID, $user) {
-        try {
-            if (empty($amount)) {
-                return;
-            }
-
-            $sql = "INSERT INTO user_product (email, groupBuyId, productId, amount) VALUES (?, ?, ?, ?)";
-            $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
-            $sth->execute(array ( $user->getEmail(), $groupBuy_ID, $product_ID, $amount) );
-
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
     public function setProductOrder($groupBuy_ID,$amount,$product,$user) {
         try {
             $sql = "UPDATE user_product set amount = ? where groupBuyId = ? and email = ? and productId = ?";
@@ -267,6 +251,7 @@ class orderDao {
             echo $e->getMessage();
         }
     }
+
     public function getGroupBuyProductOrder($groupbuy,$user) {
         try {
             $sql = "SELECT distinct * from groupbuy join user_product on groupbuy.ID = user_product.groupbuyID join product on product.Id = user_product.productId WHERE groupbuy.ID = ? and user_product.email = ? ORDER BY product.name";
@@ -316,4 +301,106 @@ class orderDao {
             echo $e->getMessage();
         }
     }
+
+    /**
+     * New user_order functions
+     */
+    public function addProduct($groupBuy_ID, $amount, $product_ID, $user) {
+        try {
+            if (empty($amount)) {
+                return;
+            }
+
+            $sql = "INSERT INTO user_order (email, groupBuyId, productId, amount) VALUES (?, ?, ?, ?)";
+            $pdo = $this->pdoObject;
+            $sth=$pdo->prepare($sql);
+            $sth->execute(array ( $user->getEmail(), $groupBuy_ID, $product_ID, $amount) );
+
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function removeProduct($groupBuyId, $productId, $user) {
+        try {
+            $sql = "DELETE from user_order where groupBuyId = ? and productId = ? and email = ?";
+            $pdo = $this->pdoObject;
+            $sth=$pdo->prepare($sql);
+            $sth->execute(array ($groupBuyId, $productId, $user->getEmail()) );
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getOrder($id, $user) {
+        try {
+            $sql = "select email, productId, groupBuyId, amount, p.* from (select email, productId, groupBuyId, sum(amount) as amount from user_order where groupBuyId = ? and email = ? group by email, productId, groupBuyId) up, product p where p.id = up.productId order by name";
+            $pdo = $this->pdoObject;
+            $sth=$pdo->prepare($sql);
+            $sth->execute(array ($id, $user->getEmail()) );
+            $results = $sth->fetchAll();
+            $order = Order::load($results);
+            if (!empty($order)) {
+                $order->setSplit($this->selectGroupBuyOrderSplit($id, $user));
+            }
+
+            return $order;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function getOrderHistory($user)
+    {
+        try {
+            $sql = 'select id, name, owner, owner AS ownerEmail, startDt, endDt from groupbuy g where id in (select groupBuyId from user_order where email = ?) and g.endDt <= CURRENT_DATE() order by endDt';
+            $pdo = $this->pdoObject;
+            $sth = $pdo->prepare($sql);
+            $sth->execute(array ($user->getEmail()));
+            $results = $sth->fetchAll();
+            $orders = GroupBuy::loadMultiple($results);
+            return $orders;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function getAllOrdersTotalPounds ($groupBuyID) {
+        try {
+            $sql = "select SUM(amount*pounds) as product_total from user_order join product on user_order.productID = product.id where groupBuyId = ?";
+            $pdo = $this->pdoObject;
+            $sth=$pdo->prepare($sql);
+            $sth->execute(array ($groupBuyID) );
+            $results = $sth->fetchAll();
+            if ($results != null) {
+                foreach ($results as $row) {
+                    return $row["product_total"];
+                }
+            } else {
+                return 0;
+            }
+        } catch (Exception $e) {
+            echo "Error: ". $e->getMessage();
+        }
+    }
+
+    public function getUserOrderTotalPounds ($groupBuyId, $user) {
+        try {
+            $sql = "select SUM(amount*pounds) as product_total from user_order join product on user_order.productID = product.id where groupBuyId = ? AND email = ?";
+            $pdo = $this->pdoObject;
+            $sth=$pdo->prepare($sql);
+            $sth->execute(array ($groupBuyId, $user->getEmail()) );
+            $results = $sth->fetchAll();
+            if ($results != null) {
+                foreach ($results as $row) {
+                    return $row["product_total"];
+                }
+            } else {
+                return 0;
+            }
+        } catch (Exception $e) {
+            echo "Error: ". $e->getMessage();
+        }
+    }
+
 }

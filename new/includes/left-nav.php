@@ -1,24 +1,10 @@
 <?php
-
 if (isset($_SESSION['activeGroupBuy'])){
-    $activeGroupBuy = $_SESSION['activeGroupBuy'];
-    $groupBuyDao = new groupBuyDao();
-    $orderDao = new orderDao();
-    $userDao = new userDao();
-    $groupBuyDao -> connect($host, $pdo);
-    $orderDao -> connect($host, $pdo);
-    $userDao -> connect($host, $pdo);
-
-    $groupBuy = $groupBuyDao -> get($activeGroupBuy);
-    $currentOrder = $orderDao -> get($activeGroupBuy, $user);
-    $expiredOrders = $groupBuyDao -> selectExpireGroupBuy();
-
-    $groupBuyTotal = $orderDao -> getTotalPounds($activeGroupBuy);
-    $userTotal = $orderDao -> getUserTotalPounds($activeGroupBuy, $user);
+    $expiredOrders = $orderDao -> getOrderHistory($user);
+    $groupBuyTotal = $orderDao -> getAllOrdersTotalPounds($activeGroupBuy);
+    $userTotal = $orderDao -> getUserOrderTotalPounds($activeGroupBuy, $user);
     $totalMembers = $userDao -> getTotalMembers();
-    $utils = new Utils;
 }
-
 ?>
 
 <div id="current-order" class="well">
@@ -36,7 +22,7 @@ if (isset($_SESSION['activeGroupBuy'])){
         ?>
             <dl>
                 <dt><a href="/new/order.php?id=<?php print $expiredOrder->getId()?>"><?php print $expiredOrder->getName()?></a></dt>
-                <dd><?php print $expiredOrder->getEndDate()?> <span>$61.60</span></dd>
+                <dd><?php print $expiredOrder->getEndDate()?> <span></span></dd>
             </dl>
         <?php } ?>
         <?php } else {  ?>
@@ -54,11 +40,11 @@ if (isset($_SESSION['activeGroupBuy'])){
         <dd></dd>
     </dl>
     <dl>
-        <dt>Purchased Pounds<br/>(Everyone): <span><?php print $groupBuyTotal; ?> lbs</span></dt>
+        <dt>Purchased Pounds<br/>(Everyone): <span><?php print round($groupBuyTotal); ?> lbs</span></dt>
         <dd></dd>
     </dl>
     <dl>
-        <dt>Purchased Pounds<br/>(You): <span><?php print $userTotal; ?> lbs</span></dt>
+        <dt>Purchased Pounds<br/>(You): <span><?php print round($userTotal); ?> lbs</span></dt>
         <dd></dd>
     </dl>
 </div>

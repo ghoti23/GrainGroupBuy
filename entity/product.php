@@ -190,6 +190,19 @@ class Product implements JsonSerializable {
         return $this->getPounds();
     }
 
+    public function getDisplayAmount()
+    {
+        if ($this->getType() == 'hops') {
+            return ($this->getAmount() * 11) . " lbs";
+        }
+
+        if ($this->getType() == 'grain') {
+            return ($this->getAmount() * $this->getPounds()) . " lbs";
+        }
+
+        return $this->getAmount();
+    }
+
     static function load($results) {
         $products = Product::loadMultiple($results);
         return $products[0];

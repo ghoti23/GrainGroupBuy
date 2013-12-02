@@ -31,6 +31,10 @@ if ($type == 'top') {
     $topGrains = $groupBuyDao -> getTopGrains();
     $topHops = $groupBuyDao -> getTopHops();
     $topSupplies = $groupBuyDao -> getTopSupplies();
+} else if ($type == 'split' && isset($_SESSION['activeGroupBuy'])) {
+    $productDao = new productDao();
+    $productDao->connect($host, $pdo);
+    $typeProducts = $productDao->getAllSplits($_SESSION['activeGroupBuy']);
 } else {
     $productDao = new productDao();
     $productDao->connect($host, $pdo);
@@ -56,6 +60,7 @@ if ($type == 'top') {
                     <h4>Products</h4>
                     <ul class="nav nav-pills">
                         <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="/new/dashboard.php">Top Sellers</a></li>
+                        <li <?php if ($type == 'split') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=split">Active Splits</a></li>
                         <li <?php if ($type == 'hops') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=hops">Hops</a></li>
                         <li <?php if ($type == 'grain') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=grain">Grains</a></li>
                         <li <?php if ($type == 'supplies') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=supplies">Supplies</a></li>
@@ -93,6 +98,15 @@ if ($type == 'top') {
                             <ul class="list-group">
                                 <?php
                                 $products = $topSupplies;
+                                include("includes/product-row.php");
+                                ?>
+                            </ul>
+                        </div>
+                    <?php } else if ($type == 'split') { ?>
+                        <div>
+                            <ul class="list-group">
+                                <?php
+                                $products = $typeProducts;
                                 include("includes/product-row.php");
                                 ?>
                             </ul>

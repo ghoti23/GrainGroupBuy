@@ -25,7 +25,7 @@ $order_id = $_SESSION['activeGroupBuy'];
 $orderDao = new orderDao();
 $orderDao -> connect($host, $pdo);
 $id = strip_tags($_REQUEST["id"]);
-$orderDao->removeProductOrder($order_id, $id, $user);
+$orderDao->removeProduct($order_id, $id, $user);
 
 header("location:/new/order.php");
 

@@ -12,7 +12,7 @@ require '../properties.php';
 require '../utils.php';
 
 session_start();
-if (!isset($_SESSION['user'])){
+if (!isset($_SESSION['user']) || !isset($_SESSION['activeGroupBuy'])){
     header("location:/new/index.php");
 }
 
@@ -22,11 +22,13 @@ if (!isset($_REQUEST["id"])){
     $order_id = strip_tags($_REQUEST["id"]);
 }
 
+$active_edit = ($_SESSION['activeGroupBuy'] == $order_id);
+
 $user = $_SESSION['user'];
 
 $orderDao = new orderDao();
 $orderDao -> connect($host, $pdo);
-$order = $orderDao->get($order_id, $user);
+$order = $orderDao->getOrder($order_id, $user);
 $order_products = $order -> getProduct();
 
 $groupBuyDao = new groupBuyDao();
@@ -60,8 +62,10 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
-                                <th>Total</th>
-                                <th>&nbsp;</th>
+                                <th <?php if (!$active_edit) { ?>colspan="2"<?php } ?>>Total</th>
+                                <?php if ($active_edit) { ?>
+                                    <th>&nbsp;</th>
+                                <?php } ?>
                             </tr>
                             </thead>
                             <tbody>
@@ -69,6 +73,7 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
                             $total = 0;
                             $foodTotal = 0;
                             $otherTotal = 0;
+                            $totalPounds = 0;
                             foreach ($order_products as $product) {
                                 $price = $utils->getMarkupPrice($user, $product, $currentGroupBuy);
                                 $totalPrice = $price * $product->getAmount();
@@ -85,9 +90,13 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
                                     <td>
                                         <?php print $product->getUnits() . " @ " . '$' . $price ?>
                                     </td>
-                                    <td><?php print $product->getAmount()?></td>
-                                    <td><?php print '$' . number_format($totalPrice, 2)?></td>
-                                    <td><a href="/new/remove-item.php?id=<?php print $product->getId()?>">Remove</a></td>
+                                    <td><?php print $product->getDisplayAmount()?></td>
+                                    <td <?php if (!$active_edit) { ?>colspan="2"<?php } ?>><?php print '$' . number_format($totalPrice, 2)?></td>
+                                    <?php if ($active_edit) { ?>
+                                    <td>
+                                        <a href="/new/remove-item.php?id=<?php print $product->getId()?>">Remove</a>
+                                    </td>
+                                    <?php } ?>
                                 </tr>
                             <?php
                             }

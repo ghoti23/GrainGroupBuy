@@ -5,11 +5,16 @@
                 <a href="/new/index.php" class="site-logo"><img src="/img/art_of_beer_tiny.png" /></a>
             </div>
             <div class="col-md-4">
-                <?php if (isset($user)) {  ?>
-                    <div class="alert alert-success">
-                        Days Remaining: 15
-                    </div>
-                <?php } ?>
+                <?php
+                    if (isset($groupBuy)) {
+                        if ($groupBuy -> isActive()) {
+                            print "<div class='alert alert-success'>Days Remaining: " . $groupBuy -> getDaysRemaining() . "</div>";
+                        }
+                        else {
+                            print "<div class='alert alert-info'>Days Remaining: " . $groupBuy -> getDaysRemaining() . "</div>";
+                        }
+                    }
+                ?>
             </div>
             <div class="col-md-6">
                 <ul class="site-nav pull-right">

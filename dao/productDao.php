@@ -120,4 +120,14 @@ class productDao {
         $products = Product::loadMultiple($results);
         return $products;
     }
+
+    public function getAllSplits($groupBuyId) {
+        $sql="select p.*, p.id as productId from product p, (select productId from user_order where groupBuyId = ? group by productId) uo where p.id = uo.productId and (p.type = 'hops' or p.type = 'grain')";
+        $pdo = $this->pdoObject;
+        $sth=$pdo->prepare($sql);
+        $sth->execute(array ($groupBuyId));
+        $results = $sth->fetchAll();
+        $products = Product::loadMultiple($results);
+        return $products;
+    }
 }

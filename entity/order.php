@@ -58,7 +58,6 @@ class Order {
         return $this->product;
     }
 
-
     public function setSplit($split) {
         $this->split = $split;
     }
@@ -66,8 +65,6 @@ class Order {
     public function getSplit() {
         return $this->split;
     }
-
-
 
 	static function loadMultiple($results) {
 		$orders = array();
