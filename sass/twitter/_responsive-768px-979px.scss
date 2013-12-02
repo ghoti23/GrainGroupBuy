@@ -1,0 +1,87 @@
+
+@media(max-width:1025px) {
+   // Make all grid-sized elements block level again
+  // [class*="span"],
+  // .row-fluid [class*="span"] {
+  //   float: none;
+  //   display: block;
+  //   width: auto;
+  //   margin-left: 0;
+  // }
+
+
+  .to_hide_tablet {
+    display:none !important;
+    
+  }
+
+  
+  .row-fluid.fluid  {
+      width:100%;
+      float:none;
+  }
+  .form-horizontal .control-label {
+    text-align:left;
+    margin-bottom:0;
+  }
+      // Fixed grid
+
+  // Fluid grid
+  @include grid-fluid($fluidGridColumnWidth768, $fluidGridGutterWidth768);
+
+  // Input grid
+  @include grid-input($gridColumnWidth768, $gridGutterWidth768);
+    // Fluid grid
+  // @include grid-fluid($fluidGridColumnWidth768, $fluidGridGutterWidth768);
+
+  .row-fluid.fluid .span4 {
+    // width:30%;
+  }
+  .row-fluid:not(.fluid) > [class*="span"] {
+    float: none;
+    display: block;
+    width: auto;
+    margin-left: 0;
+  }
+}
+
+//
+// Responsive: Tablet to desktop
+// --------------------------------------------------
+
+
+@media (min-width: 768px) and (max-width: 979px) {
+  .nav-collapse.collapse {
+// height: auto !important;
+// overflow: visible !important;
+}
+  // Fixed grid
+  @include grid-core($gridColumnWidth768, $gridGutterWidth768);
+
+  // Fluid grid
+  @include grid-fluid($fluidGridColumnWidth768, $fluidGridGutterWidth768);
+
+  // Input grid
+  @include grid-input($gridColumnWidth768, $gridGutterWidth768);
+
+  // No need to reset .thumbnails here since it's the same $gridGutterWidth
+  .container {
+    width:100%;
+  }
+ 
+  .to_hide {
+    display:none !important;
+    
+  }
+  .row-fluid ul.general_statistics li {
+      // float:left;
+      // width:100% !important;
+  }
+  .row-fluid:not(.fluid) > [class*="span"] {
+    float: none;
+    display: block;
+    width: auto;
+    margin-left: 0;
+  }
+
+}

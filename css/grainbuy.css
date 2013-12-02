@@ -1,0 +1,48 @@
+html, body {
+    height: 100%;
+    min-height: 100%;
+    padding: 0;
+}
+
+.signupform {
+    background: rgba(0,0,0,0.7);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#BB000000', endColorstr='#BB000000');
+    padding: 50px 30px 60px 60px;
+    width: 780px;
+    margin: 30px auto 0px;
+    border-radius: 10px;
+}
+
+.signupform h1 {
+    color: #FFF;
+    font-size: 50px;
+    margin: 0px 0px 30px 0px;
+    text-shadow: #000 0 2px;
+    text-align: center;
+}
+
+#table_link {
+	text-decoration: underline;
+}
+
+#main .container_top {
+    background: none repeat scroll 0 0 #3767B6;
+}
+.btn-primary {
+    background-color: #3667B6;
+    background-image: linear-gradient(to bottom, #3681B6, #364DB6);
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
+    background-color: #364DB6;
+    color: #FFFFFF;
+}
+
+a.btn-info {
+    color: #ffffff;
+}
+
+a.btn {
+    text-decoration: none;
+}
