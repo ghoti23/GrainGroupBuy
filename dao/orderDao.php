@@ -19,15 +19,14 @@ class orderDao {
 
     public function get($id, $user) {
         try {
-            $sql = "select email,productId,groupBuyId,amount,p.* from user_product up, product p where p.id=up.productId and  groupbuyID = ? and email = ? order by name";
-
+            $sql = "select email, productId, groupBuyId, amount, p.* from (select email, productId, groupBuyId, sum(amount) as amount from user_product where groupBuyId = ? and email = ? group by email, productId, groupBuyId) up, product p where p.id = up.productId order by name";
             $pdo = $this->pdoObject;
             $sth=$pdo->prepare($sql);
-            $sth->execute(array ($id,$user->getEmail()) );
+            $sth->execute(array ($id, $user->getEmail()) );
             $results = $sth->fetchAll();
             $order = Order::load($results);
             if (!empty($order)) {
-                $order->setSplit($this->selectGroupBuyOrderSplit($id,$user));
+                $order->setSplit($this->selectGroupBuyOrderSplit($id, $user));
             }
 
             return $order;
@@ -76,8 +75,8 @@ class orderDao {
         } catch (Exception $e) {
             echo "Error: ". $e->getMessage();
         }
-
     }
+
     public function getSplitTotalPounds ($groupBuyID) {
         try {
             $pounds = 0;
@@ -85,6 +84,54 @@ class orderDao {
             $pdo = $this->pdoObject;
             $sth=$pdo->prepare($sql);
             $sth->execute(array ($groupBuyID) );
+            $results = $sth->fetchAll();
+            if ($results != null) {
+                foreach ($results as $row) {
+                    $pounds += ($row["product_total"] * $row["pounds"]);
+                }
+            }
+
+            return $pounds;
+
+        } catch (Exception $e) {
+            echo "Error: ". $e->getMessage();
+        }
+
+    }
+
+    public function getUserTotalPounds ($groupBuyId, $user) {
+        $productTotal = $this->getUserProductTotalPounds($groupBuyId, $user);
+        $splitTotal = $this->getUserSplitTotalPounds($groupBuyId, $user);
+
+        return $splitTotal + $productTotal;
+    }
+
+    public function getUserProductTotalPounds ($groupBuyId, $user) {
+        try {
+            $sql = "select SUM(amount*pounds) as product_total from user_product join product on user_product.productID = product.id where groupBuyId = ? AND email = ?";
+            $pdo = $this->pdoObject;
+            $sth=$pdo->prepare($sql);
+            $sth->execute(array ($groupBuyId, $user->getEmail()) );
+            $results = $sth->fetchAll();
+            if ($results != null) {
+                foreach ($results as $row) {
+                    return $row["product_total"];
+                }
+            } else {
+                return 0;
+            }
+        } catch (Exception $e) {
+            echo "Error: ". $e->getMessage();
+        }
+    }
+
+    public function getUserSplitTotalPounds ($groupBuyId, $user) {
+        try {
+            $pounds = 0;
+            $sql = "SELECT COUNT( s.productID ) as product_total, pounds FROM split s, product p WHERE s.productId = p.id AND groupBuyId = ? AND email = ? GROUP BY s.productId";
+            $pdo = $this->pdoObject;
+            $sth=$pdo->prepare($sql);
+            $sth->execute(array ($groupBuyId, $user->getEmail()) );
             $results = $sth->fetchAll();
             if ($results != null) {
                 foreach ($results as $row) {
@@ -177,6 +224,22 @@ class orderDao {
                 $sth=$pdo->prepare($sql);
                 $sth->execute(array ($amount,$groupBuy_ID,$user->getEmail(),$product_ID) );
             }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function insertProduct($groupBuy_ID, $amount, $product_ID, $user) {
+        try {
+            if (empty($amount)) {
+                return;
+            }
+
+            $sql = "INSERT INTO user_product (email, groupBuyId, productId, amount) VALUES (?, ?, ?, ?)";
+            $pdo = $this->pdoObject;
+            $sth=$pdo->prepare($sql);
+            $sth->execute(array ( $user->getEmail(), $groupBuy_ID, $product_ID, $amount) );
+
         } catch (Exception $e) {
             echo $e->getMessage();
         }

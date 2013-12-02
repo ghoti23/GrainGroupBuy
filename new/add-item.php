@@ -34,7 +34,7 @@ $amount = strip_tags($_REQUEST["value"]);
 
 $orderDao = new orderDao();
 $orderDao->connect($host,$pdo);
-$orderDao->addProductOrder($activeGroupBuy, $amount, $productId, $user);
+$orderDao->insertProduct($activeGroupBuy, $amount, $productId, $user);
 $currentOrder = $orderDao -> get($activeGroupBuy, $user);
 ?>
 

@@ -1,9 +1,11 @@
 <?php
 
-class groupBuyDao {
+class groupBuyDao
+{
     private $pdoObject;
 
-    public function connect($host, $pdo) {
+    public function connect($host, $pdo)
+    {
         try {
             $result = $this->pdoObject = $pdo;
         } catch (Exception $e) {
@@ -12,17 +14,19 @@ class groupBuyDao {
         return null;
     }
 
-    public function disconnect() {
+    public function disconnect()
+    {
         $pdo = $this->pdoObject;
         $pdo->close();
     }
 
-    public function get ($id) {
+    public function get($id)
+    {
         try {
             $sql = 'Select * from groupbuy where ID = ?';
             $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
-            $sth->execute(array ($id) );
+            $sth = $pdo->prepare($sql);
+            $sth->execute(array($id));
             $results = $sth->fetchAll();
             $groupBuy = GroupBuy::load($results);
 
@@ -32,23 +36,25 @@ class groupBuyDao {
         }
     }
 
-
-    public function selectCurrentGroupBuy () {
+    public function selectCurrentGroupBuy()
+    {
         try {
             $sql = 'select id,name,username AS owner,email AS ownerEmail,startDt,endDt from groupbuy join user owner on email = owner where (endDt >= CURRENT_DATE() or endDt is null) and startDt <= CURRENT_DATE()';
             $pdo = $this->pdoObject;
-            $results=$pdo->query($sql);
+            $results = $pdo->query($sql);
             $orders = GroupBuy::loadMultiple($results);
             return $orders;
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
-    public function selectExpireGroupBuy () {
+
+    public function selectExpireGroupBuy()
+    {
         try {
             $sql = 'select id,name,username AS owner, owner.email AS ownerEmail,startDt,endDt from groupbuy join user owner on email = owner where endDt <= CURRENT_DATE() order by endDt';
             $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
+            $sth = $pdo->prepare($sql);
             $sth->execute();
             $results = $sth->fetchAll();
             $orders = GroupBuy::loadMultiple($results);
@@ -57,55 +63,65 @@ class groupBuyDao {
             echo "Error: " . $e->getMessage();
         }
     }
-    public function getTopGrains() {
+
+    public function getTopGrains()
+    {
         try {
             $sql = "select p.* from product p, (SELECT id, SUM(amount*pounds) as total from product p left join user_product up on p.id = up.productId and p.type = 'grain' GROUP BY p.id ORDER BY total desc, p.id  LIMIT 5) pj where p.id = pj.id";
             $pdo = $this->pdoObject;
-            $results=$pdo->query($sql);
+            $results = $pdo->query($sql);
             $products = Product::loadMultiple($results);
             return $products;
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
-    public function getTopHops() {
+
+    public function getTopHops()
+    {
         try {
             $sql = "select p.* from product p, (SELECT id, SUM(amount*pounds) as total from product p left join user_product up on p.id = up.productId and p.type = 'hops' GROUP BY p.id ORDER BY total desc, p.id  LIMIT 5) pj where p.id = pj.id";
             $pdo = $this->pdoObject;
-            $results=$pdo->query($sql);
+            $results = $pdo->query($sql);
             $products = Product::loadMultiple($results);
             return $products;
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
-    public function getTopSupplies() {
+
+    public function getTopSupplies()
+    {
         try {
             $sql = "select p.* from product p, (SELECT id, SUM(amount*pounds) as total from product p left join user_product up on p.id = up.productId and p.type not in ('grain', 'hops') GROUP BY p.id ORDER BY total desc, p.id  LIMIT 5) pj where p.id = pj.id";
             $pdo = $this->pdoObject;
-            $results=$pdo->query($sql);
+            $results = $pdo->query($sql);
             $products = Product::loadMultiple($results);
             return $products;
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
-    public function getTopUsers() {
+
+    public function getTopUsers()
+    {
         try {
             $sql = "select product_total,split_total,(ifnull(product_total,0)+ifnull(split_total,0)) as total, u.username, u.email from user u left join product_total pt on pt.email = u.email left join split_total st on st.email=u.email order by total desc LIMIT 5";
             $pdo = $this->pdoObject;
-            $results=$pdo->query($sql);
+            $results = $pdo->query($sql);
             return $results;
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
-    public function activeGroupBuy($groupBuyID) {
+
+    public function activeGroupBuy($groupBuyID)
+    {
         try {
             $sql = "select groupbuy.ID from groupbuy where (endDt >= CURRENT_DATE() or endDt is null) and startDt <= CURRENT_DATE()";
             $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
-            $sth->execute(array ($groupBuyID) );
+            $sth = $pdo->prepare($sql);
+            $sth->execute(array($groupBuyID));
             $results = $sth->fetchAll();
 
             $ID = 0;
@@ -122,11 +138,13 @@ class groupBuyDao {
             echo "Error: " . $e->getMessage();
         }
     }
-    public function all() {
+
+    public function all()
+    {
         try {
             $sql = "select * from groupbuy ";
             $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
+            $sth = $pdo->prepare($sql);
             $sth->execute();
             $results = $sth->fetchAll();
 
@@ -137,13 +155,14 @@ class groupBuyDao {
         }
     }
 
-    public function getGroupBuyUsers($groupbuy) {
+    public function getGroupBuyUsers($groupbuy)
+    {
         try {
             $sql = "SELECT DISTINCT u.email, u.username, u.password, u.admin, u.deactive, u.approve, u.wholesale,paid FROM groupbuy g JOIN user_product up ON g.ID = up.groupbuyId JOIN user u ON u.email = up.email LEFT JOIN groupbuy_paid gp on gp.groupBuyId = g.Id AND gp.email = u.email where g.ID =? UNION ALL SELECT DISTINCT u.email, u.username, u.password, u.admin, u.deactive, u.approve, u.wholesale,paid FROM groupbuy g JOIN user_product up ON g.ID = up.groupbuyId JOIN user u ON u.email = up.email RIGHT JOIN groupbuy_paid gp on gp.groupBuyId = g.Id AND gp.email = u.email where g.ID = ?  order By username";
             $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
-            $sth->execute(array ($groupbuy,$groupbuy) );
-            $results=$sth->fetchAll();
+            $sth = $pdo->prepare($sql);
+            $sth->execute(array($groupbuy, $groupbuy));
+            $results = $sth->fetchAll();
             $orders = Order::loadMultiple($results);
             $userArray = array();
             foreach ($orders as $order) {
@@ -154,9 +173,9 @@ class groupBuyDao {
             //Splitting this up as current hosting site is having issues with performance
             $sql = "SELECT DISTINCT u.email, u.username, u.password, u.admin, u.deactive, u.approve, u.wholesale,paid FROM groupbuy g JOIN split s ON s.groupBuyId = g.ID JOIN user_split us ON s.id = us.splitId JOIN user u ON u.email = us.email left join groupbuy_paid gp on g.ID = gp.groupBuyId and u.email = gp.email where g.ID = ? UNION ALL SELECT DISTINCT u.email, u.username, u.password, u.admin, u.deactive, u.approve, u.wholesale,paid FROM groupbuy g JOIN split s ON s.groupBuyId = g.ID JOIN user_split us ON s.id = us.splitId JOIN user u ON u.email = us.email RIGHT join groupbuy_paid gp on g.ID = gp.groupBuyId and u.email = gp.email where g.ID = ? order by username";
             $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
-            $sth->execute(array ($groupbuy,$groupbuy) );
-            $results=$sth->fetchAll();
+            $sth = $pdo->prepare($sql);
+            $sth->execute(array($groupbuy, $groupbuy));
+            $results = $sth->fetchAll();
             $orders = Order::loadMultiple($results);
 
             foreach ($orders as $order) {
@@ -171,13 +190,15 @@ class groupBuyDao {
             echo $e->getMessage();
         }
     }
-    public function fullGroupBuyOrderGrain($groupBuyID) {
+
+    public function fullGroupBuyOrderGrain($groupBuyID)
+    {
         try {
             //Loads full bags
             $sql = "SELECT vendor, product.id, product.name, pounds, SUM( amount ) AS amount,price, price4000, price8000, price12000, price32000,type,product.supplier FROM groupbuy INNER JOIN user_product ON groupBuyID = groupbuy.ID INNER JOIN product ON product.id = productId WHERE groupbuy.ID =? GROUP BY product.ID ORDER BY product.supplier, vendor, product.ID";
             $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
-            $sth->execute(array ($groupBuyID) );
+            $sth = $pdo->prepare($sql);
+            $sth->execute(array($groupBuyID));
             $results = $sth->fetchall();
             $products = Product::loadMultiple($results);
             $productArray = array();
@@ -189,8 +210,8 @@ class groupBuyDao {
             //Loads split bags
             $sql = "SELECT vendor, p.id, p.name, pounds, count( p.Id ) AS amount, price, price4000, price8000, price12000, price32000,groupBuyId, type, supplier,splitAmt FROM split s JOIN product p ON s.productId = p.ID WHERE groupBuyId =? GROUP BY p.supplier,productId";
             $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
-            $sth->execute(array ($groupBuyID) );
+            $sth = $pdo->prepare($sql);
+            $sth->execute(array($groupBuyID));
             $results = $sth->fetchall();
             foreach ($results as $row) {
                 $product = Product::mapRow($row);
@@ -199,7 +220,7 @@ class groupBuyDao {
                     unset($productArray[$product->getId()]);
                     $existingAmount = $currentOrder->getAmount();
                     $currentAmount = $product->getAmount();
-                    $product->setAmount($existingAmount+$currentAmount);
+                    $product->setAmount($existingAmount + $currentAmount);
                 }
                 $productArray[$product->getId()] = $product;
             }
@@ -210,12 +231,13 @@ class groupBuyDao {
         }
     }
 
-    public function add($groupBuy,$user) {
+    public function add($groupBuy, $user)
+    {
         try {
             $sql = "INSERT INTO groupbuy (name,owner,startDt,endDt,quote,notes,catalog,orderSpreadsheet,hops,grain,allowSplit,numOfSplit) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
             $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
-            $valid = $sth->execute( array ($groupBuy->getName(),
+            $sth = $pdo->prepare($sql);
+            $valid = $sth->execute(array($groupBuy->getName(),
                 $user->getEmail(),
                 $groupBuy->getStartDate(),
                 $groupBuy->getEndDate(),
@@ -226,7 +248,7 @@ class groupBuyDao {
                 $groupBuy->getHopsOnly(),
                 $groupBuy->getGrainOnly(),
                 $groupBuy->getAllowSplit(),
-                $groupBuy->getSplitAmt() ));
+                $groupBuy->getSplitAmt()));
 
             return $pdo->lastInsertId();
 
@@ -234,12 +256,14 @@ class groupBuyDao {
             echo $e->getMessage();
         }
     }
-    public function update($groupBuy) {
+
+    public function update($groupBuy)
+    {
         try {
             $sql = "UPDATE groupbuy set name = ?, startDt=?, endDt=?, quote=?, notes=?, hops=?, grain=?, shipping=?, catalog=?, orderSpreadsheet=?, tax=?, allowSplit=?, numOfSplit=? WHERE id=?";
             $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
-            $valid = $sth->execute( array ($groupBuy->getName(),
+            $sth = $pdo->prepare($sql);
+            $valid = $sth->execute(array($groupBuy->getName(),
                 $groupBuy->getStartDate(),
                 $groupBuy->getEndDate(),
                 $groupBuy->getQuote(),
@@ -252,7 +276,7 @@ class groupBuyDao {
                 $groupBuy->getTax(),
                 $groupBuy->getAllowSplit(),
                 $groupBuy->getSplitAmt(),
-                $groupBuy->getId() ));
+                $groupBuy->getId()));
             return $valid;
         } catch (Exception $e) {
             echo $e->getMessage();

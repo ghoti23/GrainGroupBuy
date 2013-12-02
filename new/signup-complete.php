@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art of Beer Brewery - Group Buy - Sign up complete</title>
-    <link rel="stylesheet" href="/css/main.css" />
+    <?php include_once("includes/default-head.php")?>
 </head>
 <body class="login">
 <div class="content">

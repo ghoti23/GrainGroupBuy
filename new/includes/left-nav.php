@@ -14,6 +14,7 @@ if (isset($_SESSION['activeGroupBuy'])){
     $expiredOrders = $groupBuyDao -> selectExpireGroupBuy();
 
     $groupBuyTotal = $orderDao -> getTotalPounds($activeGroupBuy);
+    $userTotal = $orderDao -> getUserTotalPounds($activeGroupBuy, $user);
     $totalMembers = $userDao -> getTotalMembers();
     $utils = new Utils;
 }
@@ -47,7 +48,7 @@ if (isset($_SESSION['activeGroupBuy'])){
     </div>
 </div>
 <div class="well">
-    <h4>Social Statistics</h4>
+    <h4>Statistics</h4>
     <dl>
         <dt>Total Members: <span><?php print $totalMembers; ?></span></dt>
         <dd></dd>
@@ -57,7 +58,7 @@ if (isset($_SESSION['activeGroupBuy'])){
         <dd></dd>
     </dl>
     <dl>
-        <dt>Purchased Pounds<br/>(You): <span>30 lbs</span></dt>
+        <dt>Purchased Pounds<br/>(You): <span><?php print $userTotal; ?> lbs</span></dt>
         <dd></dd>
     </dl>
 </div>

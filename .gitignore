@@ -37,5 +37,7 @@ nbproject
 validation-status.json
 validation-report.json
 
+properties.php
+
 # Folders to ignore
 node_modules

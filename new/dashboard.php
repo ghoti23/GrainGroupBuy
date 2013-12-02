@@ -41,16 +41,7 @@ if ($type == 'top') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art of Beer Brewery - Group Buy - Dashboard</title>
-    <link rel="stylesheet" href="/css/main.css" />
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <?php include_once("../analyticstracking.php") ?>
+    <?php include_once("includes/default-head.php")?>
 </head>
 <body>
 <?php include_once("includes/header.php")?>

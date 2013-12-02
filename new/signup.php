@@ -10,12 +10,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $user->setEmail($email);
 
     $pw = strip_tags($_REQUEST["password"]);
-    $username = strip_tags($_REQUEST["username"]);
-    $clean_pw = crypt(md5($pw),md5($email));
-    $user->setUsername($username);
+    $clean_pw = crypt(md5($pw), md5($email));
     $user->setPassword($clean_pw);
-    $user->setCity(strip_tags($_REQUEST["city"]));
-    //$user->setState(strip_tags($_REQUEST["state"]));
+    $user->setFirstName(strip_tags($_REQUEST["firstName"]));
+    $user->setLastName(strip_tags($_REQUEST["lastName"]));
+    $user->setZipCode(strip_tags($_REQUEST["zipCode"]));
     $dao = new dao();
     $dao->connect($host,$pdo);
     $dao->addUser($user);
@@ -26,10 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art of Beer Brewery - Group Buy - Sign up</title>
-    <link rel="stylesheet" href="/css/main.css" />
+    <?php include_once("includes/default-head.php")?>
 </head>
 <body class="login">
 <div class="content">
@@ -47,20 +43,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             </div>
             <div class="text">
                 <span>
-                    <label for="username">Home Brew Forums Username</label>
-                    <input type="text" value="" name="username" id="username" placeholder="Homebrew forums username">
-                </span>
-            </div>
-            <div class="text">
-                <span>
                     <label for="password">Password</label>
                     <input type="password" value="" name="password" id="password" placeholder="Password">
                 </span>
             </div>
             <div class="text">
                 <span>
-                    <label for="city">City</label>
-                    <input type="text" value="" name="city" id="city" placeholder="City">
+                    <label for="firstName">First Name</label>
+                    <input type="text" value="" name="firstName" id="firstName" placeholder="First Name">
+                </span>
+            </div>
+            <div class="text">
+                <span>
+                    <label for="lastName">Last Name</label>
+                    <input type="text" value="" name="lastName" id="lastName" placeholder="Last Name">
+                </span>
+            </div>
+            <div class="text">
+                <span>
+                    <label for="zipCode">Zip Code</label>
+                    <input type="text" value="" name="zipCode" id="zipCode" placeholder="Zip Code">
                 </span>
             </div>
             <div class="login-btn">
