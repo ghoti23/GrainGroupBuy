@@ -2719,8 +2719,21 @@ header .site-logo {
 
 header .alert {
   display: inline-block;
-  width: 100%;
   margin-top: 12px;
+}
+
+header .alert-success,
+header .alert-info {
+  padding: 15px 25px;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+header .alert-success {
+  color: #fff;
+  background-color: #7BC673;
+  border-color: #7BC673;
 }
 
 header ul {
