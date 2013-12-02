@@ -29,37 +29,43 @@ if (isset($_SESSION['user'])){
         <div class="col-md-10">
             <h3>Strike Temperature Calculator</h3>
             <h4>Determine what your strike temperature will need to be to meet the desired mash-in temperature.</h4>
-            <div class="well">
-                <form id="strikeForm" method="POST">
-                    <div class="control-group row-fluid">
-                        <label class="row-fluid " for="contentKey">Mash Thickness: (qt/lb)</label>
-                        <input type="text" name="mT" value="1.25">
+            <div class="well well-lg">
+                <form id="strikeForm" method="POST" class="clearfix">
+                    <div class="row-fluid">
+                        <div class="col-md-4"><label for="contentKey">Mash Thickness: (qt/lb)</label></div>
+                        <div class="col-md-8"><input type="text" name="mT" value="1.25"></div>
                     </div>
-                    <div class="control-group row-fluid">
-                        <label class="row-fluid " for="contentKey">Desired Strike Temperature (F)</label>
-                        <input type="text" name="sT" value="150">
+                    <div class="row-fluid">
+                        <div class="col-md-4"><label for="contentKey">Desired Strike Temperature (F)</label></div>
+                        <div class="col-md-8"><input type="text" name="sT" value="150"></div>
                     </div>
-                    <div class="control-group row-fluid">
-                        <label class="row-fluid " for="contentKey">Temperature of Grain: (F)</label>
-                        <input type="text" name="gT" value="60">
+                    <div class="row-fluid">
+                        <div class="col-md-4"><label for="contentKey">Temperature of Grain: (F)</label></div>
+                        <div class="col-md-8"><input type="text" name="gT" value="60"></div>
                     </div>
-                    <input type="submit" class="btn btn-info" value="Submit" />
+                    <div class="row-fluid">
+                        <div class="col-md-4">&nbsp;</div>
+                        <div class="col-md-8"><input type="submit" class="btn btn-info" value="Submit" /></div>
+                    </div>
                 </form>
             </div>
 
             <h3>Will it fit?</h3>
             <h4>A simple tool that will tell you if your grain bill will fit in your mash tun.  You will need to compensate for the volume under your mash tun.</h4>
-            <div class="well">
-                <form id="fitForm">
-                    <div class="control-group row-fluid">
-                        <label class="row-fluid " for="contentKey">Grain Weight: (lb)</label>
-                        <input type="text" name="weight" value="">
+            <div class="well well-lg">
+                <form id="fitForm" class="clearfix">
+                    <div class="row-fluid">
+                        <div class="col-md-4"><label for="contentKey">Grain Weight: (lb)</label></div>
+                        <div class="col-md-8"><input type="text" name="weight" value=""></div>
                     </div>
-                    <div class="control-group row-fluid">
-                        <label class="row-fluid " for="contentKey">Mash Thickness: (qt/lb)</label>
-                        <input type="text" name="mash" value="1.25">
+                    <div class="row-fluid">
+                        <div class="col-md-4"><label for="contentKey">Mash Thickness: (qt/lb)</label></div>
+                        <div class="col-md-8"><input type="text" name="mash" value="1.25"></div>
                     </div>
-                    <input type="submit" class="btn btn-info" value="Submit" />
+                    <div class="row-fluid">
+                        <div class="col-md-4">&nbsp;</div>
+                        <div class="col-md-8"><input type="submit" class="btn btn-info" value="Submit" /></div>
+                    </div>
                 </form>
             </div>
         </div>
