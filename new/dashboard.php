@@ -62,11 +62,12 @@ if ($type == 'top') {
                     <ul class="nav nav-pills">
                         <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="/new/dashboard.php">Top Sellers</a></li>
                         <li <?php if ($type == 'split') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=split">Active Splits</a></li>
-                        <li <?php if ($type == 'hops') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=hops">Hops</a></li>
-                        <li <?php if ($type == 'grain') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=grain">Grains</a></li>
+                        <?php if ($groupBuy->getHopsOnly() != 0) {?><li <?php if ($type == 'hops') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=hops">Hops</a></li><?php } ?>
+                        <?php if ($groupBuy->getGrainOnly() != 0) {?><li <?php if ($type == 'grain') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=grain">Grains</a></li><?php } ?>
                         <li <?php if ($type == 'supplies') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=supplies">Supplies</a></li>
                     </ul>
                     <?php if ($type == 'top') {?>
+                        <?php if ($groupBuy->getHopsOnly() != 0) {?>
                         <h5>
                             <a class="pull-right" href="/new/dashboard.php?type=hops">Browse All Hops</a>
                             Top Selling Hops
@@ -79,6 +80,8 @@ if ($type == 'top') {
                                 ?>
                             </ul>
                         </div>
+                        <?php } ?>
+                        <?php if ($groupBuy->getGrainOnly() != 0) {?>
                         <h5>
                             <a class="pull-right" href="/new/dashboard.php?type=grain">Browse All Grains</a>
                             Top Selling Grains
@@ -91,6 +94,7 @@ if ($type == 'top') {
                                 ?>
                             </ul>
                         </div>
+                        <?php } ?>
                         <h5>
                             <a class="pull-right" href="/new/dashboard.php?type=supplies">Browse All Supplies</a>
                             Top Selling Supplies
