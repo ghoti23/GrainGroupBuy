@@ -122,12 +122,12 @@ class productDao {
     }
 
     public function getAllSplits($groupBuyId) {
-        $sql="select p.*, p.id as productId from product p, (select productId from user_order where groupBuyId = ? group by productId) uo where p.id = uo.productId and (p.type = 'hops' or p.type = 'grain')";
+        $sql="select * from user_order uo, product p where p.id = uo.productId and uo.amount not in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11) and uo.groupBuyId = ? order by uo.createDate";
         $pdo = $this->pdoObject;
         $sth=$pdo->prepare($sql);
         $sth->execute(array ($groupBuyId));
         $results = $sth->fetchAll();
-        $products = Product::loadMultiple($results);
+        $products = ProductSplit::loadMultiple($results);
         return $products;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 $index = 1;
 foreach ($products as $product) {
-    $price = $utils->getMarkupPrice($user, $product, $groupBuy);
-    $vendor = $product->getVendor()
+    $price = $utils->getDisplayPrice($user, $product, $groupBuy);
+    $vendor = $product->getVendor();
     ?>
     <li class="list-group-item light">
         <form class="order-add hidden" method="post">
@@ -42,7 +42,10 @@ foreach ($products as $product) {
         </form>
         <a class="button add" href="#">Add</a>
         <em><span><?php echo $index++ ?>.</span> <?php print $product->getName()?></em> <?php if (!empty($vendor)) { print ' - ' . $vendor; } ?>
-        <div><?php print $product->getUnits() . " @ " . '$' . $price ?> &nbsp;</div>
+        <?php $desc = $product->getDescription(); if (!empty($desc)) { ?>
+            <div class="desc"><?php print $desc; ?></div>
+        <?php } ?>
+        <div><?php print $product->getDisplayUnits() . " @ " . '$' . $price ?> &nbsp;</div>
     </li>
 <?php
 }

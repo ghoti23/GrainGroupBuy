@@ -183,6 +183,44 @@ class Product implements JsonSerializable {
 
     public function getUnits()
     {
+        if ($this->getType() == 'hops') {
+            return 1;
+        }
+
+        if ($this->getType() == 'grain') {
+            if ($this->getSplit() > 0) {
+                return ($this->getPounds() / $this->getSplit());
+            }
+            else {
+                return $this->getPounds();
+            }
+
+        }
+
+        return 1;
+    }
+
+    public function getDisplayUnits()
+    {
+        if ($this->getType() == 'hops') {
+            return "1 lb";
+        }
+
+        if ($this->getType() == 'grain') {
+            if ($this->getSplit() > 0) {
+                return ($this->getPounds() / $this->getSplit()) . " lbs";
+            }
+            else {
+                return $this->getPounds() . " lbs";
+            }
+
+        }
+
+        return "1";
+    }
+
+    public function getPoundsWithUnit()
+    {
         if ($this->isHopOrGrain()) {
             return $this->getPounds() . " lbs";
         }

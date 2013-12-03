@@ -2405,8 +2405,30 @@ table th a:hover {
   border: 1px solid #cccccc;
 }
 
-.well.light h4 {
+.well.light h4,
+.well.light h3 {
   padding: 0 15px;
+}
+
+.well.light h3.upper {
+  text-transform: uppercase;
+}
+
+.well.light h3 .link {
+  font-size: 13px;
+  color: #333333;
+}
+
+.well.light .detail-item {
+  color: #333333;
+}
+
+.well.light .detail-item h4 {
+  margin: 5px 0;
+}
+
+.well.light .desc {
+  color: #333;
 }
 
 .well.light em {
@@ -2668,6 +2690,17 @@ input[type="submit"] {
           transition: all 0.1s ease-in-out;
 }
 
+.btn.btn-lg,
+.button.btn-lg,
+button.button.btn-lg,
+.btn[type="submit"].btn-lg,
+.button[type="submit"].btn-lg,
+input[type="button"].btn-lg,
+input[type="reset"].btn-lg,
+input[type="submit"].btn-lg {
+  width: 185px;
+}
+
 .btn.grey,
 .button.grey,
 button.button.grey {
@@ -2886,7 +2919,7 @@ footer ul li a {
 }
 
 .product-info {
-  padding: 0 15px 10px 15px;
+  padding: 10px 15px 10px 15px;
   margin-bottom: 10px;
 }
 

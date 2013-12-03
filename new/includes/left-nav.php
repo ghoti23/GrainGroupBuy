@@ -22,7 +22,7 @@ if (isset($_SESSION['activeGroupBuy'])){
         ?>
             <dl>
                 <dt><a href="/new/order.php?id=<?php print $expiredOrder->getId()?>"><?php print $expiredOrder->getName()?></a></dt>
-                <dd><?php print $expiredOrder->getEndDate()?> <span></span></dd>
+                <dd><?php print $expiredOrder->getFormattedEndDate()?> <span></span></dd>
             </dl>
         <?php } ?>
         <?php } else {  ?>

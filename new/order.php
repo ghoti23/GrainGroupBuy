@@ -50,7 +50,18 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
             </div>
             <div class="col-md-7">
                 <div class="well light">
-                    <h4>Order Details</h4>
+                    <h3 class="upper">
+                        <a class="pull-right link" href="/new/dashboard.php">Back to Products</a>
+                        <?php print $currentGroupBuy->getName()?>
+                    </h3>
+                    <div class="row detail-item">
+                        <div class="col-md-2"><h4>Started:</h4></div>
+                        <div class="col-md-10"><?php print $currentGroupBuy->getFormattedStartDate()?></div>
+                    </div>
+                    <div class="row detail-item">
+                        <div class="col-md-2"><h4>Ended:</h4></div>
+                        <div class="col-md-10"><?php print $currentGroupBuy->getFormattedEndDate()?></div>
+                    </div>
                     <form class="product-info" action="/new/order.php" method="post">
                         <?php
                         if (!empty($order_products)) {
@@ -76,6 +87,7 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
                             $totalPounds = 0;
                             foreach ($order_products as $product) {
                                 $price = $utils->getMarkupPrice($user, $product, $currentGroupBuy);
+                                $displayPrice = $utils->getDisplayPrice($user, $product, $groupBuy);
                                 $totalPrice = $price * $product->getAmount();
                                 $total = $total + $totalPrice;
                                 if ($product->getType() == 'grain' || $product->getType() == 'hops') {
@@ -88,7 +100,7 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
                                     <td><?php print $product->getId()?></td>
                                     <td class="ue"><em><?php print $product->getName() . "</em><div>" . $product->getVendor() . "</div>"?></td>
                                     <td>
-                                        <?php print $product->getUnits() . " @ " . '$' . $price ?>
+                                        <?php print $product->getUnits() . " @ " . '$' . $displayPrice ?>
                                     </td>
                                     <td><?php print $product->getDisplayAmount()?></td>
                                     <td <?php if (!$active_edit) { ?>colspan="2"<?php } ?>><?php print '$' . number_format($totalPrice, 2)?></td>

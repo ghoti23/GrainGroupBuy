@@ -45,7 +45,7 @@ if (isset($_SESSION['user'])){
                     </div>
                     <div class="row-fluid">
                         <div class="col-md-4">&nbsp;</div>
-                        <div class="col-md-8"><input type="submit" class="btn btn-info" value="Submit" /></div>
+                        <div class="col-md-8"><input type="submit" class="btn btn-lg" value="Submit" /></div>
                     </div>
                 </form>
             </div>
@@ -64,7 +64,7 @@ if (isset($_SESSION['user'])){
                     </div>
                     <div class="row-fluid">
                         <div class="col-md-4">&nbsp;</div>
-                        <div class="col-md-8"><input type="submit" class="btn btn-info" value="Submit" /></div>
+                        <div class="col-md-8"><input type="submit" class="btn btn-lg" value="Submit" /></div>
                     </div>
                 </form>
             </div>

@@ -340,9 +340,6 @@ class orderDao {
             $sth->execute(array ($id, $user->getEmail()) );
             $results = $sth->fetchAll();
             $order = Order::load($results);
-            if (!empty($order)) {
-                $order->setSplit($this->selectGroupBuyOrderSplit($id, $user));
-            }
 
             return $order;
         } catch (Exception $e) {

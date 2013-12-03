@@ -340,6 +340,16 @@ class GroupBuy implements JsonSerializable
         $this->markup = $markup;
     }
 
+    public function getFormattedStartDate()
+    {
+        return date('F d, Y', strtotime ($this->getStartDate()));
+    }
+
+    public function getFormattedEndDate()
+    {
+        return date('F d, Y', strtotime ($this->getEndDate()));
+    }
+
 }
 
 ?>
