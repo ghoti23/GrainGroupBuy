@@ -2812,7 +2812,7 @@ footer ul li a {
 }
 
 .home-hero {
-  height: 480px;
+  min-height: 480px;
   padding: 45px 0;
 }
 
@@ -2823,6 +2823,34 @@ footer ul li a {
   letter-spacing: -3px;
   text-align: center;
   text-shadow: #222 1px 1px 2px;
+}
+
+.home-hero h2 {
+  margin: 40px 0 30px 0;
+  font-size: 50px;
+  line-height: 55px;
+  color: #FFF;
+  text-align: center;
+}
+
+.home-hero h3 {
+  margin: 10px 0 10px 0;
+  font-size: 30px;
+  line-height: 35px;
+  color: #FFF;
+}
+
+.home-hero .button-content {
+  margin: 30px 0 30px 0;
+  text-align: center;
+}
+
+.home-hero .button-content .button {
+  width: 225px;
+  height: 56px;
+  margin-left: 15px;
+  font-size: 20px;
+  line-height: 30px;
 }
 
 .login h3 {
@@ -2948,9 +2976,16 @@ footer ul li a {
 
 .order-add select,
 .order-add select option {
-  height: 36px;
+  height: 32px;
   margin-left: 5px;
-  line-height: 36px;
+  line-height: 32px;
+  background-color: white;
+  border-color: #DFDFDF;
+}
+
+.ad-row {
+  padding: 35px 0 0 0;
+  text-align: center;
 }
 
 .centered {

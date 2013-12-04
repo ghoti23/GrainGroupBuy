@@ -34,6 +34,7 @@ $order_products = $order -> getProduct();
 $groupBuyDao = new groupBuyDao();
 $groupBuyDao -> connect($host, $pdo);
 $currentGroupBuy = $groupBuyDao -> get($order_id);
+$groupBuyTotal = $orderDao -> getAllOrdersTotalPounds($order_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,6 +90,7 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
                                 $price = $utils->getMarkupPrice($user, $product, $currentGroupBuy);
                                 $displayPrice = $utils->getDisplayPrice($user, $product, $groupBuy);
                                 $totalPrice = $price * $product->getAmount();
+                                $totalPounds = $totalPounds + ($product->getPounds() * $product->getAmount());
                                 $total = $total + $totalPrice;
                                 if ($product->getType() == 'grain' || $product->getType() == 'hops') {
                                     $foodTotal = $foodTotal + ($price*$product->getAmount());
@@ -100,7 +102,7 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
                                     <td><?php print $product->getId()?></td>
                                     <td class="ue"><em><?php print $product->getName() . "</em><div>" . $product->getVendor() . "</div>"?></td>
                                     <td>
-                                        <?php print $product->getUnits() . " @ " . '$' . $displayPrice ?>
+                                        <?php print $product->getDisplayUnits() . " @ " . '$' . $displayPrice ?>
                                     </td>
                                     <td><?php print $product->getDisplayAmount()?></td>
                                     <td <?php if (!$active_edit) { ?>colspan="2"<?php } ?>><?php print '$' . number_format($totalPrice, 2)?></td>
@@ -116,8 +118,8 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
 
                             <?php
                             if ($currentGroupBuy -> getShipping() != "") {
-                                $shipping = $groupBuy -> getShipping();
-                                $shipping = number_format(($shipping / $groupBuyTotal),3);
+                                $shipping = $currentGroupBuy -> getShipping();
+                                $shipping = number_format(($shipping / $groupBuyTotal), 3);
                                 $shippingCosts = $shipping * $totalPounds;
                                 $total = $total + $shippingCosts;
                             ?>
@@ -134,9 +136,9 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
 
                             <?php
                             if ($currentGroupBuy->getTax()) {
-                                $tax=($foodTotal*$foodTax);
-                                $tax=$tax+($otherTotal*$otherTax);
-                                $total=$total+$tax;
+                                $tax = ($foodTotal*$foodTax);
+                                $tax = $tax + ($otherTotal*$otherTax);
+                                $total = $total+$tax;
                                 ?>
                                 <tr>
                                     <td>&nbsp;</td>

@@ -231,7 +231,7 @@ class Product implements JsonSerializable {
     public function getDisplayAmount()
     {
         if ($this->getType() == 'hops') {
-            return ($this->getAmount() * 11) . " lbs";
+            return round($this->getAmount() * 11) . " lbs";
         }
 
         if ($this->getType() == 'grain') {

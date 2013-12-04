@@ -1,8 +1,8 @@
 <?php
-if (isset($_SESSION['activeGroupBuy'])){
+if (isset($_SESSION['activeGroupBuy'])) {
     $expiredOrders = $orderDao -> getOrderHistory($user);
-    $groupBuyTotal = $orderDao -> getAllOrdersTotalPounds($activeGroupBuy);
-    $userTotal = $orderDao -> getUserOrderTotalPounds($activeGroupBuy, $user);
+    $poundsTotal = $orderDao -> getAllOrdersTotalPounds(null);
+    $userTotal = $orderDao -> getUserOrderTotalPounds(null, $user);
     $totalMembers = $userDao -> getTotalMembers();
 }
 ?>
@@ -36,15 +36,15 @@ if (isset($_SESSION['activeGroupBuy'])){
 <div class="well">
     <h4>Statistics</h4>
     <dl>
-        <dt>Total Members: <span><?php print $totalMembers; ?></span></dt>
+        <dt>Total Members: <span><?php print number_format($totalMembers); ?></span></dt>
         <dd></dd>
     </dl>
     <dl>
-        <dt>Purchased Pounds<br/>(Everyone): <span><?php print round($groupBuyTotal); ?> lbs</span></dt>
+        <dt>Purchased Pounds<br/>(Everyone): <span><?php print number_format(round($poundsTotal)); ?> lbs</span></dt>
         <dd></dd>
     </dl>
     <dl>
-        <dt>Purchased Pounds<br/>(You): <span><?php print round($userTotal); ?> lbs</span></dt>
+        <dt>Purchased Pounds<br/>(You): <span><?php print number_format(round($userTotal)); ?> lbs</span></dt>
         <dd></dd>
     </dl>
 </div>

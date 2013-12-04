@@ -23,6 +23,10 @@ class GroupBuy implements JsonSerializable
     static function load($results)
     {
         $groupBuy = GroupBuy::loadMultiple($results);
+        if (empty($groupBuy)) {
+            return new GroupBuy();
+        }
+
         return $groupBuy[0];
     }
 

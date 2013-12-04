@@ -38,31 +38,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             <div class="text">
                 <span>
                     <label for="email">Email</label>
-                    <input type="email" value="" name="email" id="email" placeholder="Email">
+                    <input type="email" value="" name="email" id="email" placeholder="Email" tabindex="1" autofocus>
                 </span>
             </div>
             <div class="text">
                 <span>
                     <label for="password">Password</label>
-                    <input type="password" value="" name="password" id="password" placeholder="Password">
+                    <input type="password" value="" name="password" id="password" placeholder="Password" tabindex="2">
                 </span>
             </div>
             <div class="text">
                 <span>
                     <label for="firstName">First Name</label>
-                    <input type="text" value="" name="firstName" id="firstName" placeholder="First Name">
+                    <input type="text" value="" name="firstName" id="firstName" placeholder="First Name" tabindex="3">
                 </span>
             </div>
             <div class="text">
                 <span>
                     <label for="lastName">Last Name</label>
-                    <input type="text" value="" name="lastName" id="lastName" placeholder="Last Name">
+                    <input type="text" value="" name="lastName" id="lastName" placeholder="Last Name" tabindex="4">
                 </span>
             </div>
             <div class="text">
                 <span>
                     <label for="zipCode">Zip Code</label>
-                    <input type="text" value="" name="zipCode" id="zipCode" placeholder="Zip Code">
+                    <input type="text" value="" name="zipCode" id="zipCode" placeholder="Zip Code" tabindex="5">
                 </span>
             </div>
             <div class="login-btn">
@@ -72,6 +72,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     </div>
     <div class="footer-msg">
         <p>Already have an account? <a href="/new/login.php">Sign in.</a></p>
+    </div>
+
+    <div class="ad-row">
+        <div class="sponsored">SPONSORED</div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Footer Ad -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-5071928133115505"
+             data-ad-slot="1128070273"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 </div>
 </body>

@@ -63,8 +63,9 @@ class ProductSplit
             }
 
             $productSplit = $splits[$id];
-            $whole = floor($productSplit->getAmount());
-            $fraction = $productSplit->getAmount() - $whole;
+            $amount = round($productSplit->getAmount(), 2);
+            $whole = floor($amount);
+            $fraction = $amount - $whole;
 
             if ($whole >= 1) {
                 if ($fraction == 0) {
@@ -184,7 +185,7 @@ class ProductSplit
     public function getDisplayAmount()
     {
         if ($this->getProduct()->getType() == 'hops') {
-            return ($this->getAmount() * 11) . " lbs";
+            return round(($this->getAmount() * 11)) . " lbs";
         }
 
         if ($this->getProduct()->getType() == 'grain') {
