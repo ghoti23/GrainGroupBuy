@@ -1,16 +1,26 @@
 <?php
+require '../dao/dao.php';
 require '../dao/groupBuyDao.php';
 require '../dao/userDao.php';
 require '../dao/orderDao.php';
 require '../dao/productDao.php';
+require '../dao/ResetTokenDao.php';
 require '../entity/user.php';
 require '../entity/groupbuy.php';
 require '../entity/order.php';
 require '../entity/product.php';
 require '../entity/ProductSplit.php';
-require '../entity/split.php';
+require '../entity/ResetToken.php';
 require '../properties.php';
+require '../Mandrill.php';
 require '../utils.php';
+
+if (!isset($_REQUEST["id"])) {
+    header("location:/new/index.php");
+    return;
+}
+
+$id = strip_tags($_REQUEST["id"]);
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -20,7 +30,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     if ($password != $confirmPassword) {
         $message = 'Sorry, but your email or password was not correct.';
     } else {
-        $message = 'Sorry, but your email or password was not correct.';
+
+        $resetTokenDao = new ResetTokenDao();
+        $resetTokenDao->connect($host,$pdo);
+        $token = $resetTokenDao->get($id);
+
+        if (isset($token)) {
+            $dao = new dao();
+            $dao->connect($host,$pdo);
+            $user = $dao->loadUser($token->getEmail());
+        }
+
+        if (!isset($user)) {
+            $message = 'Sorry, but your password could not be reset.';
+        } else {
+
+            $clean_pw = crypt(md5($password), md5($user->getEmail()));
+
+            $userDao = new userDao();
+            $userDao->connect($host,$pdo);
+            $userDao->updateAccountPassword($user->getEmail(), $clean_pw);
+
+            header("location:/new/login.php?r=1");
+        }
     }
 }
 ?>
@@ -43,17 +75,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <?php echo $message ?>
             </div>
         <?php } ?>
-        <form action="/new/login.php" method="post">
+        <form action="/new/reset-password.php" method="post">
+            <input type="hidden" name="id" value="<?php print $id ?>" />
             <div class="text">
                 <span>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" placeholder="Password" maxlength="100" tabindex="1" autofocus >
+                    <label for="password">New Password</label>
+                    <input type="password" name="password" id="password" placeholder="New Password" maxlength="100" tabindex="1" autofocus >
                 </span>
             </div>
             <div class="text">
                 <span>
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" maxlength="100"  tabindex="2">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm New Password" maxlength="100"  tabindex="2">
                 </span>
             </div>
             <div class="login-btn">

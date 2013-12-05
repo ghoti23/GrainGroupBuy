@@ -26,7 +26,7 @@ class ResetTokenDao {
 
         if ($results != null) {
             foreach ($results as $row) {
-                return ResetToken.mapRow($results);
+                return ResetToken::mapRow($row);
             }
         }
 
