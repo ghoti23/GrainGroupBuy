@@ -12,7 +12,7 @@ require '../properties.php';
 require '../utils.php';
 
 session_start();
-if (!isset($_SESSION['user']) || !isset($_SESSION['activeGroupBuy'])){
+if (!isset($_SESSION['user'])){
     header("location:/new/index.php");
 }
 
@@ -22,7 +22,10 @@ if (!isset($_REQUEST["id"])){
     $order_id = strip_tags($_REQUEST["id"]);
 }
 
-$active_edit = ($_SESSION['activeGroupBuy'] == $order_id);
+$active_edit = false;
+if (isset($_SESSION['activeGroupBuy'])) {
+    $active_edit = ($_SESSION['activeGroupBuy'] == $order_id);
+}
 
 $user = $_SESSION['user'];
 

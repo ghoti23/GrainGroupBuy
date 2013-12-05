@@ -23,6 +23,8 @@ $groupBuyDao -> connect($host, $pdo);
 $openOrders = $groupBuyDao -> selectCurrentGroupBuy();
 if (!empty($openOrders)) {
     $activeGroupBuy = $openOrders[0];
+} else {
+    $nextGroupBuy = $groupBuyDao -> selectNextGroupBuy();
 }
 ?>
 <!DOCTYPE html>
@@ -35,12 +37,10 @@ if (!empty($openOrders)) {
 <div class="container">
     <section class="home-hero">
         <h1>Offering bulk pricing for grains and hops to the Chicagoland area.</h1>
-        <?php if (isset($activeGroupBuy)) {?>
-            <?php if ($activeGroupBuy->isActive()) {?>
-                <h2>We're open and accepting orders until <?php print $activeGroupBuy->getFormattedEndDate()?>.</h2>
-            <?php } else {?>
-                <h2>Sorry, but the next buy will begin on <?php print $activeGroupBuy->getFormattedStartDate()?>.</h2>
-            <?php } ?>
+        <?php if (isset($activeGroupBuy) && $activeGroupBuy->isActive()) {?>
+            <h2>We're open and accepting orders until<br> <?php print $activeGroupBuy->getFormattedEndDate()?>.</h2>
+        <?php } elseif (isset($nextGroupBuy)) {?>
+            <h2>Sorry, but the next buy will begin on<br> <?php print $nextGroupBuy->getFormattedStartDate()?>.</h2>
         <?php } else {?>
             <h2>We haven't determined the date for the next group buy.  We'll let you know soon.</h2>
         <?php } ?>

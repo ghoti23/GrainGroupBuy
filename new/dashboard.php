@@ -61,7 +61,7 @@ if ($type == 'top') {
                     <h4>Products</h4>
                     <ul class="nav nav-pills">
                         <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="/new/dashboard.php">Top Sellers</a></li>
-                        <li <?php if ($type == 'split') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=split">Active Splits</a></li>
+                        <?php if (isset($activeGroupBuy)) {  ?><li <?php if ($type == 'split') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=split">Active Splits</a></li><?php } ?>
                         <?php if ($groupBuy->getHopsOnly() != 0) {?><li <?php if ($type == 'hops') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=hops">Hops</a></li><?php } ?>
                         <?php if ($groupBuy->getGrainOnly() != 0) {?><li <?php if ($type == 'grain') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=grain">Grains</a></li><?php } ?>
                         <li <?php if ($type == 'supplies') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=supplies">Supplies</a></li>
@@ -158,7 +158,9 @@ if ($type == 'top') {
                                             <input type="button" class="btn grey cancel" value="Cancel" />
                                             <input type="submit" value="Save" />
                                         </form>
-                                        <a class="button add" href="#">Add</a>
+                                        <?php if (isset($activeGroupBuy)) {  ?>
+                                            <a class="button add" href="#">Add</a>
+                                        <?php } ?>
                                         <em><span><?php echo $index++ ?>.</span> <?php print $product->getName()?></em> <?php if (!empty($vendor)) { print ' - ' . $vendor; } ?>
                                         <?php $desc = $product->getDescription(); if (!empty($desc)) { ?>
                                             <div class="desc"><?php print $desc; ?></div>

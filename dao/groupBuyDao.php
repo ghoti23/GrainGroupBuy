@@ -49,6 +49,23 @@ class groupBuyDao
         }
     }
 
+    public function selectNextGroupBuy()
+    {
+        try {
+            $sql = 'select id,name,username AS owner,email AS ownerEmail,startDt,endDt from groupbuy join user owner on email = owner where startDt > CURRENT_DATE() order by startDt';
+            $pdo = $this->pdoObject;
+            $results = $pdo->query($sql);
+            $orders = GroupBuy::loadMultiple($results);
+            if (!empty($orders)) {
+                return $orders[0];
+            }
+
+            return null;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
     public function selectExpireGroupBuy()
     {
         try {

@@ -40,7 +40,11 @@ foreach ($products as $product) {
             <input type="button" class="btn grey cancel" value="Cancel" />
             <input type="submit" value="Save" />
         </form>
-        <a class="button add" href="#">Add</a>
+
+        <?php if (isset($activeGroupBuy)) {  ?>
+            <a class="button add" href="#">Add</a>
+        <?php } ?>
+
         <em><span><?php echo $index++ ?>.</span> <?php print $product->getName()?></em> <?php if (!empty($vendor)) { print ' - ' . $vendor; } ?>
         <?php $desc = $product->getDescription(); if (!empty($desc)) { ?>
             <div class="desc"><?php print $desc; ?></div>

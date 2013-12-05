@@ -19,11 +19,22 @@
                         <li class="separator">
                             <?php
                             if (isset($groupBuy)) {
+                                $days = $groupBuy -> getDaysRemaining();
                                 if ($groupBuy -> isActive()) {
-                                    print "<div class='alert alert-success'>" . $groupBuy -> getDaysRemaining() . " Days Remaining!</div>";
+                                    if ($days > 1) {
+                                        print "<div class='alert alert-success'>" . $days . " Days Remaining!</div>";
+                                    }
+                                    else {
+                                        print "<div class='alert alert-success'>Last Day To Order!</div>";
+                                    }
                                 }
                                 else {
-                                    print "<div class='alert alert-info'>" . $groupBuy -> getDaysRemaining() . " Days Until Next Group Buy!</div>";
+                                    if ($days > 1) {
+                                        print "<div class='alert alert-info'>" . $days . " Days Until Next Group Buy!</div>";
+                                    }
+                                    else {
+                                        print "<div class='alert alert-success'>Ordering Starts Tomorrow!</div>";
+                                    }
                                 }
                             }
                             ?>
@@ -34,3 +45,8 @@
         </div>
     </div>
 </header>
+<div class="banner-callout">
+    <b>It seems you don’t have a username.</b> Choosing a username will allow you to join
+    the discussion and show off your amazing new profile.
+    <a href="#" class="btn" >Choose a username</a>
+</div>

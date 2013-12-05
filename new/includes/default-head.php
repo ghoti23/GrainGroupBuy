@@ -1,18 +1,20 @@
 <?php
 
+$groupBuyDao = new groupBuyDao();
+$orderDao = new orderDao();
+$userDao = new userDao();
+$groupBuyDao -> connect($host, $pdo);
+$orderDao -> connect($host, $pdo);
+$userDao -> connect($host, $pdo);
+$utils = new Utils;
+
 if (isset($_SESSION['activeGroupBuy'])){
     $activeGroupBuy = $_SESSION['activeGroupBuy'];
-    $groupBuyDao = new groupBuyDao();
-    $orderDao = new orderDao();
-    $userDao = new userDao();
-    $groupBuyDao -> connect($host, $pdo);
-    $orderDao -> connect($host, $pdo);
-    $userDao -> connect($host, $pdo);
-
     $groupBuy = $groupBuyDao -> get($activeGroupBuy);
     $currentOrder = $orderDao -> getOrder($activeGroupBuy, $user);
-
-    $utils = new Utils;
+} elseif (isset($_SESSION['nextGroupBuy'])) {
+    $nextGroupBuy = $_SESSION['nextGroupBuy'];
+    $groupBuy = $groupBuyDao -> get($nextGroupBuy);
 }
 
 ?>

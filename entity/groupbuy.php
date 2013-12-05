@@ -120,10 +120,10 @@ class GroupBuy implements JsonSerializable
         $end = strtotime($this -> getEndDate());
 
         if ($start < $now && $end >= $now) {
-            return floor(abs($now - $end) / (60 * 60 * 24));
+            return ceil(abs($now - $end) / (60 * 60 * 24));
         }
 
-        return floor(abs($now - $start) / (60 * 60 * 24));
+        return ceil(abs($now - $start) / (60 * 60 * 24));
     }
 
     function allowSplit($numOfSplits)

@@ -17,7 +17,11 @@ class User implements JsonSerializable
     static function load($results)
     {
         $users = User::loadMultiple($results);
-        return $users[0];
+        if (!empty($users)) {
+            return $users[0];
+        }
+
+        return null;
     }
 
     static function loadMultiple($results)

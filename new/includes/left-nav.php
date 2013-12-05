@@ -1,17 +1,14 @@
 <?php
-if (isset($_SESSION['activeGroupBuy'])) {
-    $expiredOrders = $orderDao -> getOrderHistory($user);
-    $poundsTotal = $orderDao -> getAllOrdersTotalPounds(null);
-    $userTotal = $orderDao -> getUserOrderTotalPounds(null, $user);
-    $totalMembers = $userDao -> getTotalMembers();
-}
+$expiredOrders = $orderDao -> getOrderHistory($user);
+$poundsTotal = $orderDao -> getAllOrdersTotalPounds(null);
+$userTotal = $orderDao -> getUserOrderTotalPounds(null, $user);
+$totalMembers = $userDao -> getTotalMembers();
 ?>
-
+<?php if (isset($activeGroupBuy)) {  ?>
 <div id="current-order" class="well">
-    <?php if (isset($activeGroupBuy)) {  ?>
-        <?php include_once("includes/order-detail-nav.php")?>
-    <?php } ?>
+    <?php include_once("includes/order-detail-nav.php")?>
 </div>
+<?php } ?>
 <div class="well">
     <h4>History</h4>
     <div>
@@ -34,7 +31,7 @@ if (isset($_SESSION['activeGroupBuy'])) {
     </div>
 </div>
 <div class="well">
-    <h4>Statistics</h4>
+    <h4>Site Statistics</h4>
     <dl>
         <dt>Total Members: <span><?php print number_format($totalMembers); ?></span></dt>
         <dd></dd>

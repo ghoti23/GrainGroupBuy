@@ -12,8 +12,6 @@ if ($email != "") {
 	// The message
 	$link = "http://artofbeerbrewery.com/groupbuy/resetPassword.php?email=".$email."&id=" . $user->getPassword();
 
-
-
     $mandrill = new Mandrill('AFkXcZ94ZLRKkvpEoBEDMA');
 
     $params = array(

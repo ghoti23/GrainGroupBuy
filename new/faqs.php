@@ -58,12 +58,12 @@ if (isset($_SESSION['user'])){
 
             <h3>What is the lead time for delivery and pick up location?</h3>
             <p>Typically, you can expect to receive your order within 2 weeks after the deadline for payment has ended (which is one week after the buy closes).  Pick up is made by appointment at:</p>
-            <p>
-                Chicago Brewing Supplies Inc.<br />
-                4866 W. Cortland St.<br />
-                Chicago, IL 60639<br />
-                773-442-2455<br /><br/>
-            </p>
+            <address>
+                <strong>Chicago Brewing Supplies Inc.</strong><br>
+                4866 W. Cortland St.<br>
+                Chicago, IL 60639<br>
+                <abbr title="Phone">P:</abbr> (773) 442-2455<br /><br/>
+            </address>
 
             <h3>I have never participated in a group buy before and do not know anyone who has.  What if I have reservations about participating?</h3>
             <p>We do not want to make anyone uncomfortable.  Perhaps these buys just aren’t for you.  But if it’s any consolation, bmason1623 has been running buys in the Chicago area for almost three years.  You can ask others about their experiences.  And as always, you can ask bmason1623 himself or the others listed in the second FAQ question.  Just send a PM or email through the various forums like:</p>

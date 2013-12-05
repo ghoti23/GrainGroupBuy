@@ -231,6 +231,11 @@ footer ul li a {
     display: none !important;
   }
 
+  .alert-danger {
+    max-width: 400px;
+    margin: 20px auto;
+  }
+
   div.box {
     width: 330px;
     margin: 0 auto;
@@ -249,6 +254,11 @@ footer ul li a {
     font-size: 12px;
     text-align: center;
     padding: 20px;
+    margin: 0;
+
+    &.nopad {
+      padding: 0 20px;
+    }
   }
 }
 
@@ -344,4 +354,11 @@ footer ul li a {
 .ad-row {
   padding: 35px 0 0 0;
   text-align: center;
+}
+
+.banner-callout {
+  padding: 10px;
+  text-align: center;
+  background-color: #FFF7EC;
+  border-top: 1px solid darken(#FFF7EC, 10%);
 }
