@@ -2866,57 +2866,82 @@ footer ul li a {
   line-height: 30px;
 }
 
-.login h3 {
+.login h3,
+.referral h3 {
   margin-top: 25px;
   font-size: 18px;
   line-height: 23px;
 }
 
-.login .content {
+.login .content,
+.referral .content {
   margin-top: 90px;
 }
 
-.login .logo {
+.login .logo,
+.referral .logo {
   text-align: center;
 }
 
-.login label {
+.login label,
+.referral label {
   display: none !important;
 }
 
-.login .alert-danger {
+.login .alert-danger,
+.referral .alert-danger {
   max-width: 400px;
   margin: 20px auto;
 }
 
-.login div.box {
+.login div.box,
+.referral div.box {
   width: 330px;
   margin: 0 auto;
   text-align: center;
 }
 
-.login div.box p {
+.login div.box p,
+.referral div.box p {
   margin-bottom: 14px;
 }
 
-.login div.box .alert {
+.login div.box .alert,
+.referral div.box .alert {
   margin: 20px;
 }
 
-.login .footer-msg p {
+.login .footer-msg p,
+.referral .footer-msg p {
   padding: 20px;
   margin: 0;
   font-size: 12px;
   text-align: center;
 }
 
-.login .footer-msg p.nopad {
+.login .footer-msg p.nopad,
+.referral .footer-msg p.nopad {
   padding: 0 20px;
 }
 
+.login .login-btn input,
+.referral .login-btn input,
 .login div.text input,
-.login .login-btn input {
+.referral div.text input {
   width: 295px;
+}
+
+.referral h1 {
+  font-size: 40px;
+  line-height: 45px;
+  color: #fff;
+}
+
+.referral h3 {
+  margin-bottom: 30px;
+  font-size: 25px;
+  line-height: 30px;
+  color: #a2aab0;
 }
 
 .faq {
