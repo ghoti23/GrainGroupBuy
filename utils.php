@@ -11,7 +11,7 @@ class utils
 
     function getMarkupPrice($user, $product, $groupBuy)
     {
-        if ($product -> getType() == "grain") {
+        if ($product->getType() == "grain") {
             $price = $product->getPrice() * $product->getPounds();
         } else {
             $price = $product->getPrice();
@@ -27,18 +27,15 @@ class utils
 
     function getDisplayPrice($user, $product, $groupBuy)
     {
-        if ($product -> getType() == "grain") {
+        if ($product->getType() == "grain") {
             if ($product->getSplit() > 0) {
                 $price = $product->getPrice() * ($product->getPounds() / $product->getSplit());
-            }
-            else {
+            } else {
                 $price = $product->getPrice() * $product->getPounds();
             }
-        }
-        elseif ($product -> getType() == "hops") {
+        } elseif ($product->getType() == "hops") {
             $price = $product->getPrice() / $product->getPounds();
-        }
-        else {
+        } else {
             $price = $product->getPrice();
         }
         $markup = $groupBuy->getMarkup();
@@ -48,6 +45,19 @@ class utils
         } else {
             return number_format(($price * $markup) + $price, 2);
         }
+    }
+
+    public function getDiscountPercent($price, $retailPrice)
+    {
+        if (empty($retailPrice) || empty($price)) {
+            return null;
+        }
+
+        if ($price > $retailPrice) {
+            return null;
+        }
+
+        return round((($retailPrice - $price) / $retailPrice) * 100);
     }
 
     function getWholeSalePrice($product, $groupBuyTotalPounds)

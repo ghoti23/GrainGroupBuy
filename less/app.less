@@ -91,7 +91,7 @@ header {
 }
 
 header .inner {
-  min-height: 80px;
+  height: 80px;
 }
 
 footer {
@@ -102,6 +102,7 @@ footer {
 }
 
 header {
+
   .site-logo {
     height: 80px;
     line-height: 80px;
@@ -112,6 +113,14 @@ header {
   .alert {
     display: inline-block;
     margin-top: 12px;
+  }
+
+  &.responsive {
+    height: auto;
+
+    .alert {
+      width: 90%;
+    }
   }
 
   .alert-success, .alert-info {
@@ -342,7 +351,7 @@ footer ul li a {
     margin-left: 15px;
   }
 
-  select, select option {
+  select {
     margin-left: 5px;
     height: 32px;
     line-height: 32px;
@@ -359,6 +368,6 @@ footer ul li a {
 .banner-callout {
   padding: 10px;
   text-align: center;
-  background-color: #FFF7EC;
-  border-top: 1px solid darken(#FFF7EC, 10%);
+  background-color: @callout-color;
+  border-top: 1px solid darken(@callout-color, 10%);
 }

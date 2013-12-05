@@ -1,4 +1,4 @@
-<header>
+<header class="hidden-sm hidden-xs">
     <div class="container">
         <div class="row">
             <div class="col-md-2">
@@ -13,36 +13,21 @@
                         <li class="separator"><a class="button grey" href="/new/login.php">Log In</a></li>
                         <li><a class="button" href="/new/signup.php">Sign Up</a></li>
                     <?php } ?>
-
-                    <?php if (isset($user)) {  ?>
-                        <li><a class="link" href="/new/logout.php">Logout</a></li>
-                        <li class="separator">
-                            <?php
-                            if (isset($groupBuy)) {
-                                $days = $groupBuy -> getDaysRemaining();
-                                if ($groupBuy -> isActive()) {
-                                    if ($days > 1) {
-                                        print "<div class='alert alert-success'>" . $days . " Days Remaining!</div>";
-                                    }
-                                    else {
-                                        print "<div class='alert alert-success'>Last Day To Order!</div>";
-                                    }
-                                }
-                                else {
-                                    if ($days > 1) {
-                                        print "<div class='alert alert-info'>" . $days . " Days Until Next Group Buy!</div>";
-                                    }
-                                    else {
-                                        print "<div class='alert alert-success'>Ordering Starts Tomorrow!</div>";
-                                    }
-                                }
-                            }
-                            ?>
-                        </li>
-                    <?php } ?>
+                    <li><a class="link" href="/new/logout.php">Logout</a></li>
+                    <li class="separator">
+                        <?php include("days-remaining.php")?>
+                    </li>
                 </ul>
             </div>
         </div>
+    </div>
+</header>
+<header class="responsive hidden-md hidden-lg">
+    <div class="centered">
+        <a href="/new/index.php" class="site-logo"><img src="/img/art_of_beer_tiny.png" /></a>
+    </div>
+    <div class="centered">
+        <?php include("days-remaining.php")?>
     </div>
 </header>
 <div class="banner-callout">

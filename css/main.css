@@ -2431,6 +2431,10 @@ table th a:hover {
   color: #333;
 }
 
+.well.light .discount {
+  color: #a84242;
+}
+
 .well.light em {
   font-style: normal;
   font-weight: 700;
@@ -2734,7 +2738,7 @@ header {
 }
 
 header .inner {
-  min-height: 80px;
+  height: 80px;
 }
 
 footer {
@@ -2754,6 +2758,14 @@ header .site-logo {
 header .alert {
   display: inline-block;
   margin-top: 12px;
+}
+
+header.responsive {
+  height: auto;
+}
+
+header.responsive .alert {
+  width: 90%;
 }
 
 header .alert-success,
@@ -2985,8 +2997,7 @@ footer ul li a {
   margin-left: 15px;
 }
 
-.order-add select,
-.order-add select option {
+.order-add select {
   height: 32px;
   margin-left: 5px;
   line-height: 32px;
@@ -3002,7 +3013,7 @@ footer ul li a {
 .banner-callout {
   padding: 10px;
   text-align: center;
-  background-color: #FFF7EC;
+  background-color: #fff7ec;
   border-top: 1px solid #ffe2b9;
 }
 

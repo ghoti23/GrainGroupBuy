@@ -16,6 +16,7 @@ class Product implements JsonSerializable {
     private $split;
     private $deactive;
     private $amount;
+    private $retailPrice = 13.72;
 
     public function setAmount($amount)
     {
@@ -175,6 +176,22 @@ class Product implements JsonSerializable {
     public function getVendor()
     {
         return $this->vendor;
+    }
+
+    /**
+     * @param mixed $retailPrice
+     */
+    public function setRetailPrice($retailPrice)
+    {
+        $this->retailPrice = $retailPrice;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRetailPrice()
+    {
+        return $this->retailPrice;
     }
 
     public function isHopOrGrain() {

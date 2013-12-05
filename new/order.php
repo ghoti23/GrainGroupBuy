@@ -60,11 +60,11 @@ $groupBuyTotal = $orderDao -> getAllOrdersTotalPounds($order_id);
                     </h3>
                     <div class="row detail-item">
                         <div class="col-md-2"><h4>Started:</h4></div>
-                        <div class="col-md-10"><?php print $currentGroupBuy->getFormattedStartDate()?></div>
+                        <div class="col-md-10"><h4><?php print $currentGroupBuy->getFormattedStartDate()?></h4></div>
                     </div>
                     <div class="row detail-item">
                         <div class="col-md-2"><h4>Ended:</h4></div>
-                        <div class="col-md-10"><?php print $currentGroupBuy->getFormattedEndDate()?></div>
+                        <div class="col-md-10"><h4><?php print $currentGroupBuy->getFormattedEndDate()?></h4></div>
                     </div>
                     <form class="product-info" action="/new/order.php" method="post">
                         <?php
@@ -118,7 +118,13 @@ $groupBuyTotal = $orderDao -> getAllOrdersTotalPounds($order_id);
                             <?php
                             }
                             ?>
-
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td colspan="2"><strong>Subtotal:</strong></td>
+                                <td><?php print '$' . number_format($total, 2)?></td>
+                            </tr>
                             <?php
                             if ($currentGroupBuy -> getShipping() != "") {
                                 $shipping = $currentGroupBuy -> getShipping();
