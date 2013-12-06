@@ -55,11 +55,11 @@ if (!empty($openOrders)) {
             </div>
             <div class="col-md-4">
                 <h3>Who runs them?</h3>
-                <p>These buys are organized by Chicago Home Brewers Group.  They are a group of Chicago area homebrewers whose group buys are coordinated by bmason1623 with help from cheesecake, ghoti, Neopol, starman & wagz.</p>
+                <p>These buys are organized by Chicago Home Brewers Group.  They are a group of Chicago area homebrewers whose group buys are coordinated by Bill Mason(bmason1623) with help from cheesecake, ghoti, Neopol, starman & wagz.</p>
             </div>
             <div class="col-md-4">
                 <h3>Who can participate?</h3>
-                <p>Practically anyone can participate.  All we ask is that you reside in the Chicago area or neighboring states like WI, IN, IA and MI.  We do not ship grain.  Period.</p>
+                <p>Practically anyone can participate.  All we ask is that you reside in the Chicago area or neighboring states like WI, IN, IA and MI.  We do not ship.  Period.</p>
             </div>
         </div>
     </section>
