@@ -159,7 +159,7 @@ class groupBuyDao
     public function all()
     {
         try {
-            $sql = "select * from groupbuy ";
+            $sql = "select * from groupbuy order by id";
             $pdo = $this->pdoObject;
             $sth = $pdo->prepare($sql);
             $sth->execute();
