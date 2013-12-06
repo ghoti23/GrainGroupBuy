@@ -163,6 +163,21 @@ header {
   }
 }
 
+article {
+  .alert-success {
+    background-color: #7BC673;
+    border-color: #7BC673;
+    color: #fff;
+    padding: 10px 25px;
+    font-size: 20px;
+    line-height: 24px;
+
+    span {
+      color: #fff !important;
+    }
+  }
+}
+
 header ul, footer ul {
   padding: 0;
   margin: 0;
@@ -413,5 +428,48 @@ footer ul li a {
     }
   }
 
+  &.large {
+    .stat {
+      font-size: 140%;
+    }
+  }
+
 }
+
+.splits {
+  padding-left: 0;
+  padding-bottom: 1px;
+  margin: 0 10px 30px 10px;
+  list-style: none;
+  overflow: hidden;
+
+  li {
+    float: left;
+    width: 33.3%;
+    height: 310px;
+    padding: 10px;
+    margin: 0 -1px -1px 0;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+
+    img {
+      height: 180px;
+      width: 174px;
+      display: block;
+      margin: 0 auto 15px auto;
+      border: 3px solid @well-bg;
+      border-radius: 10px;
+    }
+
+    em {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      font-style: normal;
+    }
+  }
+}
+
+
 

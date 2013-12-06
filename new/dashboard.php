@@ -56,43 +56,47 @@ $sub_title = "Current Group Buy";
                     $supplyTotal = $orderDao -> getAllOrdersTotalPoundsByType($_SESSION['activeGroupBuy'], 'additive');
                     ?>
 
-                    <div class="">
-                        <div class="row-fluid clearfix">
-                            <div class="col-md-4">
-                                <div>Grains</div>
+                    <article>
+                        <div class="row-fluid stats clearfix alert alert-success">
+                            <div class="col-md-4 stat">
+                                Total Grains
                                 <span><?php print number_format($grainTotal); ?> lbs</span>
                             </div>
                             <div class="col-md-4 stat">
-                                <div>Hops</div>
+                                Total Hops
                                 <span><?php print number_format(round($hopTotal)); ?> lbs</span>
                             </div>
                             <div class="col-md-4 stat">
-                                <div>Supplies</div>
-                                <div><img src="/img/drinks_16_280.png" ></div>
+                                Total Supplies
                                 <span><?php print number_format(round($supplyTotal)); ?> lbs</span>
                             </div>
                         </div>
+                    </article>
 
-                        <h6>Active Splits</h6>
-                        <?php
+                    <?php
+                    if (!empty($typeProducts)) {
+                        print "<h1 class='section'>Active Splits</h1>";
+                        print "<ul class='splits'>";
                         $index = 1;
                         foreach ($typeProducts as $productSplit) {
                             $product = $productSplit -> getProduct();
                             $price = $utils->getDisplayPrice($user, $product, $groupBuy);
                             $vendor = $product->getVendor()
                             ?>
-                            <div>
+                            <li>
+                                <img src="<?php print $product->getImagePath()?>" />
                                 <em><?php print $product->getName()?></em> <?php if (!empty($vendor)) { print ' - ' . $vendor; } ?>
                                 <?php $desc = $product->getDescription(); if (!empty($desc)) { ?>
                                     <div class="desc"><?php print $desc; ?></div>
                                 <?php } ?>
                                 <div><?php print $product->getDisplayUnits() . " @ " . '$' . $price ?> &nbsp;</div>
                                 <div><?php print "<b>" . $productSplit->getDisplayAmount() . "</b> of <b>" . $product->getPoundsWithUnit() . "</b>"?></div>
-                            </div>
+                            </li>
                         <?php
                         }
-                        ?>
-                    </div>
+                        print "</ul>";
+                    }
+                    ?>
 
                 <?php } ?>
 
@@ -101,9 +105,7 @@ $sub_title = "Current Group Buy";
                     $userTotal = $orderDao -> getUserOrderTotalPounds(null, $user);
                     $totalMembers = $userDao -> getTotalMembers();
                 ?>
-                <div class="subnav">
-                    <h3>All-Time Statistics</h3>
-                </div>
+                <h1 class="section">All-Time Statistics</h1>
                 <div class="well">
                     <div class="row-fluid stats clearfix">
                         <div class="col-md-4 stat">

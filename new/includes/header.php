@@ -1,10 +1,10 @@
 <header class="hidden-sm hidden-xs">
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
-                <a href="/new/index.php" class="site-logo"><img src="/img/art_of_beer_tiny.png" /></a>
+            <div class="col-md-4">
+                <a href="/new/index.php" class="site-logo"><img src="/img/groupbuy_gray_tiny_64.png" /></a>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <ul class="site-nav pull-right">
                     <li><a class="link" href="/new/calculators.php">Useful Tools</a></li>
                     <li><a class="link" href="/new/faqs.php">FAQs</a></li>
@@ -26,7 +26,7 @@
 </header>
 <header class="responsive hidden-md hidden-lg">
     <div class="centered">
-        <a href="/new/index.php" class="site-logo"><img src="/img/art_of_beer_tiny.png" /></a>
+        <a href="/new/index.php" class="site-logo"><img src="/img/groupbuy_gray_tiny_64.png" /></a>
     </div>
     <div class="centered">
         <?php include("days-remaining.php")?>

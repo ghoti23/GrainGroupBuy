@@ -55,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <body class="login">
 <div class="content">
     <div class="logo">
-        <a href="/new/index.php"><img src="/img/art_of_beer_sm.png" /></a>
+        <a href="/new/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
     </div>
     <h3 class="centered">Create your Group Buy account.</h3>
     <?php if (!empty($message)) {  ?>

@@ -47,11 +47,11 @@ $sub_title = "Beer Adjuncts";
         <div class="row">
             <div class="col-md-2">
                 <ul class="nav-simple">
-                    <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="/new/beer-adjuncts.php.php">Top Sellers</a></li>
-                    <li <?php if ($type == 'sugar') {?>class="active"<?php } ?>><a href="/new/beer-adjuncts.php.php?type=sugar">Belgian Candi Sugar</a></li>
-                    <li <?php if ($type == 'cornsyrup') {?>class="active"<?php } ?>><a href="/new/beer-adjuncts.php.php?type=cornsyrup">Corn Syrup/Carbonation Drops</a></li>
-                    <li <?php if ($type == 'honey') {?>class="active"<?php } ?>><a href="/new/beer-adjuncts.php.php?type=honey">Honey</a></li>
-                    <li <?php if ($type == 'nonfermentables') {?>class="active"<?php } ?>><a href="/new/beer-adjuncts.php.php?type=nonfermentables">Non-Fermentables</a></li>
+                    <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="/new/beer-adjuncts.php">Top Sellers</a></li>
+                    <li <?php if ($type == 'sugar') {?>class="active"<?php } ?>><a href="/new/beer-adjuncts.php?type=sugar">Belgian Candi Sugar</a></li>
+                    <li <?php if ($type == 'cornsyrup') {?>class="active"<?php } ?>><a href="/new/beer-adjuncts.php?type=cornsyrup">Corn Syrup/Carbonation Drops</a></li>
+                    <li <?php if ($type == 'honey') {?>class="active"<?php } ?>><a href="/new/beer-adjuncts.php?type=honey">Honey</a></li>
+                    <li <?php if ($type == 'nonfermentables') {?>class="active"<?php } ?>><a href="/new/beer-adjuncts.php?type=nonfermentables">Non-Fermentables</a></li>
                 </ul>
             </div>
             <div class="col-md-7">

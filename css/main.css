@@ -526,6 +526,12 @@ h3 .small {
   font-size: 65%;
 }
 
+h1.section {
+  padding: 0 10px 10px 10px;
+  font-size: 28px;
+  line-height: 36px;
+}
+
 h4,
 h5,
 h6 {
@@ -2883,6 +2889,19 @@ header ul li .link {
   color: #666666;
 }
 
+article .alert-success {
+  padding: 10px 25px;
+  font-size: 20px;
+  line-height: 24px;
+  color: #fff;
+  background-color: #7BC673;
+  border-color: #7BC673;
+}
+
+article .alert-success span {
+  color: #fff !important;
+}
+
 header ul,
 footer ul {
   padding: 0;
@@ -3136,6 +3155,45 @@ footer ul li a {
   line-height: 50px;
   color: #a2aab0;
   text-align: center;
+}
+
+.stats.large .stat {
+  font-size: 140%;
+}
+
+.splits {
+  padding-bottom: 1px;
+  padding-left: 0;
+  margin: 0 10px 30px 10px;
+  overflow: hidden;
+  list-style: none;
+}
+
+.splits li {
+  float: left;
+  width: 33.3%;
+  height: 310px;
+  padding: 10px;
+  margin: 0 -1px -1px 0;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.splits li img {
+  display: block;
+  width: 174px;
+  height: 180px;
+  margin: 0 auto 15px auto;
+  border: 3px solid #4b5159;
+  border-radius: 10px;
+}
+
+.splits li em {
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  color: #ffffff;
 }
 
 .centered {
