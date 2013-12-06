@@ -98,14 +98,20 @@ class productDao {
     }
 
     public function getByType($type) {
-        if ($type != 'hops' && $type != 'grain') {
-            return $this->getAllSupplies();
-        }
-
         $sql="select *, id as productId from product where type = ? order by name";
         $pdo = $this->pdoObject;
         $sth=$pdo->prepare($sql);
         $sth->execute(array ($type) );
+        $results = $sth->fetchAll();
+        $products = Product::loadMultiple($results);
+        return $products;
+    }
+
+    public function getByTypeAndSubtype($type, $subType) {
+        $sql="select *, id as productId from product where type = ? and subtype = ? order by name";
+        $pdo = $this->pdoObject;
+        $sth=$pdo->prepare($sql);
+        $sth->execute(array ($type, $subType) );
         $results = $sth->fetchAll();
         $products = Product::loadMultiple($results);
         return $products;

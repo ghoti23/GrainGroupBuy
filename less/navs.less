@@ -16,15 +16,18 @@
     position: relative;
     display: block;
 
+    &.text {
+      padding: 5px 15px;
+    }
+
     > a {
-      color: #666666;
+      color: #fff;
       position: relative;
       display: block;
       padding: @nav-link-padding;
       &:hover,
       &:focus {
-        text-decoration: none;
-        background-color: @nav-link-hover-bg;
+        text-decoration: underline;
       }
     }
 
@@ -71,6 +74,37 @@
   // See https://github.com/h5bp/html5-boilerplate/issues/984#issuecomment-3985989
   > li > a > img {
     max-width: none;
+  }
+}
+
+.nav-simple {
+  margin: 0 0 10px 0;
+  padding-left: 0; // Override default ul/ol
+  list-style: none;
+  .clearfix();
+
+  > li {
+    position: relative;
+    display: block;
+
+    > a {
+      color: #fff;
+      position: relative;
+      display: block;
+      padding: @nav-link-padding;
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
@@ -137,8 +171,7 @@
       &,
       &:hover,
       &:focus {
-        color: @nav-pills-active-link-hover-color;
-        background-color: @nav-pills-active-link-hover-bg;
+        text-decoration: underline;
 
         .caret {
           border-top-color: @nav-pills-active-link-hover-color;
@@ -260,4 +293,15 @@
   margin-top: -1px;
   // Remove the top rounded corners here since there is a hard edge above the menu
   .border-top-radius(0);
+}
+
+
+.subnav {
+  padding: 0 10px 18px 10px;
+
+  h1 {
+    margin: 0;
+    font-size: 28px;
+    line-height: 36px;
+  }
 }

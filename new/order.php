@@ -38,6 +38,7 @@ $groupBuyDao = new groupBuyDao();
 $groupBuyDao -> connect($host, $pdo);
 $currentGroupBuy = $groupBuyDao -> get($order_id);
 $groupBuyTotal = $orderDao -> getAllOrdersTotalPounds($order_id);
+$sub_title = "Order History"
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,14 +49,11 @@ $groupBuyTotal = $orderDao -> getAllOrdersTotalPounds($order_id);
 <?php include_once("includes/header.php")?>
 <div class="container">
     <div class="body-spacer">
+        <?php include_once("includes/subnav.php")?>
         <div class="row">
-            <div class="col-md-3">
-                <?php include_once("includes/left-nav.php")?>
-            </div>
-            <div class="col-md-7">
+            <div class="col-md-9">
                 <div class="well light">
                     <h3 class="upper">
-                        <a class="pull-right link" href="/new/dashboard.php">Back to Products</a>
                         <?php print $currentGroupBuy->getName()?>
                     </h3>
                     <div class="row detail-item">
@@ -178,7 +176,7 @@ $groupBuyTotal = $orderDao -> getAllOrdersTotalPounds($order_id);
                     </form>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <?php include_once("includes/right-nav.php")?>
             </div>
         </div>

@@ -27,20 +27,14 @@ if (!isset($_REQUEST["type"])){
 
 $groupBuyDao = new groupBuyDao();
 $groupBuyDao -> connect($host, $pdo);
+$productDao = new productDao();
+$productDao->connect($host, $pdo);
 
-if ($type == 'top') {
-    $topGrains = $groupBuyDao -> getTopGrains();
-    $topHops = $groupBuyDao -> getTopHops();
-    $topSupplies = $groupBuyDao -> getTopSupplies();
-} else if ($type == 'split' && isset($_SESSION['activeGroupBuy'])) {
-    $productDao = new productDao();
-    $productDao->connect($host, $pdo);
+if (isset($_SESSION['activeGroupBuy'])) {
     $typeProducts = $productDao->getAllSplits($_SESSION['activeGroupBuy']);
-} else {
-    $productDao = new productDao();
-    $productDao->connect($host, $pdo);
-    $typeProducts = $productDao->getByType($type);
 }
+
+$sub_title = "Current Group Buy";
 
 ?>
 <!DOCTYPE html>
@@ -52,146 +46,125 @@ if ($type == 'top') {
 <?php include_once("includes/header.php")?>
 <div class="container">
     <div class="body-spacer">
+        <?php include_once("includes/subnav.php")?>
         <div class="row">
-            <div class="col-md-3">
-                <?php include_once("includes/left-nav.php")?>
-            </div>
-            <div class="col-md-7">
-                <div class="well light">
-                    <h4>Products</h4>
-                    <ul class="nav nav-pills">
-                        <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="/new/dashboard.php">Top Sellers</a></li>
-                        <?php if (isset($activeGroupBuy)) {  ?><li <?php if ($type == 'split') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=split">Active Splits</a></li><?php } ?>
-                        <?php if ($groupBuy->getHopsOnly() != 0) {?><li <?php if ($type == 'hops') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=hops">Hops</a></li><?php } ?>
-                        <?php if ($groupBuy->getGrainOnly() != 0) {?><li <?php if ($type == 'grain') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=grain">Grains</a></li><?php } ?>
-                        <li <?php if ($type == 'supplies') {?>class="active"<?php } ?>><a href="/new/dashboard.php?type=supplies">Supplies</a></li>
-                    </ul>
-                    <?php if ($type == 'top') {?>
-                        <?php if ($groupBuy->getHopsOnly() != 0) {?>
-                        <h5>
-                            <a class="pull-right" href="/new/dashboard.php?type=hops">Browse All Hops</a>
-                            Top Selling Hops
-                        </h5>
-                        <div>
-                            <ul class="list-group">
-                                <?php
-                                $products = $topHops;
-                                include("includes/product-row.php");
-                                ?>
-                            </ul>
-                        </div>
-                        <?php } ?>
-                        <?php if ($groupBuy->getGrainOnly() != 0) {?>
-                        <h5>
-                            <a class="pull-right" href="/new/dashboard.php?type=grain">Browse All Grains</a>
-                            Top Selling Grains
-                        </h5>
-                        <div>
-                            <ul class="list-group">
-                                <?php
-                                $products = $topGrains;
-                                include("includes/product-row.php");
-                                ?>
-                            </ul>
-                        </div>
-                        <?php } ?>
-                        <h5>
-                            <a class="pull-right" href="/new/dashboard.php?type=supplies">Browse All Supplies</a>
-                            Top Selling Supplies
-                        </h5>
-                        <div>
-                            <ul class="list-group">
-                                <?php
-                                $products = $topSupplies;
-                                include("includes/product-row.php");
-                                ?>
-                            </ul>
-                        </div>
-                    <?php } else if ($type == 'split') { ?>
-                        <div>
-                            <ul class="list-group">
-                                <?php
+            <div class="col-md-9">
+                <?php
+                if (isset($_SESSION['activeGroupBuy'])) {
+                    $grainTotal = $orderDao -> getAllOrdersTotalPoundsByType($_SESSION['activeGroupBuy'], 'grain');
+                    $hopTotal = $orderDao -> getAllOrdersTotalPoundsByType($_SESSION['activeGroupBuy'], 'hops');
+                    $supplyTotal = $orderDao -> getAllOrdersTotalPoundsByType($_SESSION['activeGroupBuy'], 'additive');
+                    ?>
 
-                                if (empty($typeProducts)) {
-                                    print "<li class='list-group-item light'>The are currently no active splits.</li>";
-                                }
-
-                                $index = 1;
-                                foreach ($typeProducts as $productSplit) {
-                                    $product = $productSplit -> getProduct();
-                                    $price = $utils->getDisplayPrice($user, $product, $groupBuy);
-                                    $vendor = $product->getVendor()
-                                    ?>
-                                    <li class="list-group-item light">
-                                        <form class="order-add hidden" method="post">
-                                            <input type="hidden" name="id" value="<?php print $product->getId()?>" />
-                                            <span>How much?</span>
-                                            <select name="value">
-                                                <?php
-                                                if ($product->getType() == "grain") {
-                                                    if ($product->getSplit() > 0) {
-                                                        $count = 1;
-                                                        $orderUnit = $product->getPounds() / $product->getSplit();
-                                                        for ($i = .5; $i <= 10; $i += .5) {
-                                                            print "<option value='" . $i . "'>" . $count++ * $orderUnit . " lbs</option>";
-                                                        }
-                                                    }
-                                                    else {
-                                                        for ($i = 1; $i <= 10; $i++) {
-                                                            print "<option value='" . $i . "'>" . $i * $product->getPounds() . " lbs</option>";
-                                                        }
-                                                    }
-                                                }
-                                                elseif ($product->getType() == "hops") {
-                                                    for ($i = 1; $i <= 11; $i++) {
-                                                        print "<option value='" . ($i / 11) . "'>" . $i . " lbs</option>";
-                                                    }
-                                                }
-                                                else {
-                                                    for ($i = 1; $i <= 10; $i++) {
-                                                        print "<option value='" . $i . "'>" . $i . "</option>";
-                                                    }
-                                                }
-                                                ?>
-                                            </select>
-
-                                            <input type="button" class="btn grey cancel" value="Cancel" />
-                                            <input type="submit" value="Save" />
-                                        </form>
-                                        <?php if (isset($activeGroupBuy)) {  ?>
-                                            <a class="button add" href="#">Add</a>
-                                        <?php } ?>
-                                        <em><span><?php echo $index++ ?>.</span> <?php print $product->getName()?></em> <?php if (!empty($vendor)) { print ' - ' . $vendor; } ?>
-                                        <?php $desc = $product->getDescription(); if (!empty($desc)) { ?>
-                                            <div class="desc"><?php print $desc; ?></div>
-                                        <?php } ?>
-                                        <div><?php print $product->getDisplayUnits() . " @ " . '$' . $price ?> &nbsp;</div>
-                                        <div><?php print "<b>" . $productSplit->getDisplayAmount() . "</b> of <b>" . $product->getPoundsWithUnit() . "</b>"?></div>
-                                    </li>
-                                <?php
-                                }
-                                ?>
-                            </ul>
+                    <div class="">
+                        <div class="row-fluid clearfix">
+                            <div class="col-md-4">
+                                <div>Grains</div>
+                                <span><?php print number_format($grainTotal); ?> lbs</span>
+                            </div>
+                            <div class="col-md-4 stat">
+                                <div>Hops</div>
+                                <span><?php print number_format(round($hopTotal)); ?> lbs</span>
+                            </div>
+                            <div class="col-md-4 stat">
+                                <div>Supplies</div>
+                                <div><img src="/img/drinks_16_280.png" ></div>
+                                <span><?php print number_format(round($supplyTotal)); ?> lbs</span>
+                            </div>
                         </div>
-                    <?php } else { ?>
-                        <div>
-                            <ul class="list-group">
-                                <?php
-                                    $products = $typeProducts;
-                                    include("includes/product-row.php");
-                                ?>
-                            </ul>
-                        </div>
-                    <?php } ?>
+
+                        <h6>Active Splits</h6>
+                        <?php
+                        $index = 1;
+                        foreach ($typeProducts as $productSplit) {
+                            $product = $productSplit -> getProduct();
+                            $price = $utils->getDisplayPrice($user, $product, $groupBuy);
+                            $vendor = $product->getVendor()
+                            ?>
+                            <div>
+                                <em><?php print $product->getName()?></em> <?php if (!empty($vendor)) { print ' - ' . $vendor; } ?>
+                                <?php $desc = $product->getDescription(); if (!empty($desc)) { ?>
+                                    <div class="desc"><?php print $desc; ?></div>
+                                <?php } ?>
+                                <div><?php print $product->getDisplayUnits() . " @ " . '$' . $price ?> &nbsp;</div>
+                                <div><?php print "<b>" . $productSplit->getDisplayAmount() . "</b> of <b>" . $product->getPoundsWithUnit() . "</b>"?></div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
+
+                <?php } ?>
+
+                <?php
+                    $poundsTotal = $orderDao -> getAllOrdersTotalPounds(null);
+                    $userTotal = $orderDao -> getUserOrderTotalPounds(null, $user);
+                    $totalMembers = $userDao -> getTotalMembers();
+                ?>
+                <div class="subnav">
+                    <h3>All-Time Statistics</h3>
                 </div>
+                <div class="well">
+                    <div class="row-fluid stats clearfix">
+                        <div class="col-md-4 stat">
+                            Total Members<br/>&nbsp;
+                            <span><?php print number_format($totalMembers); ?></span>
+                        </div>
+                        <div class="col-md-4 stat">
+                            Purchased Pounds<br/>(Everyone)
+                            <span><?php print number_format(round($poundsTotal)); ?> lbs</span>
+                        </div>
+                        <div class="col-md-4 stat">
+                            Purchased Pounds<br/>(You)
+                            <span><?php print number_format(round($userTotal)); ?> lbs</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <?php include_once("includes/right-nav.php")?>
             </div>
         </div>
     </div>
-
 </div>
 <?php include_once("includes/footer.php")?>
 </body>
 </html>
+
+
+
+<?php
+/*
+if (empty($typeProducts)) {
+    print "<li class='list-group-item light'>The are currently no active splits.</li>";
+}
+
+$index = 1;
+foreach ($typeProducts as $productSplit) {
+    $product = $productSplit -> getProduct();
+    $price = $utils->getDisplayPrice($user, $product, $groupBuy);
+    $vendor = $product->getVendor()
+    ?>
+    <li class="list-group-item light">
+        <form class="order-add hidden" method="post">
+            <input type="hidden" name="id" value="<?php print $product->getId()?>" />
+            <span>How much?</span>
+
+            <input type="button" class="btn grey cancel" value="Cancel" />
+            <input type="submit" value="Save" />
+        </form>
+        <?php if (isset($activeGroupBuy)) {  ?>
+            <a class="button add" href="#">Add</a>
+        <?php } ?>
+        <em><span><?php echo $index++ ?>.</span> <?php print $product->getName()?></em> <?php if (!empty($vendor)) { print ' - ' . $vendor; } ?>
+        <?php $desc = $product->getDescription(); if (!empty($desc)) { ?>
+            <div class="desc"><?php print $desc; ?></div>
+        <?php } ?>
+        <div><?php print $product->getDisplayUnits() . " @ " . '$' . $price ?> &nbsp;</div>
+        <div><?php print "<b>" . $productSplit->getDisplayAmount() . "</b> of <b>" . $product->getPoundsWithUnit() . "</b>"?></div>
+    </li>
+<?php
+}
+*/
+?>
