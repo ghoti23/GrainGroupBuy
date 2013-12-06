@@ -265,6 +265,7 @@ class orderDao {
             echo $e->getMessage();
         }
     }
+
     public function getGroupBuyGrainSplitOrder($groupbuy,$user) {
         try {
             $sql = "SELECT distinct * from groupbuy g join split s on g.id = s.groupBuyId join  user_split us on us.splitId = s.Id join product p on p.id = s.productId where g.ID = ? and us.email = ? order by p.name  ";
@@ -373,6 +374,32 @@ class orderDao {
                 $sql = "select SUM(amount*pounds) as product_total from user_order join product on user_order.productID = product.id where groupBuyId = ?";
                 $sth=$pdo->prepare($sql);
                 $sth->execute(array ($groupBuyID) );
+            }
+
+            $results = $sth->fetchAll();
+            if ($results != null) {
+                foreach ($results as $row) {
+                    return $row["product_total"];
+                }
+            } else {
+                return 0;
+            }
+        } catch (Exception $e) {
+            echo "Error: ". $e->getMessage();
+        }
+    }
+
+    public function getAllOrdersTotalPoundsByType ($groupBuyID, $type) {
+        try {
+            $pdo = $this->pdoObject;
+            if (empty($groupBuyID)) {
+                $sql = "select SUM(amount*pounds) as product_total from user_order join product on user_order.productID = product.id where product.type = ?";
+                $sth=$pdo->prepare($sql);
+                $sth->execute(array ($type));
+            } else {
+                $sql = "select SUM(amount*pounds) as product_total from user_order join product on user_order.productID = product.id where groupBuyId = ? and product.type = ?";
+                $sth=$pdo->prepare($sql);
+                $sth->execute(array ($groupBuyID, $type) );
             }
 
             $results = $sth->fetchAll();

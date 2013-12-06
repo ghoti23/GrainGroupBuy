@@ -1,6 +1,9 @@
 <div class="hidden-md hidden-lg">
-    <?php include("general-nav.php")?>
-
+    <?php if (isset($activeGroupBuy)) {  ?>
+        <div id="current-order" class="well">
+            <?php include("includes/order-detail-nav.php")?>
+        </div>
+    <?php } ?>
     <div class="ad-row">
         <div class="sponsored">SPONSORED</div>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -16,6 +19,12 @@
 </div>
 
 <div class="hidden-sm hidden-xs">
+    <?php if (isset($activeGroupBuy)) {  ?>
+        <div id="current-order" class="well">
+            <?php include("includes/order-detail-nav.php")?>
+        </div>
+    <?php } ?>
+
     <div class="ads-container">
         <div class="sponsored">SPONSORED</div>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

@@ -13,10 +13,11 @@
                         <li class="separator"><a class="button grey" href="/new/login.php">Log In</a></li>
                         <li><a class="button" href="/new/signup.php">Sign Up</a></li>
                     <?php } else { ?>
-                    <li><a class="link" href="/new/logout.php">Logout</a></li>
-                    <li class="separator">
-                        <?php include("days-remaining.php")?>
-                    </li>
+                        <li><a class="link" href="/new/order-history.php">Order History</a></li>
+                        <li><a class="link" href="/new/logout.php">Logout</a></li>
+                        <li class="separator">
+                            <?php include("days-remaining.php")?>
+                        </li>
                     <?php } ?>
                 </ul>
             </div>
@@ -36,6 +37,7 @@
             <li><a class="link" href="/new/faqs.php">FAQs</a></li>
 
             <?php if (isset($user)) {  ?>
+                <li><a class="link" href="/new/order-history.php">Order History</a></li>
                 <li><a class="link" href="/new/logout.php">Logout</a></li>
             <?php } ?>
         </ul>

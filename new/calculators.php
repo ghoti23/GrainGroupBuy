@@ -25,52 +25,54 @@ if (isset($_SESSION['user'])){
 <body>
 <?php include_once("includes/header.php")?>
 <div class="faq container">
-    <div class="row">
-        <div class="col-md-10">
-            <h3>Strike Temperature Calculator</h3>
-            <h4>Determine what your strike temperature will need to be to meet the desired mash-in temperature.</h4>
-            <div class="well well-lg">
-                <form id="strikeForm" method="POST" class="clearfix">
-                    <div class="row-fluid">
-                        <div class="col-md-4"><label for="contentKey">Mash Thickness: (qt/lb)</label></div>
-                        <div class="col-md-8"><input type="text" name="mT" value="1.25"></div>
-                    </div>
-                    <div class="row-fluid">
-                        <div class="col-md-4"><label for="contentKey">Desired Strike Temperature (F)</label></div>
-                        <div class="col-md-8"><input type="text" name="sT" value="150"></div>
-                    </div>
-                    <div class="row-fluid">
-                        <div class="col-md-4"><label for="contentKey">Temperature of Grain: (F)</label></div>
-                        <div class="col-md-8"><input type="text" name="gT" value="60"></div>
-                    </div>
-                    <div class="row-fluid">
-                        <div class="col-md-4">&nbsp;</div>
-                        <div class="col-md-8"><input type="submit" class="btn btn-lg" value="Submit" /></div>
-                    </div>
-                </form>
-            </div>
+    <div class="body-spacer">
+        <div class="row">
+            <div class="col-md-9">
+                <h3>Strike Temperature Calculator</h3>
+                <h4>Determine what your strike temperature will need to be to meet the desired mash-in temperature.</h4>
+                <div class="well well-lg">
+                    <form id="strikeForm" method="POST" class="clearfix">
+                        <div class="row-fluid">
+                            <div class="col-md-4"><label for="contentKey">Mash Thickness: (qt/lb)</label></div>
+                            <div class="col-md-8"><input type="text" name="mT" value="1.25"></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="col-md-4"><label for="contentKey">Desired Strike Temperature (F)</label></div>
+                            <div class="col-md-8"><input type="text" name="sT" value="150"></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="col-md-4"><label for="contentKey">Temperature of Grain: (F)</label></div>
+                            <div class="col-md-8"><input type="text" name="gT" value="60"></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="col-md-4">&nbsp;</div>
+                            <div class="col-md-8"><input type="submit" class="btn btn-lg" value="Submit" /></div>
+                        </div>
+                    </form>
+                </div>
 
-            <h3>Will it fit?</h3>
-            <h4>A simple tool that will tell you if your grain bill will fit in your mash tun.  You will need to compensate for the volume under your mash tun.</h4>
-            <div class="well well-lg">
-                <form id="fitForm" class="clearfix">
-                    <div class="row-fluid">
-                        <div class="col-md-4"><label for="contentKey">Grain Weight: (lb)</label></div>
-                        <div class="col-md-8"><input type="text" name="weight" value=""></div>
-                    </div>
-                    <div class="row-fluid">
-                        <div class="col-md-4"><label for="contentKey">Mash Thickness: (qt/lb)</label></div>
-                        <div class="col-md-8"><input type="text" name="mash" value="1.25"></div>
-                    </div>
-                    <div class="row-fluid">
-                        <div class="col-md-4">&nbsp;</div>
-                        <div class="col-md-8"><input type="submit" class="btn btn-lg" value="Submit" /></div>
-                    </div>
-                </form>
+                <h3>Will it fit?</h3>
+                <h4>A simple tool that will tell you if your grain bill will fit in your mash tun.  You will need to compensate for the volume under your mash tun.</h4>
+                <div class="well well-lg">
+                    <form id="fitForm" class="clearfix">
+                        <div class="row-fluid">
+                            <div class="col-md-4"><label for="contentKey">Grain Weight: (lb)</label></div>
+                            <div class="col-md-8"><input type="text" name="weight" value=""></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="col-md-4"><label for="contentKey">Mash Thickness: (qt/lb)</label></div>
+                            <div class="col-md-8"><input type="text" name="mash" value="1.25"></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="col-md-4">&nbsp;</div>
+                            <div class="col-md-8"><input type="submit" class="btn btn-lg" value="Submit" /></div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="col-md-2">
-            <?php include_once("includes/right-nav.php")?>
+            <div class="col-md-3">
+                <?php include_once("includes/right-nav.php")?>
+            </div>
         </div>
     </div>
 </div>

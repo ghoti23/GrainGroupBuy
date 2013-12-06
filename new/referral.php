@@ -27,6 +27,7 @@ if ($user == null) {
 <?php include_once("includes/header.php")?>
 <div class="container">
     <div class="body-spacer">
+
         <div class="row">
             <div class="col-md-10 referral">
                 <div class="centered">
