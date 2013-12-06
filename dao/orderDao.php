@@ -340,9 +340,6 @@ class orderDao {
             $sth->execute(array ($id, $user->getEmail()) );
             $results = $sth->fetchAll();
             $order = Order::load($results);
-            if (!empty($order)) {
-                $order->setSplit($this->selectGroupBuyOrderSplit($id, $user));
-            }
 
             return $order;
         } catch (Exception $e) {
@@ -353,7 +350,7 @@ class orderDao {
     public function getOrderHistory($user)
     {
         try {
-            $sql = 'select id, name, owner, owner AS ownerEmail, startDt, endDt from groupbuy g where id in (select groupBuyId from user_order where email = ?) and g.endDt <= CURRENT_DATE() order by endDt';
+            $sql = 'select id, name, owner, owner AS ownerEmail, startDt, endDt from groupbuy g where id in (select groupBuyId from user_order where email = ?) and g.endDt <= CURRENT_DATE() order by endDt desc';
             $pdo = $this->pdoObject;
             $sth = $pdo->prepare($sql);
             $sth->execute(array ($user->getEmail()));
@@ -367,10 +364,17 @@ class orderDao {
 
     public function getAllOrdersTotalPounds ($groupBuyID) {
         try {
-            $sql = "select SUM(amount*pounds) as product_total from user_order join product on user_order.productID = product.id where groupBuyId = ?";
             $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
-            $sth->execute(array ($groupBuyID) );
+            if (empty($groupBuyID)) {
+                $sql = "select SUM(amount*pounds) as product_total from user_order join product on user_order.productID = product.id";
+                $sth=$pdo->prepare($sql);
+                $sth->execute();
+            } else {
+                $sql = "select SUM(amount*pounds) as product_total from user_order join product on user_order.productID = product.id where groupBuyId = ?";
+                $sth=$pdo->prepare($sql);
+                $sth->execute(array ($groupBuyID) );
+            }
+
             $results = $sth->fetchAll();
             if ($results != null) {
                 foreach ($results as $row) {
@@ -386,10 +390,17 @@ class orderDao {
 
     public function getUserOrderTotalPounds ($groupBuyId, $user) {
         try {
-            $sql = "select SUM(amount*pounds) as product_total from user_order join product on user_order.productID = product.id where groupBuyId = ? AND email = ?";
             $pdo = $this->pdoObject;
-            $sth=$pdo->prepare($sql);
-            $sth->execute(array ($groupBuyId, $user->getEmail()) );
+            if (empty($groupBuyId)) {
+                $sql = "select SUM(amount*pounds) as product_total from user_order join product on user_order.productID = product.id where email = ?";
+                $sth=$pdo->prepare($sql);
+                $sth->execute(array ($user->getEmail()));
+            } else {
+                $sql = "select SUM(amount*pounds) as product_total from user_order join product on user_order.productID = product.id where groupBuyId = ? AND email = ?";
+                $sth=$pdo->prepare($sql);
+                $sth->execute(array ($groupBuyId, $user->getEmail()));
+            }
+
             $results = $sth->fetchAll();
             if ($results != null) {
                 foreach ($results as $row) {

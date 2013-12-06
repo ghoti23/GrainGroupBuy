@@ -2405,14 +2405,41 @@ table th a:hover {
   border: 1px solid #cccccc;
 }
 
-.well.light h4 {
+.well.light h4,
+.well.light h3 {
   padding: 0 15px;
+}
+
+.well.light h3.upper {
+  text-transform: uppercase;
+}
+
+.well.light h3 .link {
+  font-size: 13px;
+  color: #333333;
+}
+
+.well.light .detail-item {
+  color: #333333;
+}
+
+.well.light .detail-item h4 {
+  margin: 5px 0;
+}
+
+.well.light .desc {
+  color: #333;
+}
+
+.well.light .discount {
+  color: #a84242;
 }
 
 .well.light em {
   font-style: normal;
   font-weight: 700;
   color: #333333;
+  text-transform: uppercase;
 }
 
 .well.light h5 {
@@ -2668,6 +2695,17 @@ input[type="submit"] {
           transition: all 0.1s ease-in-out;
 }
 
+.btn.btn-lg,
+.button.btn-lg,
+button.button.btn-lg,
+.btn[type="submit"].btn-lg,
+.button[type="submit"].btn-lg,
+input[type="button"].btn-lg,
+input[type="reset"].btn-lg,
+input[type="submit"].btn-lg {
+  width: 185px;
+}
+
 .btn.grey,
 .button.grey,
 button.button.grey {
@@ -2700,7 +2738,7 @@ header {
 }
 
 header .inner {
-  min-height: 80px;
+  height: 80px;
 }
 
 footer {
@@ -2720,6 +2758,14 @@ header .site-logo {
 header .alert {
   display: inline-block;
   margin-top: 12px;
+}
+
+header.responsive {
+  height: auto;
+}
+
+header.responsive .alert {
+  width: 90%;
 }
 
 header .alert-success,
@@ -2779,7 +2825,7 @@ footer ul li a {
 }
 
 .home-hero {
-  height: 480px;
+  min-height: 480px;
   padding: 45px 0;
 }
 
@@ -2792,47 +2838,110 @@ footer ul li a {
   text-shadow: #222 1px 1px 2px;
 }
 
-.login h3 {
+.home-hero h2 {
+  margin: 40px 0 30px 0;
+  font-size: 50px;
+  line-height: 55px;
+  color: #FFF;
+  text-align: center;
+}
+
+.home-hero h3 {
+  margin: 10px 0 10px 0;
+  font-size: 30px;
+  line-height: 35px;
+  color: #FFF;
+}
+
+.home-hero .button-content {
+  margin: 30px 0 30px 0;
+  text-align: center;
+}
+
+.home-hero .button-content .button {
+  width: 225px;
+  height: 56px;
+  margin-left: 15px;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.login h3,
+.referral h3 {
   margin-top: 25px;
   font-size: 18px;
   line-height: 23px;
 }
 
-.login .content {
+.login .content,
+.referral .content {
   margin-top: 90px;
 }
 
-.login .logo {
+.login .logo,
+.referral .logo {
   text-align: center;
 }
 
-.login label {
+.login label,
+.referral label {
   display: none !important;
 }
 
-.login div.box {
+.login .alert-danger,
+.referral .alert-danger {
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.login div.box,
+.referral div.box {
   width: 330px;
   margin: 0 auto;
   text-align: center;
 }
 
-.login div.box p {
+.login div.box p,
+.referral div.box p {
   margin-bottom: 14px;
 }
 
-.login div.box .alert {
+.login div.box .alert,
+.referral div.box .alert {
   margin: 20px;
 }
 
-.login .footer-msg p {
+.login .footer-msg p,
+.referral .footer-msg p {
   padding: 20px;
+  margin: 0;
   font-size: 12px;
   text-align: center;
 }
 
+.login .footer-msg p.nopad,
+.referral .footer-msg p.nopad {
+  padding: 0 20px;
+}
+
+.login .login-btn input,
+.referral .login-btn input,
 .login div.text input,
-.login .login-btn input {
+.referral div.text input {
   width: 295px;
+}
+
+.referral h1 {
+  font-size: 40px;
+  line-height: 45px;
+  color: #fff;
+}
+
+.referral h3 {
+  margin-bottom: 30px;
+  font-size: 25px;
+  line-height: 30px;
+  color: #a2aab0;
 }
 
 .faq {
@@ -2886,7 +2995,7 @@ footer ul li a {
 }
 
 .product-info {
-  padding: 0 15px 10px 15px;
+  padding: 10px 15px 10px 15px;
   margin-bottom: 10px;
 }
 
@@ -2913,11 +3022,24 @@ footer ul li a {
   margin-left: 15px;
 }
 
-.order-add select,
-.order-add select option {
-  height: 36px;
+.order-add select {
+  height: 32px;
   margin-left: 5px;
-  line-height: 36px;
+  line-height: 32px;
+  background-color: white;
+  border-color: #DFDFDF;
+}
+
+.ad-row {
+  padding: 35px 0 0 0;
+  text-align: center;
+}
+
+.banner-callout {
+  padding: 10px;
+  text-align: center;
+  background-color: #fff7ec;
+  border-top: 1px solid #ffe2b9;
 }
 
 .centered {

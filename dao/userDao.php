@@ -105,6 +105,18 @@ class userDao {
         }
     }
 
+    public function updateAccountPassword ($email, $password) {
+        try {
+            $sql = 'UPDATE user set password = ? where email = ?';
+            $pdo = $this->pdoObject;
+            $sth=$pdo->prepare($sql);
+            $sth->execute(array ($password, $email) );
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
     public function loadUserForgotPassword ($id, $email) {
         try {
             $sql = 'Select * from user where password = ? and email = ?';

@@ -23,6 +23,10 @@ class GroupBuy implements JsonSerializable
     static function load($results)
     {
         $groupBuy = GroupBuy::loadMultiple($results);
+        if (empty($groupBuy)) {
+            return new GroupBuy();
+        }
+
         return $groupBuy[0];
     }
 
@@ -116,10 +120,10 @@ class GroupBuy implements JsonSerializable
         $end = strtotime($this -> getEndDate());
 
         if ($start < $now && $end >= $now) {
-            return floor(abs($now - $end) / (60 * 60 * 24));
+            return ceil(abs($now - $end) / (60 * 60 * 24));
         }
 
-        return floor(abs($now - $start) / (60 * 60 * 24));
+        return ceil(abs($now - $start) / (60 * 60 * 24));
     }
 
     function allowSplit($numOfSplits)
@@ -338,6 +342,16 @@ class GroupBuy implements JsonSerializable
     public function setMarkup($markup)
     {
         $this->markup = $markup;
+    }
+
+    public function getFormattedStartDate()
+    {
+        return date('F d, Y', strtotime ($this->getStartDate()));
+    }
+
+    public function getFormattedEndDate()
+    {
+        return date('F d, Y', strtotime ($this->getEndDate()));
     }
 
 }

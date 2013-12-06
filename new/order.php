@@ -12,7 +12,7 @@ require '../properties.php';
 require '../utils.php';
 
 session_start();
-if (!isset($_SESSION['user']) || !isset($_SESSION['activeGroupBuy'])){
+if (!isset($_SESSION['user'])){
     header("location:/new/index.php");
 }
 
@@ -22,7 +22,10 @@ if (!isset($_REQUEST["id"])){
     $order_id = strip_tags($_REQUEST["id"]);
 }
 
-$active_edit = ($_SESSION['activeGroupBuy'] == $order_id);
+$active_edit = false;
+if (isset($_SESSION['activeGroupBuy'])) {
+    $active_edit = ($_SESSION['activeGroupBuy'] == $order_id);
+}
 
 $user = $_SESSION['user'];
 
@@ -34,6 +37,7 @@ $order_products = $order -> getProduct();
 $groupBuyDao = new groupBuyDao();
 $groupBuyDao -> connect($host, $pdo);
 $currentGroupBuy = $groupBuyDao -> get($order_id);
+$groupBuyTotal = $orderDao -> getAllOrdersTotalPounds($order_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +54,18 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
             </div>
             <div class="col-md-7">
                 <div class="well light">
-                    <h4>Order Details</h4>
+                    <h3 class="upper">
+                        <a class="pull-right link" href="/new/dashboard.php">Back to Products</a>
+                        <?php print $currentGroupBuy->getName()?>
+                    </h3>
+                    <div class="row detail-item">
+                        <div class="col-md-2"><h4>Started:</h4></div>
+                        <div class="col-md-10"><h4><?php print $currentGroupBuy->getFormattedStartDate()?></h4></div>
+                    </div>
+                    <div class="row detail-item">
+                        <div class="col-md-2"><h4>Ended:</h4></div>
+                        <div class="col-md-10"><h4><?php print $currentGroupBuy->getFormattedEndDate()?></h4></div>
+                    </div>
                     <form class="product-info" action="/new/order.php" method="post">
                         <?php
                         if (!empty($order_products)) {
@@ -76,7 +91,9 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
                             $totalPounds = 0;
                             foreach ($order_products as $product) {
                                 $price = $utils->getMarkupPrice($user, $product, $currentGroupBuy);
+                                $displayPrice = $utils->getDisplayPrice($user, $product, $groupBuy);
                                 $totalPrice = $price * $product->getAmount();
+                                $totalPounds = $totalPounds + ($product->getPounds() * $product->getAmount());
                                 $total = $total + $totalPrice;
                                 if ($product->getType() == 'grain' || $product->getType() == 'hops') {
                                     $foodTotal = $foodTotal + ($price*$product->getAmount());
@@ -88,7 +105,7 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
                                     <td><?php print $product->getId()?></td>
                                     <td class="ue"><em><?php print $product->getName() . "</em><div>" . $product->getVendor() . "</div>"?></td>
                                     <td>
-                                        <?php print $product->getUnits() . " @ " . '$' . $price ?>
+                                        <?php print $product->getDisplayUnits() . " @ " . '$' . $displayPrice ?>
                                     </td>
                                     <td><?php print $product->getDisplayAmount()?></td>
                                     <td <?php if (!$active_edit) { ?>colspan="2"<?php } ?>><?php print '$' . number_format($totalPrice, 2)?></td>
@@ -101,11 +118,17 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
                             <?php
                             }
                             ?>
-
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td colspan="2"><strong>Subtotal:</strong></td>
+                                <td><?php print '$' . number_format($total, 2)?></td>
+                            </tr>
                             <?php
                             if ($currentGroupBuy -> getShipping() != "") {
-                                $shipping = $groupBuy -> getShipping();
-                                $shipping = number_format(($shipping / $groupBuyTotal),3);
+                                $shipping = $currentGroupBuy -> getShipping();
+                                $shipping = number_format(($shipping / $groupBuyTotal), 3);
                                 $shippingCosts = $shipping * $totalPounds;
                                 $total = $total + $shippingCosts;
                             ?>
@@ -122,9 +145,9 @@ $currentGroupBuy = $groupBuyDao -> get($order_id);
 
                             <?php
                             if ($currentGroupBuy->getTax()) {
-                                $tax=($foodTotal*$foodTax);
-                                $tax=$tax+($otherTotal*$otherTax);
-                                $total=$total+$tax;
+                                $tax = ($foodTotal*$foodTax);
+                                $tax = $tax + ($otherTotal*$otherTax);
+                                $total = $total+$tax;
                                 ?>
                                 <tr>
                                     <td>&nbsp;</td>

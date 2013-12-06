@@ -31,14 +31,42 @@
   }
 
   &.light {
-    h4 {
+    h4, h3 {
       padding: 0 15px;
+    }
+
+    h3 {
+      &.upper {
+        text-transform: uppercase;
+      }
+
+      .link {
+        font-size: 13px;
+        color: #333333;
+      }
+    }
+
+    .detail-item {
+      color: #333333;
+
+      h4 {
+        margin: 5px 0;
+      }
+    }
+
+    .desc {
+      color: #333;
+    }
+
+    .discount {
+      color: darken(@alert-danger-bg, 45%);
     }
 
     em {
       color: #333333;
       font-weight: 700;
       font-style: normal;
+      text-transform: uppercase;
     }
 
     background-color: #eeeeee;

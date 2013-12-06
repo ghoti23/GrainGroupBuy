@@ -16,6 +16,7 @@ class Product implements JsonSerializable {
     private $split;
     private $deactive;
     private $amount;
+    private $retailPrice = 13.72;
 
     public function setAmount($amount)
     {
@@ -177,11 +178,65 @@ class Product implements JsonSerializable {
         return $this->vendor;
     }
 
+    /**
+     * @param mixed $retailPrice
+     */
+    public function setRetailPrice($retailPrice)
+    {
+        $this->retailPrice = $retailPrice;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRetailPrice()
+    {
+        return $this->retailPrice;
+    }
+
     public function isHopOrGrain() {
         return ($this->getType() == 'hops' || $this->getType() == 'grain');
     }
 
     public function getUnits()
+    {
+        if ($this->getType() == 'hops') {
+            return 1;
+        }
+
+        if ($this->getType() == 'grain') {
+            if ($this->getSplit() > 0) {
+                return ($this->getPounds() / $this->getSplit());
+            }
+            else {
+                return $this->getPounds();
+            }
+
+        }
+
+        return 1;
+    }
+
+    public function getDisplayUnits()
+    {
+        if ($this->getType() == 'hops') {
+            return "1 lb";
+        }
+
+        if ($this->getType() == 'grain') {
+            if ($this->getSplit() > 0) {
+                return ($this->getPounds() / $this->getSplit()) . " lbs";
+            }
+            else {
+                return $this->getPounds() . " lbs";
+            }
+
+        }
+
+        return "1";
+    }
+
+    public function getPoundsWithUnit()
     {
         if ($this->isHopOrGrain()) {
             return $this->getPounds() . " lbs";
@@ -193,7 +248,7 @@ class Product implements JsonSerializable {
     public function getDisplayAmount()
     {
         if ($this->getType() == 'hops') {
-            return ($this->getAmount() * 11) . " lbs";
+            return round($this->getAmount() * 11) . " lbs";
         }
 
         if ($this->getType() == 'grain') {

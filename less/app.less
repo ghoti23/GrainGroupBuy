@@ -57,6 +57,10 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   -ms-transition: all .1s ease-in-out;
   -o-transition: all .1s ease-in-out;
   transition: all .1s ease-in-out;
+
+  &.btn-lg {
+    width: 185px;
+  }
 }
 
 .btn.grey, .button.grey, button.button.grey {
@@ -87,7 +91,7 @@ header {
 }
 
 header .inner {
-  min-height: 80px;
+  height: 80px;
 }
 
 footer {
@@ -98,6 +102,7 @@ footer {
 }
 
 header {
+
   .site-logo {
     height: 80px;
     line-height: 80px;
@@ -108,6 +113,14 @@ header {
   .alert {
     display: inline-block;
     margin-top: 12px;
+  }
+
+  &.responsive {
+    height: auto;
+
+    .alert {
+      width: 90%;
+    }
   }
 
   .alert-success, .alert-info {
@@ -166,7 +179,7 @@ footer ul li a {
 }
 
 .home-hero {
-  height: 480px;
+  min-height: 480px;
   padding: 45px 0;
 
   h1 {
@@ -177,9 +190,37 @@ footer ul li a {
     text-shadow: #222 1px 1px 2px;
     text-align: center;
   }
+
+  h2 {
+    font-size: 50px;
+    line-height: 55px;
+    color: #FFF;
+    margin: 40px 0 30px 0;
+    text-align: center;
+  }
+
+  h3 {
+    color: #FFF;
+    font-size: 30px;
+    line-height: 35px;
+    margin: 10px 0 10px 0;
+  }
+
+  .button-content {
+    margin: 30px 0 30px 0;
+    text-align: center;
+
+    .button {
+      width: 225px;
+      height: 56px;
+      margin-left: 15px;
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
 }
 
-.login {
+.login, .referral {
 
   h3 {
     font-size: 18px;
@@ -197,6 +238,11 @@ footer ul li a {
 
   label {
     display: none !important;
+  }
+
+  .alert-danger {
+    max-width: 400px;
+    margin: 20px auto;
   }
 
   div.box {
@@ -217,12 +263,33 @@ footer ul li a {
     font-size: 12px;
     text-align: center;
     padding: 20px;
+    margin: 0;
+
+    &.nopad {
+      padding: 0 20px;
+    }
+  }
+
+  .login-btn input, div.text input {
+    width: 295px;
   }
 }
 
-.login div.text input, .login .login-btn input {
-  width: 295px;
+.referral {
+  h1 {
+    font-size: 40px;
+    line-height: 45px;
+    color: #fff;
+  }
+
+  h3 {
+    font-size: 25px;
+    line-height: 30px;
+    margin-bottom: 30px;
+    color: @text-color;
+  }
 }
+
 
 .faq {
   padding: 15px 0;
@@ -276,7 +343,7 @@ footer ul li a {
 }
 
 .product-info {
-  padding: 0 15px 10px 15px;
+  padding: 10px 15px 10px 15px;
   margin-bottom: 10px;
 
   &.border {
@@ -300,10 +367,23 @@ footer ul li a {
     margin-left: 15px;
   }
 
-  select, select option {
+  select {
     margin-left: 5px;
-    height: 36px;
-    line-height: 36px;
+    height: 32px;
+    line-height: 32px;
+    border-color: #DFDFDF;
+    background-color: white;
   }
 }
 
+.ad-row {
+  padding: 35px 0 0 0;
+  text-align: center;
+}
+
+.banner-callout {
+  padding: 10px;
+  text-align: center;
+  background-color: @callout-color;
+  border-top: 1px solid darken(@callout-color, 10%);
+}
