@@ -110,7 +110,7 @@ class groupBuyDao
     public function getTopSupplies()
     {
         try {
-            $sql = "select p.* from product p, (SELECT id, SUM(amount*pounds) as total from product p left join user_order up on p.id = up.productId and p.type not in ('grain', 'hops') GROUP BY p.id ORDER BY total desc, p.id  LIMIT 25) pj where p.id = pj.id";
+            $sql = "select p.* from product p, (SELECT id, SUM(amount*pounds) as total from product p left join user_order up on p.id = up.productId and p.type = 'supply' GROUP BY p.id ORDER BY total desc, p.id  LIMIT 25) pj where p.id = pj.id";
             $pdo = $this->pdoObject;
             $results = $pdo->query($sql);
             $products = Product::loadMultiple($results);

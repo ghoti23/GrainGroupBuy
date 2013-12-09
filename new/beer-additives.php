@@ -29,10 +29,10 @@ if (!isset($_REQUEST["type"])){
     $type = strip_tags($_REQUEST["type"]);
     $productDao = new productDao();
     $productDao->connect($host, $pdo);
-    $typeProducts = $productDao->getByTypeAndSubtype('additive', $type);
+    $typeProducts = $productDao->getByTypeAndSubtype('supply', $type);
 }
 
-$sub_title = "Beer Additives";
+$sub_title = "Beer Additives & Supplies";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,6 +53,10 @@ $sub_title = "Beer Additives";
                     <li <?php if ($type == 'oak') {?>class="active"<?php } ?>><a href="/new/beer-additives.php?type=oak">Oak</a></li>
                     <li <?php if ($type == 'clarifying') {?>class="active"<?php } ?>><a href="/new/beer-additives.php?type=clarifying">Clarifying Agents</a></li>
                     <li <?php if ($type == 'phadjuster') {?>class="active"<?php } ?>><a href="/new/beer-additives.php?type=phadjuster">Water Treatment</a></li>
+                    <li <?php if ($type == 'sugar') {?>class="active"<?php } ?>><a href="/new/beer-additives.php?type=sugar">Belgian Candi Sugar</a></li>
+                    <li <?php if ($type == 'cornsyrup') {?>class="active"<?php } ?>><a href="/new/beer-additives.php?type=cornsyrup">Corn Syrup/Carbonation Drops</a></li>
+                    <li <?php if ($type == 'honey') {?>class="active"<?php } ?>><a href="/new/beer-additives.php?type=honey">Honey</a></li>
+                    <li <?php if ($type == 'nonfermentables') {?>class="active"<?php } ?>><a href="/new/beer-additives.php?type=nonfermentables">Non-Fermentables</a></li>
                     <li <?php if ($type == 'other') {?>class="active"<?php } ?>><a href="/new/beer-additives.php?type=other">Other Additives</a></li>
                 </ul>
             </div>

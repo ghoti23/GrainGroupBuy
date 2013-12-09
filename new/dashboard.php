@@ -76,7 +76,7 @@ $sub_title = "Current Group Buy";
                     <?php
                     if (!empty($typeProducts)) {
                         print "<h1 class='section'>Active Splits</h1>";
-                        print "<p class='section'>In order to achieve significant cost savings, we need to buy our products in bulk - typically 11 lbs or hops or 50 lbs of grain.  This is often too much for the average brewer, so we allow product 'splits' which enables our members to order 1 lb of hops or 25 lbs of grain in certain cases.  However, these splits cannot be added to the final order until enough members reach the product bulk size requirement.  Once the product reaches that size, it will move off the active split list and can be placed on the final order.</p>";
+                        print "<p class='section'>In order to achieve significant cost savings, we need to buy our products in bulk - typically 11 lbs of hops or 50 lbs of grain.  This is often too much for the average brewer, so we allow product 'splits' which enables our members to order 1 lb of hops or 25 lbs of grain in certain cases.  However, these splits cannot be added to the final order until enough members reach the product bulk size requirement.  Once the product reaches that size, it will move off the active split list and can be placed on the final order.</p>";
                         print "<ul class='splits'>";
                         $index = 1;
                         foreach ($typeProducts as $productSplit) {
