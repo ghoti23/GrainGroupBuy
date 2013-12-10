@@ -56,15 +56,13 @@ $sub_title = "Hops";
                 <div class="well light">
                     <div class="detail-bar">
                         <div class="total"><?php print count($typeProducts); ?> Items</div>
-                        <div class="filter">Filter: </div>
+                        <div class="filter">&nbsp;</div>
                     </div>
                     <div>
-                        <ul class="list-group">
-                            <?php
-                            $products = $typeProducts;
-                            include("includes/product-row.php");
-                            ?>
-                        </ul>
+                        <?php
+                        $products = $typeProducts;
+                        include("includes/product-row.php");
+                        ?>
                     </div>
                 </div>
 

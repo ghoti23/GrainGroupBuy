@@ -1,4 +1,28 @@
 <?php
+if (!empty($products)) {
+    print "<ul class='product-list small'>";
+    $index = 1;
+    foreach ($products as $product) {
+        $price = $utils->getDisplayPrice($user, $product, $groupBuy);
+        $vendor = $product->getVendor();
+        $desc = $product->getDescription();
+        $discountPercentage = $utils->getDiscountPercent($price, $product->getRetailPrice());
+        ?>
+        <li>
+            <img src="<?php print $product->getImagePath()?>" />
+            <em><?php print $product->getName()?></em>
+            <?php if (!empty($vendor)) { print '<div>' . $vendor . "</div>"; } ?>
+            <div><?php print $product->getDisplayUnits() . " @ " . '$' . $price ?> &nbsp;</div>
+            <div><a class="button add" href="#" data-title="<?php print $product->getName()?>" data-id="<?php print $product->getId()?>" data-desc="<?php print $product->getDescription()?>">Add</a></div>
+        </li>
+    <?php
+    }
+    print "</ul>";
+}
+?>
+
+<?php
+/*
 $index = 1;
 foreach ($products as $product) {
     $price = $utils->getDisplayPrice($user, $product, $groupBuy);
@@ -58,4 +82,5 @@ foreach ($products as $product) {
     </li>
 <?php
 }
+*/
 ?>

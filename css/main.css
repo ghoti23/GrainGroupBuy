@@ -2699,6 +2699,155 @@ a.list-group-item.active:focus .list-group-item-text {
   line-height: 1.3;
 }
 
+.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  display: none;
+  overflow: auto;
+  overflow-y: scroll;
+}
+
+.modal.fade .modal-dialog {
+  -webkit-transform: translate(0, -25%);
+      -ms-transform: translate(0, -25%);
+          transform: translate(0, -25%);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+     -moz-transition: -moz-transform 0.3s ease-out;
+       -o-transition: -o-transform 0.3s ease-out;
+          transition: transform 0.3s ease-out;
+}
+
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+
+.modal-dialog {
+  position: relative;
+  z-index: 1050;
+  width: auto;
+  padding: 10px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid #999999;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  outline: none;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  background-clip: padding-box;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+  background-color: #000000;
+}
+
+.modal-backdrop.fade {
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+.modal-backdrop.in {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+.modal-header {
+  min-height: 16.428571429px;
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-header h4 {
+  color: #6d6d6d;
+}
+
+.modal-header .close {
+  margin-top: -2px;
+}
+
+.modal-title {
+  margin: 0;
+  line-height: 1.428571429;
+}
+
+.modal-body {
+  position: relative;
+  padding: 20px;
+}
+
+.modal-footer {
+  padding: 19px 20px 20px;
+  margin-top: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+}
+
+.modal-footer:before,
+.modal-footer:after {
+  display: table;
+  content: " ";
+}
+
+.modal-footer:after {
+  clear: both;
+}
+
+.modal-footer:before,
+.modal-footer:after {
+  display: table;
+  content: " ";
+}
+
+.modal-footer:after {
+  clear: both;
+}
+
+.modal-footer .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+
+.modal-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+
+.modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .modal-dialog {
+    width: 600px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+}
+
 html,
 body {
   height: 100%;
@@ -2893,16 +3042,17 @@ header ul li .link {
   color: #666666;
 }
 
-article .alert-success {
+article .heads-up {
   padding: 10px 25px;
+  margin-bottom: 20px;
   font-size: 20px;
   line-height: 24px;
   color: #fff;
-  background-color: #7BC673;
-  border-color: #7BC673;
+  background-color: #5bc0de;
+  border-color: #46b8da;
 }
 
-article .alert-success span {
+article .heads-up span {
   color: #fff !important;
 }
 
@@ -3165,7 +3315,7 @@ footer ul li a {
   font-size: 140%;
 }
 
-.splits {
+.product-list {
   padding-bottom: 1px;
   padding-left: 0;
   margin: 0 10px 30px 10px;
@@ -3173,10 +3323,10 @@ footer ul li a {
   list-style: none;
 }
 
-.splits li {
+.product-list li {
   float: left;
   width: 33.3%;
-  height: 310px;
+  height: 340px;
   padding: 10px;
   margin: 0 -1px -1px 0;
   font-size: 13px;
@@ -3184,7 +3334,7 @@ footer ul li a {
   text-align: center;
 }
 
-.splits li img {
+.product-list li img {
   display: block;
   width: 174px;
   height: 180px;
@@ -3193,11 +3343,29 @@ footer ul li a {
   border-radius: 10px;
 }
 
-.splits li em {
+.product-list li em {
+  display: block;
+  width: 100%;
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
   color: #ffffff;
+}
+
+.product-list li em,
+.product-list li div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-list li .add {
+  width: 90px;
+  margin-top: 10px;
+}
+
+.product-list.small li img {
+  border: 2px solid #ddd;
 }
 
 .centered {

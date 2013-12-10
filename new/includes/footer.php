@@ -6,9 +6,69 @@
     </ul>
 </footer>
 
-<script src="/js/plugins/jquery.min.js"></script>
-<script src="/js/plugins/jQuery.serializeObject.js"></script>
-<script src="/js/main.js"></script>
+
+<!-- Modal -->
+<div class="modal" id="product-modal" tabindex="-1" role="dialog" aria-labelledby="Add Product" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="post">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img />
+                    </div>
+                    <div class="col-md-8">
+                        <div class="desc"></div>
+                        <select name="value">
+                            <?php
+                                for ($i = 1; $i <= 10; $i++) {
+                                    print "<option value='" . $i . "'>" . $i . "</option>";
+                                }
+                            /*
+                            if ($product->getType() == "grain") {
+                                if ($product->getSplit() > 0) {
+                                    $count = 1;
+                                    $orderUnit = $product->getPounds() / $product->getSplit();
+                                    for ($i = .5; $i <= 10; $i += .5) {
+                                        print "<option value='" . $i . "'>" . $count++ * $orderUnit . " lbs</option>";
+                                    }
+                                }
+                                else {
+                                    for ($i = 1; $i <= 10; $i++) {
+                                        print "<option value='" . $i . "'>" . $i * $product->getPounds() . " lbs</option>";
+                                    }
+                                }
+                            }
+                            elseif ($product->getType() == "hops") {
+                                for ($i = 1; $i <= 11; $i++) {
+                                    print "<option value='" . ($i / 11) . "'>" . $i . " lbs</option>";
+                                }
+                            }
+                            else {
+                                for ($i = 1; $i <= 10; $i++) {
+                                    print "<option value='" . $i . "'>" . $i . "</option>";
+                                }
+                            }
+                            */
+                            ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="id" value="" />
+                <button type="button" class="btn grey" data-dismiss="modal">Cancel</button>
+                <input type="submit" value="Add Item" />
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+<script src="/js/groupbuy.js"></script>
 <script>
     // Include the UserVoice JavaScript SDK (only needed once on a page)
     UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/npYI91PM1QHuevJXxZllCg.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();

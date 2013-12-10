@@ -3,7 +3,7 @@
         <li class="text">Product Types:</li>
         <?php if ($groupBuy->getHopsOnly() != 0) {?><li <?php if ($sub_title == 'Hops') {?>class="active"<?php } ?>><a href="/new/hops.php">Hops</a></li><?php } ?>
         <?php if ($groupBuy->getGrainOnly() != 0) {?><li <?php if ($sub_title == 'Grains') {?>class="active"<?php } ?>><a href="/new/grains.php">Grains</a></li><?php } ?>
-        <li <?php if ($sub_title == 'Beer Additives & Supplies') {?>class="active"<?php } ?>><a href="/new/beer-additives.php">Beer Additives & Supplies</a></li>
+        <li <?php if ($sub_title == 'Beer Additives & Supplies') {?>class="active"<?php } ?>><a href="/new/beer-supplies.php">Beer Additives & Supplies</a></li>
     </ul>
 
     <h1>

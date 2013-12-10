@@ -57,7 +57,7 @@ $sub_title = "Current Group Buy";
                     ?>
 
                     <article>
-                        <div class="row-fluid stats clearfix alert alert-success">
+                        <div class="row-fluid stats clearfix heads-up alert">
                             <div class="col-md-4 stat">
                                 Total Grains
                                 <span><?php print number_format($grainTotal); ?> lbs</span>
@@ -77,7 +77,7 @@ $sub_title = "Current Group Buy";
                     if (!empty($typeProducts)) {
                         print "<h1 class='section'>Active Splits</h1>";
                         print "<p class='section'>In order to achieve significant cost savings, we need to buy our products in bulk - typically 11 lbs of hops or 50 lbs of grain.  This is often too much for the average brewer, so we allow product 'splits' which enables our members to order 1 lb of hops or 25 lbs of grain in certain cases.  However, these splits cannot be added to the final order until enough members reach the product bulk size requirement.  Once the product reaches that size, it will move off the active split list and can be placed on the final order.</p>";
-                        print "<ul class='splits'>";
+                        print "<ul class='product-list'>";
                         $index = 1;
                         foreach ($typeProducts as $productSplit) {
                             $product = $productSplit -> getProduct();
@@ -86,12 +86,11 @@ $sub_title = "Current Group Buy";
                             ?>
                             <li>
                                 <img src="<?php print $product->getImagePath()?>" />
-                                <em><?php print $product->getName()?></em> <?php if (!empty($vendor)) { print ' - ' . $vendor; } ?>
-                                <?php $desc = $product->getDescription(); if (!empty($desc)) { ?>
-                                    <div class="desc"><?php print $desc; ?></div>
-                                <?php } ?>
+                                <em><?php print $product->getName()?></em>
+                                <?php if (!empty($vendor)) { print '<div>' . $vendor . "</div>"; } ?>
                                 <div><?php print $product->getDisplayUnits() . " @ " . '$' . $price ?> &nbsp;</div>
                                 <div><?php print "<b>" . $productSplit->getDisplayAmount() . "</b> of <b>" . $product->getPoundsWithUnit() . "</b>"?></div>
+                                <div><a class="button add" href="#" data-title="<?php print $product->getName()?>" data-id="<?php print $product->getId()?>" data-desc="<?php print $product->getDescription()?>">Add</a></div>
                             </li>
                         <?php
                         }

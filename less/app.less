@@ -164,13 +164,21 @@ header {
 }
 
 article {
-  .alert-success {
-    background-color: #7BC673;
-    border-color: #7BC673;
+  .heads-up {
+    /*
+    background-image: url(/img/patterns/pixel_weave.png);
+    background-position: initial initial;
+    background-repeat: initial initial;
+    border-radius: @alert-border-radius;
+    color: #333;
+    */
+    background-color: @brand-info;
+    border-color: darken(@btn-info-bg, 5%);
     color: #fff;
     padding: 10px 25px;
     font-size: 20px;
     line-height: 24px;
+    margin-bottom: 20px;
 
     span {
       color: #fff !important;
@@ -436,7 +444,7 @@ footer ul li a {
 
 }
 
-.splits {
+.product-list {
   padding-left: 0;
   padding-bottom: 1px;
   margin: 0 10px 30px 10px;
@@ -446,7 +454,7 @@ footer ul li a {
   li {
     float: left;
     width: 33.3%;
-    height: 310px;
+    height: 340px;
     padding: 10px;
     margin: 0 -1px -1px 0;
     font-size: 13px;
@@ -467,6 +475,28 @@ footer ul li a {
       font-size: 15px;
       font-weight: 700;
       font-style: normal;
+      width: 100%;
+      display: block;
+    }
+
+    em, div {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .add {
+      width: 90px;
+      margin-top: 10px;
+    }
+  }
+
+  &.small {
+    li {
+
+      img {
+        border: 2px solid #ddd;
+      }
     }
   }
 }
