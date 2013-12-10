@@ -13,7 +13,7 @@ if (!empty($products)) {
             <em><?php print $product->getName()?></em>
             <?php if (!empty($vendor)) { print '<div>' . $vendor . "</div>"; } ?>
             <div><?php print $product->getDisplayUnits() . " @ " . '$' . $price ?> &nbsp;</div>
-            <div><a class="button add" href="#" data-title="<?php print $product->getName()?>" data-id="<?php print $product->getId()?>" data-desc="<?php print $product->getDescription()?>">Add</a></div>
+            <div><a class="button add" href="#" data-id="<?php print $product->getId()?>" data-type="<?php print $product->getType()?>" data-split="<?php print $product->getSplit()?>" data-pounds="<?php print $product->getPounds()?>"  data-desc="<?php print $product->getDescription()?>">Add</a></div>
         </li>
     <?php
     }

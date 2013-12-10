@@ -17,43 +17,13 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <img />
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <div class="desc"></div>
+                        <em>How Much?</em>
                         <select name="value">
-                            <?php
-                                for ($i = 1; $i <= 10; $i++) {
-                                    print "<option value='" . $i . "'>" . $i . "</option>";
-                                }
-                            /*
-                            if ($product->getType() == "grain") {
-                                if ($product->getSplit() > 0) {
-                                    $count = 1;
-                                    $orderUnit = $product->getPounds() / $product->getSplit();
-                                    for ($i = .5; $i <= 10; $i += .5) {
-                                        print "<option value='" . $i . "'>" . $count++ * $orderUnit . " lbs</option>";
-                                    }
-                                }
-                                else {
-                                    for ($i = 1; $i <= 10; $i++) {
-                                        print "<option value='" . $i . "'>" . $i * $product->getPounds() . " lbs</option>";
-                                    }
-                                }
-                            }
-                            elseif ($product->getType() == "hops") {
-                                for ($i = 1; $i <= 11; $i++) {
-                                    print "<option value='" . ($i / 11) . "'>" . $i . " lbs</option>";
-                                }
-                            }
-                            else {
-                                for ($i = 1; $i <= 10; $i++) {
-                                    print "<option value='" . $i . "'>" . $i . "</option>";
-                                }
-                            }
-                            */
-                            ?>
                         </select>
                     </div>
                 </div>

@@ -2731,6 +2731,22 @@ a.list-group-item.active:focus .list-group-item-text {
           transform: translate(0, 0);
 }
 
+.modal form em {
+  display: block;
+  padding: 10px 0;
+  font-style: normal;
+  font-weight: 700;
+  color: #333;
+}
+
+.modal form select {
+  height: 32px;
+  margin-left: 5px;
+  line-height: 32px;
+  background-color: white;
+  border-color: #DFDFDF;
+}
+
 .modal-dialog {
   position: relative;
   z-index: 1050;
@@ -2742,6 +2758,7 @@ a.list-group-item.active:focus .list-group-item-text {
 
 .modal-content {
   position: relative;
+  color: #6d6d6d;
   background-color: #ffffff;
   border: 1px solid #999999;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -2750,6 +2767,12 @@ a.list-group-item.active:focus .list-group-item-text {
   -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
           box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
+}
+
+.modal-content img {
+  max-width: 90%;
+  border: 2px solid #ddd;
+  border-radius: 10px;
 }
 
 .modal-backdrop {
@@ -2779,7 +2802,8 @@ a.list-group-item.active:focus .list-group-item-text {
 }
 
 .modal-header h4 {
-  color: #6d6d6d;
+  font-weight: 700;
+  color: #333;
 }
 
 .modal-header .close {

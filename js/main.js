@@ -11,19 +11,54 @@
 	var product_modal = $('#product-modal');
 
 	var title_field = product_modal.find('.title'),
+		img_field = product_modal.find('img'),
 		desc_field = product_modal.find('.desc'),
-		id_field = product_modal.find('input[name="id"]');
+		id_field = product_modal.find('input[name="id"]'),
+		select_field = product_modal.find('select');
 
 	$('body').delegate(".add", "click", function (ev) {
 		var btn = $(ev.currentTarget),
-			title = btn.data('title'),
+			parent = btn.closest('li'),
+			title = parent.find('em').html(),
+			img = parent.find('img').attr('src'),
 			desc = btn.data('desc'),
-			id = btn.data('id');
+			id = btn.data('id'),
+			type = btn.data('type'),
+			pounds = p_int(btn.data('pounds')),
+			split = p_int(btn.data('split')),
+			options = [];
+
+		if (type == 'grain') {
+			if (split > 0) {
+				var count = 1;
+				var orderUnit = pounds / split;
+				for (var i = .5; i <= 10; i += .5) {
+					options.push("<option value='" + i + "'>" + (count++ * orderUnit) + " lbs</option>");
+				}
+			}
+			else {
+				for (var i = 1; i <= 10; i++) {
+					options.push("<option value='" + i + "'>" + (i * pounds) + " lbs</option>");
+				}
+			}
+		}
+		else if (type == 'hops') {
+			for (var i = 1; i <= 11; i++) {
+				options.push("<option value='" + (i / 11) + "'>" + i + " lbs</option>");
+			}
+		}
+		else {
+			for (var i = 1; i <= 10; i++) {
+				options.push("<option value='" + i + "'>" + i + "</option>");
+			}
+		}
 
 		title_field.html(title);
 		desc_field.html(desc);
+		img_field.attr('src', img);
 		id_field.val(id);
-		product_modal.modal('show')
+		select_field.html(options.join(''));
+		product_modal.modal('show');
 
 		return false;
 	});
