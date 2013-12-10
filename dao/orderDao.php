@@ -415,6 +415,32 @@ class orderDao {
         }
     }
 
+    public function getAllOrdersTotalSupplies ($groupBuyID) {
+        try {
+            $pdo = $this->pdoObject;
+            if (empty($groupBuyID)) {
+                $sql = "select SUM(amount) as product_total from user_order join product on user_order.productID = product.id where product.type not in ('hops', 'grain')";
+                $sth=$pdo->prepare($sql);
+                $sth->execute(array ());
+            } else {
+                $sql = "select SUM(amount) as product_total from user_order join product on user_order.productID = product.id where groupBuyId = ? and product.type not in ('hops', 'grain')";
+                $sth=$pdo->prepare($sql);
+                $sth->execute(array ($groupBuyID) );
+            }
+
+            $results = $sth->fetchAll();
+            if ($results != null) {
+                foreach ($results as $row) {
+                    return $row["product_total"];
+                }
+            } else {
+                return 0;
+            }
+        } catch (Exception $e) {
+            echo "Error: ". $e->getMessage();
+        }
+    }
+
     public function getUserOrderTotalPounds ($groupBuyId, $user) {
         try {
             $pdo = $this->pdoObject;

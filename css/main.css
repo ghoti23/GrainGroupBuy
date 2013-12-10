@@ -3335,6 +3335,14 @@ footer ul li a {
   text-align: center;
 }
 
+.stats .stat .icon {
+  padding: 10px 0 0 0;
+}
+
+.stats .stat .icon img {
+  width: 125px;
+}
+
 .stats.large .stat {
   font-size: 140%;
 }

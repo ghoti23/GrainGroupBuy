@@ -53,22 +53,25 @@ $sub_title = "Current Group Buy";
                 if (isset($_SESSION['activeGroupBuy'])) {
                     $grainTotal = $orderDao -> getAllOrdersTotalPoundsByType($_SESSION['activeGroupBuy'], 'grain');
                     $hopTotal = $orderDao -> getAllOrdersTotalPoundsByType($_SESSION['activeGroupBuy'], 'hops');
-                    $supplyTotal = $orderDao -> getAllOrdersTotalPoundsByType($_SESSION['activeGroupBuy'], 'additive');
+                    $supplyTotal = $orderDao -> getAllOrdersTotalSupplies($_SESSION['activeGroupBuy']);
                     ?>
 
                     <article>
                         <div class="row-fluid stats clearfix heads-up alert">
                             <div class="col-md-4 stat">
                                 Total Grains
+                                <div class="icon"><img src="/img/grain-icon.png" /></div>
                                 <span><?php print number_format($grainTotal); ?> lbs</span>
                             </div>
                             <div class="col-md-4 stat">
                                 Total Hops
+                                <div class="icon"><img src="/img/grain-icon.png" /></div>
                                 <span><?php print number_format(round($hopTotal)); ?> lbs</span>
                             </div>
                             <div class="col-md-4 stat">
                                 Total Supplies
-                                <span><?php print number_format(round($supplyTotal)); ?> lbs</span>
+                                <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                <span><?php print number_format(round($supplyTotal)); ?></span>
                             </div>
                         </div>
                     </article>
