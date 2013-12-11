@@ -81,6 +81,19 @@ class groupBuyDao
         }
     }
 
+    public function getTopProducts()
+    {
+        try {
+            $sql = "select p.* from product p, (SELECT id, SUM(amount*pounds) as total from product p left join user_order up on p.id = up.productId GROUP BY p.id ORDER BY total desc, p.id  LIMIT 3) pj where p.id = pj.id";
+            $pdo = $this->pdoObject;
+            $results = $pdo->query($sql);
+            $products = Product::loadMultiple($results);
+            return $products;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
     public function getTopGrains()
     {
         try {

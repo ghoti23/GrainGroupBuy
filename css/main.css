@@ -2552,6 +2552,7 @@ table th a:hover {
   font-weight: normal !important;
   line-height: 16px;
   color: #fff;
+  text-transform: uppercase;
 }
 
 .well dd {
@@ -3072,8 +3073,8 @@ article .heads-up {
   font-size: 20px;
   line-height: 24px;
   color: #fff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #222;
+  border-color: #222;
 }
 
 article .heads-up span {

@@ -31,8 +31,10 @@ $productDao = new productDao();
 $productDao->connect($host, $pdo);
 
 if (isset($_SESSION['activeGroupBuy'])) {
-    $typeProducts = $productDao->getAllSplits($_SESSION['activeGroupBuy']);
+    $splitProducts = $productDao->getAllSplits($_SESSION['activeGroupBuy']);
 }
+
+$topProducts = $groupBuyDao->getTopProducts();
 
 $sub_title = "Current Group Buy";
 
@@ -57,7 +59,7 @@ $sub_title = "Current Group Buy";
                     ?>
 
                     <article>
-                        <div class="row-fluid stats clearfix heads-up alert">
+                        <div class="row-fluid stats clearfix heads-up">
                             <div class="col-md-4 stat">
                                 Total Grains
                                 <div class="icon"><img src="/img/grain-icon.png" /></div>
@@ -76,32 +78,20 @@ $sub_title = "Current Group Buy";
                         </div>
                     </article>
 
-                    <?php
-                    if (!empty($typeProducts)) {
-                        print "<h1 class='section'>Active Splits</h1>";
-                        print "<p class='section'>In order to achieve significant cost savings, we need to buy our products in bulk - typically 11 lbs of hops or 50 lbs of grain.  This is often too much for the average brewer, so we allow product 'splits' which enables our members to order 1 lb of hops or 25 lbs of grain in certain cases.  However, these splits cannot be added to the final order until enough members reach the product bulk size requirement.  Once the product reaches that size, it will move off the active split list and can be placed on the final order.</p>";
-                        print "<ul class='product-list'>";
-                        $index = 1;
-                        foreach ($typeProducts as $productSplit) {
-                            $product = $productSplit -> getProduct();
-                            $price = $utils->getDisplayPrice($user, $product, $groupBuy);
-                            $vendor = $product->getVendor()
-                            ?>
-                            <li>
-                                <img src="<?php print $product->getImagePath()?>" />
-                                <em><?php print $product->getName()?></em>
-                                <?php if (!empty($vendor)) { print '<div>' . $vendor . "</div>"; } ?>
-                                <div><?php print $product->getDisplayUnits() . " @ " . '$' . $price ?> &nbsp;</div>
-                                <div><?php print "<b>" . $productSplit->getDisplayAmount() . "</b> of <b>" . $product->getPoundsWithUnit() . "</b>"?></div>
-                                <div><a class="button add" href="#" data-id="<?php print $product->getId()?>" data-type="<?php print $product->getType()?>" data-split="<?php print $product->getSplit()?>" data-pounds="<?php print $product->getPounds()?>"  data-desc="<?php print $product->getDescription()?>">Add</a></div>
-                            </li>
-                        <?php
-                        }
-                        print "</ul>";
+                <?php
+                    if (!empty($splitProducts)) {
+                        $products = $splitProducts;
+                        include("includes/product-split-row.php");
                     }
-                    ?>
 
-                <?php } ?>
+                }
+
+                if (!empty($topProducts)) {
+                    $products = $topProducts;
+                    print "<h1 class='section'>Top Selling Products</h1>";
+                    include("includes/product-row.php");
+                }
+                ?>
 
                 <?php
                     $poundsTotal = $orderDao -> getAllOrdersTotalPounds(null);
@@ -109,8 +99,8 @@ $sub_title = "Current Group Buy";
                     $totalMembers = $userDao -> getTotalMembers();
                 ?>
                 <h1 class="section">All-Time Statistics</h1>
-                <div class="well">
-                    <div class="row-fluid stats clearfix">
+                <article>
+                    <div class="row-fluid stats clearfix heads-up">
                         <div class="col-md-4 stat">
                             Total Members<br/>&nbsp;
                             <span><?php print number_format($totalMembers); ?></span>
@@ -124,7 +114,7 @@ $sub_title = "Current Group Buy";
                             <span><?php print number_format(round($userTotal)); ?> lbs</span>
                         </div>
                     </div>
-                </div>
+                </article>
 
             </div>
             <div class="col-md-3">

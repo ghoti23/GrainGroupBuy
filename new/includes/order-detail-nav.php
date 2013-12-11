@@ -15,7 +15,8 @@ if (!empty($currentOrderProducts)) { ?>
         $vendor = $product->getVendor();
         ?>
         <dl>
-            <dt><?php print $product->getName()?> <?php if (!empty($vendor)) { print ' - ' . $vendor; } ?></dt>
+            <dt><?php print $product->getName()?> </dt>
+            <?php if (!empty($vendor)) { print '<dd>' . $vendor . '</dd>'; } ?>
             <dd><?php print $product->getDisplayUnits() . " @ " . '$' . $displayPrice ?></dd>
             <dd><?php print "Quantity - " . $product->getDisplayAmount()?> <span><?php print '$' . number_format($totalPrice, 2)?></span></dd>
         </dl>

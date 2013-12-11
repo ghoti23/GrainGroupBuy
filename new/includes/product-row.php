@@ -1,6 +1,6 @@
 <?php
 if (!empty($products)) {
-    print "<ul class='product-list small'>";
+    print "<ul class='product-list'>";
     $index = 1;
     foreach ($products as $product) {
         $price = $utils->getDisplayPrice($user, $product, $groupBuy);

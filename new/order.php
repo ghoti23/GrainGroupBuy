@@ -168,10 +168,9 @@ $sub_title = "Order History"
                             </tbody>
                         </table>
                         <?php } else {  ?>
-                            <dl>
-                                <dt>The order is empty.</dt>
-                                <dd></dd>
-                            </dl>
+                            <div class="alert alert-info">
+                                <p>Your current order is empty.</p>
+                            </div>
                         <?php } ?>
                     </form>
                 </div>
