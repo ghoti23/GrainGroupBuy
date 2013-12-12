@@ -6,14 +6,20 @@ $index = 1;
 foreach ($products as $productSplit) {
     $product = $productSplit -> getProduct();
     $price = $utils->getDisplayPrice($user, $product, $groupBuy);
-    $vendor = $product->getVendor()
+    $vendor = $product->getVendor();
+    $percentComplete = $productSplit -> getPercentComplete();
     ?>
-    <li>
+    <li class="split">
         <img src="<?php print $product->getImagePath()?>" />
         <em><?php print $product->getName()?></em>
-        <?php if (!empty($vendor)) { print '<div>' . $vendor . "</div>"; } ?>
-        <div><?php print $product->getDisplayUnits() . " @ " . '$' . $price ?> &nbsp;</div>
-        <div><?php print "<b>" . $productSplit->getDisplayAmount() . "</b> of <b>" . $product->getPoundsWithUnit() . "</b>"?></div>
+        <?php if (!empty($vendor)) { print '<div class="vendor">' . $vendor . "</div>"; } ?>
+        <div class="price"><?php print $product->getDisplayUnits() . " @ " . '$' . $price ?> &nbsp;</div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-split" role="progressbar" aria-valuenow="<?php print $percentComplete?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php print $percentComplete?>%">
+                <span class="sr-only"><?php print $productSplit->getDisplayAmount() . " of " . $product->getPoundsWithUnit() ?></span>
+            </div>
+        </div>
+        <div class="progress-detail"><?php print $productSplit->getDisplayAmount() . " of " . $product->getPoundsWithUnit() ?></div>
         <div class="desc hide"><?php print $product->getDescription()?></div>
         <div><a class="button add" href="#" data-id="<?php print $product->getId()?>" data-type="<?php print $product->getType()?>" data-split="<?php print $product->getSplit()?>" data-pounds="<?php print $product->getPounds()?>">Add</a></div>
     </li>

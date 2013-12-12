@@ -182,6 +182,11 @@ class ProductSplit
         array_push($this->allEmails, $email);
     }
 
+    public function getPercentComplete()
+    {
+        return round($this->getAmount() * 100);
+    }
+
     public function getDisplayAmount()
     {
         if ($this->getProduct()->getType() == 'hops') {
