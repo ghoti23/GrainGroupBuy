@@ -16,7 +16,7 @@ session_start();
 
 $user = $_SESSION['user'];
 if ($user == null) {
-    header("location:/new/index.php");
+    header("location:index.php");
     return;
 }
 
@@ -47,19 +47,19 @@ $sub_title = "Beer Additives & Supplies";
         <div class="row">
             <div class="col-md-2">
                 <ul class="nav-simple">
-                    <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="/beer-supplies.php">Top Sellers</a></li>
-                    <li <?php if ($type == 'bag') {?>class="active"<?php } ?>><a href="/beer-supplies.php?type=bag">Bags</a></li>
-                    <li <?php if ($type == 'barrel alt') {?>class="active"<?php } ?>><a href="/beer-supplies.php?type=barrel alt">Barrel Alternatives</a></li>
-                    <li <?php if ($type == 'brewing sugar') {?>class="active"<?php } ?>><a href="/beer-supplies.php?type=brewing sugar">Belgian Candi</a></li>
-                    <li <?php if ($type == 'caps') {?>class="active"<?php } ?>><a href="/beer-supplies.php?type=caps">Bottle Caps</a></li>
-                    <li <?php if ($type == 'cleaner') {?>class="active"<?php } ?>><a href="/beer-supplies.php?type=cleaner">Cleaners</a></li>
-                    <li <?php if ($type == 'fruit') {?>class="active"<?php } ?>><a href="/beer-supplies.php?type=fruit">Fruit Flavoring</a></li>
-                    <li <?php if ($type == 'spice') {?>class="active"<?php } ?>><a href="/beer-supplies.php?type=spice">Herbs & Spices</a></li>
-                    <li <?php if ($type == 'chips') {?>class="active"<?php } ?>><a href="/beer-supplies.php?type=chips">Oak Chips</a></li>
-                    <li <?php if ($type == 'sanitizer') {?>class="active"<?php } ?>><a href="/beer-supplies.php?type=sanitizer">Sanitizers</a></li>
-                    <li <?php if ($type == 'phadjuster') {?>class="active"<?php } ?>><a href="/beer-supplies.php?type=phadjuster">Water Treatment</a></li>
-                    <li <?php if ($type == 'wax') {?>class="active"<?php } ?>><a href="/beer-supplies.php?type=wax">Wax</a></li>
-                    <li <?php if ($type == 'spiral') {?>class="active"<?php } ?>><a href="/beer-supplies.php?type=spiral">Wood Spirals</a></li>
+                    <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="beer-supplies.php">Top Sellers</a></li>
+                    <li <?php if ($type == 'bag') {?>class="active"<?php } ?>><a href="beer-supplies.php?type=bag">Bags</a></li>
+                    <li <?php if ($type == 'barrel alt') {?>class="active"<?php } ?>><a href="beer-supplies.php?type=barrel alt">Barrel Alternatives</a></li>
+                    <li <?php if ($type == 'brewing sugar') {?>class="active"<?php } ?>><a href="beer-supplies.php?type=brewing sugar">Belgian Candi</a></li>
+                    <li <?php if ($type == 'caps') {?>class="active"<?php } ?>><a href="beer-supplies.php?type=caps">Bottle Caps</a></li>
+                    <li <?php if ($type == 'cleaner') {?>class="active"<?php } ?>><a href="beer-supplies.php?type=cleaner">Cleaners</a></li>
+                    <li <?php if ($type == 'fruit') {?>class="active"<?php } ?>><a href="beer-supplies.php?type=fruit">Fruit Flavoring</a></li>
+                    <li <?php if ($type == 'spice') {?>class="active"<?php } ?>><a href="beer-supplies.php?type=spice">Herbs & Spices</a></li>
+                    <li <?php if ($type == 'chips') {?>class="active"<?php } ?>><a href="beer-supplies.php?type=chips">Oak Chips</a></li>
+                    <li <?php if ($type == 'sanitizer') {?>class="active"<?php } ?>><a href="beer-supplies.php?type=sanitizer">Sanitizers</a></li>
+                    <li <?php if ($type == 'phadjuster') {?>class="active"<?php } ?>><a href="beer-supplies.php?type=phadjuster">Water Treatment</a></li>
+                    <li <?php if ($type == 'wax') {?>class="active"<?php } ?>><a href="beer-supplies.php?type=wax">Wax</a></li>
+                    <li <?php if ($type == 'spiral') {?>class="active"<?php } ?>><a href="beer-supplies.php?type=spiral">Wood Spirals</a></li>
                 </ul>
             </div>
             <div class="col-md-7">

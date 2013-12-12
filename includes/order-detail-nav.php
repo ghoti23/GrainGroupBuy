@@ -3,7 +3,7 @@ $total = 0;
 $currentOrderProducts = $currentOrder->getProduct();
 if (!empty($currentOrderProducts)) { ?>
     <h4 class="head">
-    <a href="/new/order.php?id=<?php print $activeGroupBuy?>" class="pull-right">Edit</a>
+    <a href="order.php?id=<?php print $activeGroupBuy?>" class="pull-right">Edit</a>
     My Order
     </h4>
 <?php
@@ -31,6 +31,6 @@ if (!empty($currentOrderProducts)) { ?>
 <dl>
     <dt class="total">
         Total:
-        <span><a href="/new/order.php?id=<?php print $activeGroupBuy?>"><?php print '$' . number_format($total, 2)?></a></span></dt>
+        <span><a href="order.php?id=<?php print $activeGroupBuy?>"><?php print '$' . number_format($total, 2)?></a></span></dt>
     <dd></dd>
 </dl>

@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                     $_SESSION['nextGroupBuy'] = $nextGroupBuy -> getId();
                 }
             }
-            header("location:/new/dashboard.php");
+            header("location:dashboard.php");
         } else {
             $message = 'You\'re registered but we haven\'t been able to approve your account yet.  It typically takes 24 hours.';
         }
@@ -59,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 <div class="content">
     <div class="logo">
-        <a href="/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
+        <a href="index.php"><img src="img/groupbuy_white_tiny.png" /></a>
     </div>
     <h3 class="centered">Welcome back!</h3>
     <div class="box">
@@ -68,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <?php echo $message ?>
             </div>
         <?php } ?>
-        <form action="/login.php" method="post">
+        <form action="login.php" method="post">
             <div class="text">
                 <span>
                     <label for="username">Email</label>

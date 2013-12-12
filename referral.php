@@ -15,7 +15,7 @@ session_start();
 
 $user = $_SESSION['user'];
 if ($user == null) {
-    header("location:/new/index.php");
+    header("location:index.php");
 }
 ?>
 <!DOCTYPE html>

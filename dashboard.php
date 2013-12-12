@@ -16,7 +16,7 @@ session_start();
 
 $user = $_SESSION['user'];
 if ($user == null) {
-    header("location:/index.php");
+    header("location:index.php");
 }
 
 if (!isset($_REQUEST["type"])){
@@ -63,39 +63,39 @@ $sub_title = "Current Group Buy";
                             <?php if ($groupBuy->getHopsOnly() != 0 && $groupBuy->getGrainOnly() != 0) {?>
                                 <div class="col-md-4 stat">
                                     Total Grains
-                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <div class="icon"><img src="img/grain-icon.png" /></div>
                                     <span><?php print number_format($grainTotal); ?> lbs</span>
                                 </div>
                                 <div class="col-md-4 stat">
                                     Total Hops
-                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <div class="icon"><img src="img/grain-icon.png" /></div>
                                     <span><?php print number_format(round($hopTotal)); ?> lbs</span>
                                 </div>
                                 <div class="col-md-4 stat">
                                     Total Supplies
-                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <div class="icon"><img src="img/grain-icon.png" /></div>
                                     <span><?php print number_format(round($supplyTotal)); ?></span>
                                 </div>
                             <?php } elseif ($groupBuy->getHopsOnly() != 0) { ?>
                                 <div class="col-md-6 stat">
                                     Total Hops
-                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <div class="icon"><img src="img/grain-icon.png" /></div>
                                     <span><?php print number_format(round($hopTotal)); ?> lbs</span>
                                 </div>
                                 <div class="col-md-6 stat">
                                     Total Supplies
-                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <div class="icon"><img src="img/grain-icon.png" /></div>
                                     <span><?php print number_format(round($supplyTotal)); ?></span>
                                 </div>
                             <?php } elseif ($groupBuy->getGrainOnly() != 0) { ?>
                                 <div class="col-md-6 stat">
                                     Total Grains
-                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <div class="icon"><img src="img/grain-icon.png" /></div>
                                     <span><?php print number_format($grainTotal); ?> lbs</span>
                                 </div>
                                 <div class="col-md-6 stat">
                                     Total Supplies
-                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <div class="icon"><img src="img/grain-icon.png" /></div>
                                     <span><?php print number_format(round($supplyTotal)); ?></span>
                                 </div>
                             <?php } ?>

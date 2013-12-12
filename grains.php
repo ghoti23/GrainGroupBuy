@@ -16,7 +16,7 @@ session_start();
 
 $user = $_SESSION['user'];
 if ($user == null) {
-    header("location:/new/index.php");
+    header("location:index.php");
     return;
 }
 
@@ -47,9 +47,9 @@ $sub_title = "Grains";
         <div class="row">
             <div class="col-md-2">
                 <ul class="nav-simple">
-                    <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="/grains.php">Top Sellers</a></li>
-                    <li <?php if ($type == 'base') {?>class="active"<?php } ?>><a href="/grains.php?type=base">Base</a></li>
-                    <li <?php if ($type == 'specialty') {?>class="active"<?php } ?>><a href="/grains.php?type=specialty">Speciality</a></li>
+                    <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="grains.php">Top Sellers</a></li>
+                    <li <?php if ($type == 'base') {?>class="active"<?php } ?>><a href="grains.php?type=base">Base</a></li>
+                    <li <?php if ($type == 'specialty') {?>class="active"<?php } ?>><a href="grains.php?type=specialty">Speciality</a></li>
                 </ul>
             </div>
             <div class="col-md-7">

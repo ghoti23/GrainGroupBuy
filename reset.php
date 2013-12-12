@@ -58,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             $template_content = array();
 
             $response = $mandrill->messages->sendTemplate($template_name, $template_content, $params);
-            header("location:/new/reset-complete.php");
+            header("location:reset-complete.php");
         }
     }
 }
@@ -73,7 +73,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 <div class="content">
     <div class="logo">
-        <a href="/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
+        <a href="index.php"><img src="img/groupbuy_white_tiny.png" /></a>
     </div>
     <h3 class="centered">Reset your password</h3>
     <div class="box">
@@ -82,7 +82,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <?php echo $message ?>
             </div>
         <?php } ?>
-        <form action="/reset.php" method="post">
+        <form action="reset.php" method="post">
             <div class="text">
                 <span>
                     <label for="email">Email</label>

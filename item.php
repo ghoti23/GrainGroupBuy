@@ -13,11 +13,11 @@ require 'utils.php';
 
 session_start();
 if (!isset($_SESSION['user'])){
-    header("location:/new/index.php");
+    header("location:index.php");
 }
 
 if (!isset($_REQUEST["id"])){
-    header("location:/new/dashboard.php");
+    header("location:dashboard.php");
 }
 
 $user = $_SESSION['user'];
@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $orderDao = new orderDao();
     $orderDao->connect($host, $pdo);
     $orderDao->addProductOrder($activeGroupBuy, $amount, $item_id, $user);
-    header("location:/new/dashboard.php");
+    header("location:dashboard.php");
 }
 
 $productDao = new productDao();

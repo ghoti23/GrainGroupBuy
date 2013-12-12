@@ -2,12 +2,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <a href="/index.php" class="site-logo"><img src="/img/groupbuy_gray_tiny_64.png" /></a>
+                <a href="index.php" class="site-logo"><img src="img/groupbuy_gray_tiny_64.png" /></a>
             </div>
             <div class="col-md-8">
                 <ul class="site-nav pull-right">
-                    <li><a class="link" href="/calculators.php">Useful Tools</a></li>
-                    <li><a class="link" href="/faqs.php">FAQs</a></li>
+                    <li><a class="link" href="calculators.php">Useful Tools</a></li>
+                    <li><a class="link" href="faqs.php">FAQs</a></li>
 
                     <?php if (!isset($user)) {  ?>
                         <li class="separator"><a class="button grey" href="login.php">Log In</a></li>
@@ -26,19 +26,19 @@
 </header>
 <header class="responsive hidden-md hidden-lg">
     <div class="centered">
-        <a href="/index.php" class="site-logo"><img src="/img/groupbuy_gray_tiny_64.png" /></a>
+        <a href="index.php" class="site-logo"><img src="img/groupbuy_gray_tiny_64.png" /></a>
     </div>
     <div class="centered">
         <?php include("days-remaining.php")?>
     </div>
     <div class="centered">
         <ul class="site-nav">
-            <li><a class="link" href="/calculators.php">Useful Tools</a></li>
-            <li><a class="link" href="/faqs.php">FAQs</a></li>
+            <li><a class="link" href="calculators.php">Useful Tools</a></li>
+            <li><a class="link" href="faqs.php">FAQs</a></li>
 
             <?php if (isset($user)) {  ?>
-                <li><a class="link" href="/new/order-history.php">Order History</a></li>
-                <li><a class="link" href="/new/logout.php">Logout</a></li>
+                <li><a class="link" href="order-history.php">Order History</a></li>
+                <li><a class="link" href="logout.php">Logout</a></li>
             <?php } ?>
         </ul>
     </div>

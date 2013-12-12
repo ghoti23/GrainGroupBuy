@@ -16,7 +16,7 @@ session_start();
 
 $user = $_SESSION['user'];
 if ($user == null) {
-    header("location:/new/index.php");
+    header("location:index.php");
     return;
 }
 
@@ -29,7 +29,7 @@ if (!isset($_REQUEST["type"])){
     $type = strip_tags($_REQUEST["type"]);
     $productDao = new productDao();
     $productDao->connect($host, $pdo);
-    $typeProducts = $productDao->getByTypeAndSubtype('grain', $type);
+    $typeProducts = $productDao->getByTypeAndSubtype('hops', $type);
 }
 
 $sub_title = "Hops";
@@ -47,9 +47,9 @@ $sub_title = "Hops";
         <div class="row">
             <div class="col-md-2">
                 <ul class="nav-simple">
-                    <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="/hops.php">Top Sellers</a></li>
-                    <li <?php if ($type == 'base') {?>class="active"<?php } ?>><a href="/hops.php?type=base">Base</a></li>
-                    <li <?php if ($type == 'speciality') {?>class="active"<?php } ?>><a href="/hops.php?type=speciality">Speciality</a></li>
+                    <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="hops.php">Top Sellers</a></li>
+                    <li <?php if ($type == 'base') {?>class="active"<?php } ?>><a href="hops.php?type=base">Base</a></li>
+                    <li <?php if ($type == 'speciality') {?>class="active"<?php } ?>><a href="hops.php?type=speciality">Speciality</a></li>
                 </ul>
             </div>
             <div class="col-md-7">

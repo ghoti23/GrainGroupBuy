@@ -16,7 +16,7 @@ require 'Mandrill.php';
 require 'utils.php';
 
 if (!isset($_REQUEST["id"])) {
-    header("location:/new/index.php");
+    header("location:index.php");
     return;
 }
 
@@ -51,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             $userDao->connect($host,$pdo);
             $userDao->updateAccountPassword($user->getEmail(), $clean_pw);
 
-            header("location:/new/login.php?r=1");
+            header("location:login.php?r=1");
         }
     }
 }
@@ -66,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 <div class="content">
     <div class="logo">
-        <a href="/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
+        <a href="index.php"><img src="img/groupbuy_white_tiny.png" /></a>
     </div>
     <h3 class="centered">Reset password</h3>
     <div class="box">

@@ -13,7 +13,7 @@ require 'utils.php';
 
 session_start();
 if (!isset($_SESSION['user'])){
-    header("location:/new/index.php");
+    header("location:index.php");
 }
 
 if (!isset($_REQUEST["id"])){

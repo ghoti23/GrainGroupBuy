@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $dao->connect($host,$pdo);
         $userAdded = $dao->addUser($user);
         if ($userAdded == true) {
-            header("location:/new/signup-complete.php");
+            header("location:signup-complete.php");
         } else {
             $message = 'Sorry, but the email or username is already in use.  Did you already signup?';
         }
@@ -55,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <body class="login">
 <div class="content">
     <div class="logo">
-        <a href="/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
+        <a href="index.php"><img src="img/groupbuy_white_tiny.png" /></a>
     </div>
     <h3 class="centered">Create your Group Buy account.</h3>
     <?php if (!empty($message)) {  ?>
@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         </div>
     <?php } ?>
     <div class="box">
-        <form action="/signup.php" method="post">
+        <form action="signup.php" method="post">
             <div class="text">
                 <span>
                     <label for="email">Email</label>

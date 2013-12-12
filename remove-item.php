@@ -13,11 +13,11 @@ require 'utils.php';
 
 session_start();
 if (!isset($_SESSION['user'])){
-    header("location:/new/index.php");
+    header("location:index.php");
 }
 
 if (!isset($_SESSION['activeGroupBuy'])){
-    header("location:/new/order.php");
+    header("location:order.php");
 }
 
 $user = $_SESSION['user'];
@@ -27,6 +27,6 @@ $orderDao -> connect($host, $pdo);
 $id = strip_tags($_REQUEST["id"]);
 $orderDao->removeProduct($order_id, $id, $user);
 
-header("location:/new/order.php");
+header("location:order.php");
 
 ?>

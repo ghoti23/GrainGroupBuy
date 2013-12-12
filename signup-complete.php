@@ -22,7 +22,7 @@ require 'utils.php';
 <body class="login">
 <div class="content">
     <div class="logo">
-        <a href="/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
+        <a href="index.php"><img src="img/groupbuy_white_tiny.png" /></a>
     </div>
     <h3 class="centered">Your Group Buy account has been created.</h3>
     <div class="footer-msg">
