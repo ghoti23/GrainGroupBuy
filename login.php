@@ -87,8 +87,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         </form>
     </div>
     <div class="footer-msg">
-        <p><a href="/reset.php">Forgot your password?</a></p>
-        <p class="nopad">Don't have an account? <a href="/signup.php">Sign up.</a></p>
+        <p><a href="reset.php">Forgot your password?</a></p>
+        <p class="nopad">Don't have an account? <a href="signup.php">Sign up.</a></p>
     </div>
 
     <div class="ad-row">

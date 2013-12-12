@@ -107,7 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         </form>
     </div>
     <div class="footer-msg">
-        <p>Already have an account? <a href="/new/login.php">Sign in.</a></p>
+        <p>Already have an account? <a href="login.php">Sign in.</a></p>
     </div>
 
     <div class="ad-row">

@@ -59,7 +59,7 @@ if ($user == null) {
                         </div>
                     </form>
                     <div class="footer-msg">
-                        <p><a href="/dashboard.php">I'll try this later.</a></p>
+                        <p><a href="dashboard.php">I'll try this later.</a></p>
                     </div>
                 </div>
             </div>

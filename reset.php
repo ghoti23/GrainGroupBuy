@@ -95,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         </form>
     </div>
     <div class="footer-msg">
-        <p>Know your password? <a href="/new/login.php">Sign in.</a></p>
+        <p>Know your password? <a href="login.php">Sign in.</a></p>
     </div>
 
     <div class="ad-row">

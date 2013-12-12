@@ -26,7 +26,7 @@ require 'utils.php';
     </div>
     <h3 class="centered">Your reset password email has been sent<br> and should be in your inbox shortly.</h3>
     <div class="footer-msg">
-        <p>Already have an account? <a href="/login.php">Sign in.</a></p>
+        <p>Already have an account? <a href="login.php">Sign in.</a></p>
     </div>
 
     <div class="ad-row">

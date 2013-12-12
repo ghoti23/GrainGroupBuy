@@ -1,15 +1,15 @@
 <?php
-require '../dao/groupBuyDao.php';
-require '../dao/userDao.php';
-require '../dao/orderDao.php';
-require '../dao/productDao.php';
-require '../entity/user.php';
-require '../entity/groupbuy.php';
-require '../entity/order.php';
-require '../entity/product.php';
-require '../entity/split.php';
-require '../properties.php';
-require '../utils.php';
+require 'dao/groupBuyDao.php';
+require 'dao/userDao.php';
+require 'dao/orderDao.php';
+require 'dao/productDao.php';
+require 'entity/user.php';
+require 'entity/groupbuy.php';
+require 'entity/order.php';
+require 'entity/product.php';
+require 'entity/split.php';
+require 'properties.php';
+require 'utils.php';
 
 session_start();
 
@@ -42,14 +42,6 @@ if (isset($_SESSION['user'])){
 
                 <h3>What items are available in the group buy?</h3>
                 <p>There are many different kinds of brewers malts from a variety of maltsters.  We also offer hops, adjuncts, spices, chemicals, etc.  There will inevitably out of stock conditions which we have no control over.</p>
-
-                <h3>How do I add items to my order?</h3>
-                <p>First you will need to go into the active group buy.  From there you will see a screen that looks similar to the following.  Click the Add Item button in the top right</p>
-                <p><img src="img/add_item.png"></p>
-                <p>Then you will get a screen that has a search box on it.  You can type in anything you want to search on (2-row) or just hit search to see all the products</p>
-                <p><img src="img/search.png"></p>
-                <p>You can then type in a quantity of items you want in a box and press the + button.  This will be added to your cart, you can either conduct another search or choose group buy from the left menu to head back.</p>
-                <p><img src="img/results.png"></p>
 
                 <h3>How do I pay?</h3>
                 <p>Once the buy closes, people will submit their paypal payment (no other choices available at the moment) based on their order total which is shown in the ordering software.  More information will be given once the buy is underway.</p>

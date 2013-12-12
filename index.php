@@ -45,8 +45,8 @@ if (!empty($openOrders)) {
             <h2>We haven't determined the date for the next group buy.  We'll let you know soon.</h2>
         <?php } ?>
         <div class="button-content">
-            <a href="/login.php" class="button grey">Existing Account</a>
-            <a href="/signup.php" class="button">Request an Account</a>
+            <a href="login.php" class="button grey">Existing Account</a>
+            <a href="signup.php" class="button">Request an Account</a>
         </div>
         <div class="row">
             <div class="col-md-4">

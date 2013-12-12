@@ -26,7 +26,7 @@ require 'utils.php';
     </div>
     <h3 class="centered">Your Group Buy account has been created.</h3>
     <div class="footer-msg">
-        <p>Already have an account? <a href="/login.php">Sign in.</a></p>
+        <p>Already have an account? <a href="login.php">Sign in.</a></p>
     </div>
 
     <div class="ad-row">

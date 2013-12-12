@@ -109,7 +109,7 @@ $sub_title = "Order History"
                                     <td <?php if (!$active_edit) { ?>colspan="2"<?php } ?>><?php print '$' . number_format($totalPrice, 2)?></td>
                                     <?php if ($active_edit) { ?>
                                     <td>
-                                        <a href="/remove-item.php?id=<?php print $product->getId()?>">Remove</a>
+                                        <a href="remove-item.php?id=<?php print $product->getId()?>">Remove</a>
                                     </td>
                                     <?php } ?>
                                 </tr>
