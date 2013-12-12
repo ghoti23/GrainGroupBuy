@@ -1,15 +1,15 @@
 <?php
-require '../dao/groupBuyDao.php';
-require '../dao/userDao.php';
-require '../dao/orderDao.php';
-require '../dao/productDao.php';
-require '../entity/user.php';
-require '../entity/groupbuy.php';
-require '../entity/order.php';
-require '../entity/product.php';
-require '../entity/split.php';
-require '../properties.php';
-require '../utils.php';
+require 'dao/groupBuyDao.php';
+require 'dao/userDao.php';
+require 'dao/orderDao.php';
+require 'dao/productDao.php';
+require 'entity/user.php';
+require 'entity/groupbuy.php';
+require 'entity/order.php';
+require 'entity/product.php';
+require 'entity/split.php';
+require 'properties.php';
+require 'utils.php';
 
 session_start();
 if (!isset($_SESSION['user'])){
@@ -47,7 +47,7 @@ $item = $productDao->get($item_id);
     <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
-<?php include_once("includes/header.php")?>
+<?php include_once("includes/header.php") ?>
 <div class="container">
     <div class="body-spacer">
         <div class="row">
@@ -63,7 +63,7 @@ $item = $productDao->get($item_id);
                         <h6>Supplier: <?php echo $item->getSupplier()?></h6>
                         <p><?php echo $item->getDescription()?></p>
                     </div>
-                    <form class="product-info" action="/new/item.php" method="post">
+                    <form class="product-info" action="/item.php" method="post">
                         <input type="hidden" name="id" value="<?php print $item->getId()?>" />
                         <div class="text-right">
                             <input type="text" name="value" value="1" maxlength="3">

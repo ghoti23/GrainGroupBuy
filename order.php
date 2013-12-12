@@ -1,15 +1,15 @@
 <?php
-require '../dao/groupBuyDao.php';
-require '../dao/userDao.php';
-require '../dao/orderDao.php';
-require '../dao/productDao.php';
-require '../entity/user.php';
-require '../entity/groupbuy.php';
-require '../entity/order.php';
-require '../entity/product.php';
-require '../entity/split.php';
-require '../properties.php';
-require '../utils.php';
+require 'dao/groupBuyDao.php';
+require 'dao/userDao.php';
+require 'dao/orderDao.php';
+require 'dao/productDao.php';
+require 'entity/user.php';
+require 'entity/groupbuy.php';
+require 'entity/order.php';
+require 'entity/product.php';
+require 'entity/split.php';
+require 'properties.php';
+require 'utils.php';
 
 session_start();
 if (!isset($_SESSION['user'])){
@@ -43,7 +43,7 @@ $sub_title = "Order History"
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once("includes/default-head.php")?>
+    <?php include_once("includes/default-head.php") ?>
 </head>
 <body>
 <?php include_once("includes/header.php")?>
@@ -64,7 +64,7 @@ $sub_title = "Order History"
                         <div class="col-md-2"><h4>Ended:</h4></div>
                         <div class="col-md-10"><h4><?php print $currentGroupBuy->getFormattedEndDate()?></h4></div>
                     </div>
-                    <form class="product-info" action="/new/order.php" method="post">
+                    <form class="product-info" action="/order.php" method="post">
                         <?php
                         if (!empty($order_products)) {
                         ?>
@@ -109,7 +109,7 @@ $sub_title = "Order History"
                                     <td <?php if (!$active_edit) { ?>colspan="2"<?php } ?>><?php print '$' . number_format($totalPrice, 2)?></td>
                                     <?php if ($active_edit) { ?>
                                     <td>
-                                        <a href="/new/remove-item.php?id=<?php print $product->getId()?>">Remove</a>
+                                        <a href="/remove-item.php?id=<?php print $product->getId()?>">Remove</a>
                                     </td>
                                     <?php } ?>
                                 </tr>

@@ -1,15 +1,15 @@
 <?php
-require '../dao/groupBuyDao.php';
-require '../dao/userDao.php';
-require '../dao/orderDao.php';
-require '../dao/productDao.php';
-require '../entity/user.php';
-require '../entity/groupbuy.php';
-require '../entity/order.php';
-require '../entity/product.php';
-require '../entity/split.php';
-require '../properties.php';
-require '../utils.php';
+require 'dao/groupBuyDao.php';
+require 'dao/userDao.php';
+require 'dao/orderDao.php';
+require 'dao/productDao.php';
+require 'entity/user.php';
+require 'entity/groupbuy.php';
+require 'entity/order.php';
+require 'entity/product.php';
+require 'entity/split.php';
+require 'properties.php';
+require 'utils.php';
 
 session_start();
 
@@ -21,7 +21,7 @@ if ($user == null) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once("includes/default-head.php")?>
+    <?php include_once("includes/default-head.php") ?>
 </head>
 <body>
 <?php include_once("includes/header.php")?>
@@ -59,7 +59,7 @@ if ($user == null) {
                         </div>
                     </form>
                     <div class="footer-msg">
-                        <p><a href="/new/dashboard.php">I'll try this later.</a></p>
+                        <p><a href="/dashboard.php">I'll try this later.</a></p>
                     </div>
                 </div>
             </div>

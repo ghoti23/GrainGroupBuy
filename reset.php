@@ -1,19 +1,19 @@
 <?php
-require '../dao/dao.php';
-require '../dao/groupBuyDao.php';
-require '../dao/userDao.php';
-require '../dao/orderDao.php';
-require '../dao/productDao.php';
-require '../dao/ResetTokenDao.php';
-require '../entity/user.php';
-require '../entity/groupbuy.php';
-require '../entity/order.php';
-require '../entity/product.php';
-require '../entity/ProductSplit.php';
-require '../entity/ResetToken.php';
-require '../properties.php';
-require '../Mandrill.php';
-require '../utils.php';
+require 'dao/dao.php';
+require 'dao/groupBuyDao.php';
+require 'dao/userDao.php';
+require 'dao/orderDao.php';
+require 'dao/productDao.php';
+require 'dao/ResetTokenDao.php';
+require 'entity/user.php';
+require 'entity/groupbuy.php';
+require 'entity/order.php';
+require 'entity/product.php';
+require 'entity/ProductSplit.php';
+require 'entity/ResetToken.php';
+require 'properties.php';
+require 'Mandrill.php';
+require 'utils.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -67,13 +67,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once("includes/default-head.php")?>
+    <?php include_once("includes/default-head.php") ?>
 </head>
 <body class="login">
 
 <div class="content">
     <div class="logo">
-        <a href="/new/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
+        <a href="/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
     </div>
     <h3 class="centered">Reset your password</h3>
     <div class="box">
@@ -82,7 +82,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <?php echo $message ?>
             </div>
         <?php } ?>
-        <form action="/new/reset.php" method="post">
+        <form action="/reset.php" method="post">
             <div class="text">
                 <span>
                     <label for="email">Email</label>

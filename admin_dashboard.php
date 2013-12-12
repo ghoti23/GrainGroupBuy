@@ -1,15 +1,15 @@
 <?php
-require '../dao/groupBuyDao.php';
-require '../dao/userDao.php';
-require '../dao/orderDao.php';
-require '../dao/productDao.php';
-require '../entity/user.php';
-require '../entity/groupbuy.php';
-require '../entity/order.php';
-require '../entity/product.php';
-require '../entity/split.php';
-require '../properties.php';
-require '../utils.php';
+require 'dao/groupBuyDao.php';
+require 'dao/userDao.php';
+require 'dao/orderDao.php';
+require 'dao/productDao.php';
+require 'entity/user.php';
+require 'entity/groupbuy.php';
+require 'entity/order.php';
+require 'entity/product.php';
+require 'entity/split.php';
+require 'properties.php';
+require 'utils.php';
 
 session_start();
 $user = $_SESSION['user'];
@@ -34,7 +34,7 @@ $groupBuys = $groupBuyDao->all();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once("includes/default-head.php")?>
+    <?php include_once("includes/default-head.php") ?>
 </head>
 <body>
 <?php include_once("includes/header.php")?>

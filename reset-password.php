@@ -1,19 +1,19 @@
 <?php
-require '../dao/dao.php';
-require '../dao/groupBuyDao.php';
-require '../dao/userDao.php';
-require '../dao/orderDao.php';
-require '../dao/productDao.php';
-require '../dao/ResetTokenDao.php';
-require '../entity/user.php';
-require '../entity/groupbuy.php';
-require '../entity/order.php';
-require '../entity/product.php';
-require '../entity/ProductSplit.php';
-require '../entity/ResetToken.php';
-require '../properties.php';
-require '../Mandrill.php';
-require '../utils.php';
+require 'dao/dao.php';
+require 'dao/groupBuyDao.php';
+require 'dao/userDao.php';
+require 'dao/orderDao.php';
+require 'dao/productDao.php';
+require 'dao/ResetTokenDao.php';
+require 'entity/user.php';
+require 'entity/groupbuy.php';
+require 'entity/order.php';
+require 'entity/product.php';
+require 'entity/ProductSplit.php';
+require 'entity/ResetToken.php';
+require 'properties.php';
+require 'Mandrill.php';
+require 'utils.php';
 
 if (!isset($_REQUEST["id"])) {
     header("location:/new/index.php");
@@ -60,13 +60,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once("includes/default-head.php")?>
+    <?php include_once("includes/default-head.php") ?>
 </head>
 <body class="login">
 
 <div class="content">
     <div class="logo">
-        <a href="/new/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
+        <a href="/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
     </div>
     <h3 class="centered">Reset password</h3>
     <div class="box">
@@ -75,7 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <?php echo $message ?>
             </div>
         <?php } ?>
-        <form action="/new/reset-password.php" method="post">
+        <form action="/reset-password.php" method="post">
             <input type="hidden" name="id" value="<?php print $id ?>" />
             <div class="text">
                 <span>
@@ -95,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         </form>
     </div>
     <div class="footer-msg">
-        <p>Don't have an account? <a href="/new/signup.php">Sign up.</a></p>
+        <p>Don't have an account? <a href="/signup.php">Sign up.</a></p>
     </div>
 
     <div class="ad-row">

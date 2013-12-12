@@ -1,16 +1,16 @@
 <?php
-require '../dao/groupBuyDao.php';
-require '../dao/userDao.php';
-require '../dao/orderDao.php';
-require '../dao/productDao.php';
-require '../entity/user.php';
-require '../entity/groupbuy.php';
-require '../entity/order.php';
-require '../entity/product.php';
-require '../entity/ProductSplit.php';
-require '../entity/split.php';
-require '../properties.php';
-require '../utils.php';
+require 'dao/groupBuyDao.php';
+require 'dao/userDao.php';
+require 'dao/orderDao.php';
+require 'dao/productDao.php';
+require 'entity/user.php';
+require 'entity/groupbuy.php';
+require 'entity/order.php';
+require 'entity/product.php';
+require 'entity/ProductSplit.php';
+require 'entity/split.php';
+require 'properties.php';
+require 'utils.php';
 
 session_start();
 
@@ -37,7 +37,7 @@ $sub_title = "Grains";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once("includes/default-head.php")?>
+    <?php include_once("includes/default-head.php") ?>
 </head>
 <body>
 <?php include_once("includes/header.php")?>
@@ -47,9 +47,9 @@ $sub_title = "Grains";
         <div class="row">
             <div class="col-md-2">
                 <ul class="nav-simple">
-                    <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="/new/grains.php">Top Sellers</a></li>
-                    <li <?php if ($type == 'base') {?>class="active"<?php } ?>><a href="/new/grains.php?type=base">Base</a></li>
-                    <li <?php if ($type == 'specialty') {?>class="active"<?php } ?>><a href="/new/grains.php?type=specialty">Speciality</a></li>
+                    <li <?php if ($type == 'top') {?>class="active"<?php } ?>><a href="/grains.php">Top Sellers</a></li>
+                    <li <?php if ($type == 'base') {?>class="active"<?php } ?>><a href="/grains.php?type=base">Base</a></li>
+                    <li <?php if ($type == 'specialty') {?>class="active"<?php } ?>><a href="/grains.php?type=specialty">Speciality</a></li>
                 </ul>
             </div>
             <div class="col-md-7">

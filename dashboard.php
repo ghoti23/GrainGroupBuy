@@ -1,161 +1,189 @@
 <?php
 require 'dao/groupBuyDao.php';
- ?>
-<?php
-require 'entity/groupbuy.php';
-?>
-<?php
-require 'entity/product.php';
-?>
-<?php
-require 'entity/order.php';
-?>
-<?php
+require 'dao/userDao.php';
+require 'dao/orderDao.php';
+require 'dao/productDao.php';
 require 'entity/user.php';
-?>
-<?php session_start();
-    if(!isset($_SESSION['user'])) {
-        header( 'Location: index.php' ) ;
-    }
-	$user = $_SESSION['user'];
-?>
-<?php
+require 'entity/groupbuy.php';
+require 'entity/order.php';
+require 'entity/product.php';
+require 'entity/ProductSplit.php';
+require 'entity/split.php';
 require 'properties.php';
+require 'utils.php';
+
+session_start();
+
+$user = $_SESSION['user'];
+if ($user == null) {
+    header("location:/index.php");
+}
+
+if (!isset($_REQUEST["type"])){
+    $type = 'top';
+} else {
+    $type = strip_tags($_REQUEST["type"]);
+}
+
+$groupBuyDao = new groupBuyDao();
+$groupBuyDao -> connect($host, $pdo);
+$productDao = new productDao();
+$productDao->connect($host, $pdo);
+
+if (isset($_SESSION['activeGroupBuy'])) {
+    $splitProducts = $productDao->getAllSplits($_SESSION['activeGroupBuy']);
+}
+
+$topProducts = $groupBuyDao->getTopProducts();
+
+$sub_title = "Current Group Buy";
+
 ?>
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Group Buy - Dashboard</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="<?php echo $_SESSION['admin'] ?>">
-		<meta name="author" content="<?php echo $user->getAdmin(); ?>">
-		<link rel="shortcut icon" href="css/images/favicon.png">
+<html lang="en">
+<head>
+    <?php include_once("includes/default-head.php") ?>
+</head>
+<body>
+<?php include_once("includes/header.php")?>
+<div class="container">
+    <div class="body-spacer">
+        <?php include_once("includes/subnav.php")?>
+        <div class="row">
+            <div class="col-md-9">
+                <?php
+                if (isset($_SESSION['activeGroupBuy'])) {
+                    $grainTotal = $orderDao -> getAllOrdersTotalPoundsByType($_SESSION['activeGroupBuy'], 'grain');
+                    $hopTotal = $orderDao -> getAllOrdersTotalPoundsByType($_SESSION['activeGroupBuy'], 'hops');
+                    $supplyTotal = $orderDao -> getAllOrdersTotalSupplies($_SESSION['activeGroupBuy']);
+                    ?>
 
-		<link href="css/base.css" rel="stylesheet">
-		<link href="css/manage.css" rel="stylesheet">
-		<link href="css/grainbuy.css" rel="stylesheet">
+                    <article>
+                        <div class="row-fluid stats clearfix heads-up">
+                            <?php if ($groupBuy->getHopsOnly() != 0 && $groupBuy->getGrainOnly() != 0) {?>
+                                <div class="col-md-4 stat">
+                                    Total Grains
+                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <span><?php print number_format($grainTotal); ?> lbs</span>
+                                </div>
+                                <div class="col-md-4 stat">
+                                    Total Hops
+                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <span><?php print number_format(round($hopTotal)); ?> lbs</span>
+                                </div>
+                                <div class="col-md-4 stat">
+                                    Total Supplies
+                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <span><?php print number_format(round($supplyTotal)); ?></span>
+                                </div>
+                            <?php } elseif ($groupBuy->getHopsOnly() != 0) { ?>
+                                <div class="col-md-6 stat">
+                                    Total Hops
+                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <span><?php print number_format(round($hopTotal)); ?> lbs</span>
+                                </div>
+                                <div class="col-md-6 stat">
+                                    Total Supplies
+                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <span><?php print number_format(round($supplyTotal)); ?></span>
+                                </div>
+                            <?php } elseif ($groupBuy->getGrainOnly() != 0) { ?>
+                                <div class="col-md-6 stat">
+                                    Total Grains
+                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <span><?php print number_format($grainTotal); ?> lbs</span>
+                                </div>
+                                <div class="col-md-6 stat">
+                                    Total Supplies
+                                    <div class="icon"><img src="/img/grain-icon.png" /></div>
+                                    <span><?php print number_format(round($supplyTotal)); ?></span>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </article>
 
-		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-		<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<?php include_once("analyticstracking.php") ?>
-	</head>
-	<body>
-		<div id="loading">
-			<img src="img/ajax-loader.gif">
-		</div>
-		<div id="responsive_part">
-			<div class="logo">
-				<a href="index.html"></a>
-			</div>
-			<ul class="nav responsive">
-				<li>
-					<btn class="btn btn-la1rge btn-i1nfo responsive_menu icon_item" data-toggle="collapse" data-target="#sidebar">
-						<i class="icon-reorder"></i>
-					</btn>
-				</li>
-			</ul>
-		</div>
-		<!-- Responsive part -->
-		<div id="sidebar" class="collapse">
-			<div class="logo">
-				<a href="index.php"></a>
-			</div>
-			<ul id="sidebar_menu" class="navbar nav nav-list sidebar_box">
-				<li class="accordion-group active">
-					<a class="dashboard" href="dashboard.php"><img src="img/menu_icons/dashboard.png">Dashboard</a>
-				</li>
-                <li >
-                    <a class="faq" href="faq.php"><img src="img/menu_icons/question.png"> FAQs</a>
-                </li>
-                <li>
-                    <a class="calculator" href="calculators.php"><i class="ui-icon-calculator"></i> Calculators</a>
-                </li>
-			</ul>
-            <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- Left Nav - Small Rectangle -->
-            <ins class="adsbygoogle"
-                 style="display:inline-block;width:180px;height:150px"
-                 data-ad-client="ca-pub-5071928133115505"
-                 data-ad-slot="3662734270"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-		</div>
+                <?php
+                    if (!empty($splitProducts)) {
+                        $products = $splitProducts;
+                        include("includes/product-split-row.php");
+                    }
 
-		<div id="main">
-			<div class="container">
-				<div class="container_top">
-					<div class="row-fluid ">
+                }
 
-						<?php
-						require_once('includes/header.php');
-						?>
+                if (!empty($topProducts)) {
+                    $products = $topProducts;
+                    print "<h1 class='section'>Top Selling Products</h1>";
+                    include("includes/product-row.php");
+                }
+                ?>
 
-						<div class="span4">
+                <?php
+                    $poundsTotal = $orderDao -> getAllOrdersTotalPounds(null);
+                    $userTotal = $orderDao -> getUserOrderTotalPounds(null, $user);
+                    $totalMembers = $userDao -> getTotalMembers();
+                ?>
+                <h1 class="section">All-Time Statistics</h1>
+                <article>
+                    <div class="row-fluid stats clearfix heads-up">
+                        <div class="col-md-4 stat">
+                            Total Members<br/>&nbsp;
+                            <span><?php print number_format($totalMembers); ?></span>
+                        </div>
+                        <div class="col-md-4 stat">
+                            Purchased Pounds<br/>(Everyone)
+                            <span><?php print number_format(round($poundsTotal)); ?> lbs</span>
+                        </div>
+                        <div class="col-md-4 stat">
+                            Purchased Pounds<br/>(You)
+                            <span><?php print number_format(round($userTotal)); ?> lbs</span>
+                        </div>
+                    </div>
+                </article>
 
-						</div>
-					</div>
-				</div>
-				<!-- End container_top -->
-				<div id="container2">
-					<div class="row-fluid">
-						<div class="box gradient">
-							<div class="title">
-								<div class="row-fluid">
-									<div class="span6">
-										<h4><i class=" icon-bar-chart"></i><span>Group Buys</span></h4>
-									</div>
-									<!-- End .span6 -->
-
-									<!-- End .span6 -->
-								</div>
-								<!-- End .row-fluid -->
-							</div>
-							<!-- End .title -->
-							<div class="content">
-								Active Group Buys
-								<table class="table table-striped">
-									<tbody>
-										<?php $dao = new groupBuyDao();
-										$dao -> connect($host, $pdo);
-										$openOrders = $dao -> selectCurrentGroupBuy();
-										foreach ($openOrders as $i => $value) {
-											$order = $openOrders[$i];
-											print '<tr><td><a href="viewGroupBuy.php?id=' . $order -> getId() . '">' . $order -> getName() . '</a></td><td>' . $order -> getOwner() . '</td></tr>';
-										}
-										?>
-									</tbody>
-								</table>
-								<br />
-								<br />
-								Completed Group Buys
-								<table class="table table-striped">
-									<tbody>
-										<?php $openOrders = $dao -> selectExpireGroupBuy($user -> getEmail());
-										foreach ($openOrders as $i => $value) {
-											$order = $openOrders[$i];
-											print '<tr><td><a href="viewCompletedGroupBuy.php?id=' . $order -> getId() . '">' . $order -> getName() . '</a></td><td>' . $order -> getOwner() . '</td></tr>';
-										}
-										?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<!-- End .box -->
-					</div>
-					<!-- End .row-fluid -->
-				</div>
-				<!-- End #container -->
-			</div>
-			<?php include_once("includes/footer.php")
-			?>
-		</div>
-		</div>
-		<!-- /container -->
-		<?php include_once("includes/default-js.php")
-		?>
-	</body>
+            </div>
+            <div class="col-md-3">
+                <?php include_once("includes/right-nav.php")?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php include_once("includes/footer.php")?>
+</body>
 </html>
+
+
+
+<?php
+/*
+if (empty($typeProducts)) {
+    print "<li class='list-group-item light'>The are currently no active splits.</li>";
+}
+
+$index = 1;
+foreach ($typeProducts as $productSplit) {
+    $product = $productSplit -> getProduct();
+    $price = $utils->getDisplayPrice($user, $product, $groupBuy);
+    $vendor = $product->getVendor()
+    ?>
+    <li class="list-group-item light">
+        <form class="order-add hidden" method="post">
+            <input type="hidden" name="id" value="<?php print $product->getId()?>" />
+            <span>How much?</span>
+
+            <input type="button" class="btn grey cancel" value="Cancel" />
+            <input type="submit" value="Save" />
+        </form>
+        <?php if (isset($activeGroupBuy)) {  ?>
+            <a class="button add" href="#">Add</a>
+        <?php } ?>
+        <em><span><?php echo $index++ ?>.</span> <?php print $product->getName()?></em> <?php if (!empty($vendor)) { print ' - ' . $vendor; } ?>
+        <?php $desc = $product->getDescription(); if (!empty($desc)) { ?>
+            <div class="desc"><?php print $desc; ?></div>
+        <?php } ?>
+        <div><?php print $product->getDisplayUnits() . " @ " . '$' . $price ?> &nbsp;</div>
+        <div><?php print "<b>" . $productSplit->getDisplayAmount() . "</b> of <b>" . $product->getPoundsWithUnit() . "</b>"?></div>
+    </li>
+<?php
+}
+*/
+?>

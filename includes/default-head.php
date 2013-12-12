@@ -29,4 +29,4 @@ if (isset($_SESSION['activeGroupBuy'])){
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<?php include_once("../analyticstracking.php") ?>
+<?php include_once("analyticstracking.php") ?>

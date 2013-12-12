@@ -1,32 +1,32 @@
 <?php
-require '../dao/dao.php';
-require '../dao/groupBuyDao.php';
-require '../dao/userDao.php';
-require '../dao/orderDao.php';
-require '../dao/productDao.php';
-require '../entity/user.php';
-require '../entity/groupbuy.php';
-require '../entity/order.php';
-require '../entity/product.php';
-require '../entity/ProductSplit.php';
-require '../entity/split.php';
-require '../properties.php';
-require '../utils.php';
+require 'dao/dao.php';
+require 'dao/groupBuyDao.php';
+require 'dao/userDao.php';
+require 'dao/orderDao.php';
+require 'dao/productDao.php';
+require 'entity/user.php';
+require 'entity/groupbuy.php';
+require 'entity/order.php';
+require 'entity/product.php';
+require 'entity/ProductSplit.php';
+require 'entity/split.php';
+require 'properties.php';
+require 'utils.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once("includes/default-head.php")?>
+    <?php include_once("includes/default-head.php") ?>
 </head>
 <body class="login">
 <div class="content">
     <div class="logo">
-        <a href="/new/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
+        <a href="/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
     </div>
     <h3 class="centered">Your reset password email has been sent<br> and should be in your inbox shortly.</h3>
     <div class="footer-msg">
-        <p>Already have an account? <a href="/new/login.php">Sign in.</a></p>
+        <p>Already have an account? <a href="/login.php">Sign in.</a></p>
     </div>
 
     <div class="ad-row">

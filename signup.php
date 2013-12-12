@@ -1,17 +1,17 @@
 <?php
-require '../dao/dao.php';
-require '../dao/groupBuyDao.php';
-require '../dao/userDao.php';
-require '../dao/orderDao.php';
-require '../dao/productDao.php';
-require '../entity/user.php';
-require '../entity/groupbuy.php';
-require '../entity/order.php';
-require '../entity/product.php';
-require '../entity/ProductSplit.php';
-require '../entity/split.php';
-require '../properties.php';
-require '../utils.php';
+require 'dao/dao.php';
+require 'dao/groupBuyDao.php';
+require 'dao/userDao.php';
+require 'dao/orderDao.php';
+require 'dao/productDao.php';
+require 'entity/user.php';
+require 'entity/groupbuy.php';
+require 'entity/order.php';
+require 'entity/product.php';
+require 'entity/ProductSplit.php';
+require 'entity/split.php';
+require 'properties.php';
+require 'utils.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -50,12 +50,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once("includes/default-head.php")?>
+    <?php include_once("includes/default-head.php") ?>
 </head>
 <body class="login">
 <div class="content">
     <div class="logo">
-        <a href="/new/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
+        <a href="/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
     </div>
     <h3 class="centered">Create your Group Buy account.</h3>
     <?php if (!empty($message)) {  ?>
@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         </div>
     <?php } ?>
     <div class="box">
-        <form action="/new/signup.php" method="post">
+        <form action="/signup.php" method="post">
             <div class="text">
                 <span>
                     <label for="email">Email</label>

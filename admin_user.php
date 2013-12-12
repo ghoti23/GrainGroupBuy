@@ -69,7 +69,7 @@ $groupBuyID = strip_tags($_REQUEST["id"]);
             <div class="row-fluid ">
 
                 <?php
-                require_once ('includes/header.php');
+                require_once('includes/header.php');
                 ?>
 
                 <div class="span4">
@@ -213,7 +213,7 @@ $groupBuyID = strip_tags($_REQUEST["id"]);
     </div>
     <div id="viewModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     </div>
-    <?php include_once("includes/footer.php")?>
+    <?php include_once("includes/footer.php") ?>
 </div>
 <!-- /container -->
 </body>

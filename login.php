@@ -1,16 +1,16 @@
 <?php
-require '../dao/groupBuyDao.php';
-require '../dao/userDao.php';
-require '../dao/orderDao.php';
-require '../dao/productDao.php';
-require '../entity/user.php';
-require '../entity/groupbuy.php';
-require '../entity/order.php';
-require '../entity/product.php';
-require '../entity/ProductSplit.php';
-require '../entity/split.php';
-require '../properties.php';
-require '../utils.php';
+require 'dao/groupBuyDao.php';
+require 'dao/userDao.php';
+require 'dao/orderDao.php';
+require 'dao/productDao.php';
+require 'entity/user.php';
+require 'entity/groupbuy.php';
+require 'entity/order.php';
+require 'entity/product.php';
+require 'entity/ProductSplit.php';
+require 'entity/split.php';
+require 'properties.php';
+require 'utils.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -53,13 +53,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once("includes/default-head.php")?>
+    <?php include_once("includes/default-head.php") ?>
 </head>
 <body class="login">
 
 <div class="content">
     <div class="logo">
-        <a href="/new/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
+        <a href="/index.php"><img src="/img/groupbuy_white_tiny.png" /></a>
     </div>
     <h3 class="centered">Welcome back!</h3>
     <div class="box">
@@ -68,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <?php echo $message ?>
             </div>
         <?php } ?>
-        <form action="/new/login.php" method="post">
+        <form action="/login.php" method="post">
             <div class="text">
                 <span>
                     <label for="username">Email</label>
@@ -87,8 +87,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         </form>
     </div>
     <div class="footer-msg">
-        <p><a href="/new/reset.php">Forgot your password?</a></p>
-        <p class="nopad">Don't have an account? <a href="/new/signup.php">Sign up.</a></p>
+        <p><a href="/reset.php">Forgot your password?</a></p>
+        <p class="nopad">Don't have an account? <a href="/signup.php">Sign up.</a></p>
     </div>
 
     <div class="ad-row">
