@@ -7,6 +7,7 @@ class Product implements JsonSerializable
     private $name;
     private $vendor;
     private $description;
+    private $unitSize;
     private $price;
     private $price4000;
     private $price8000;
@@ -100,7 +101,26 @@ class Product implements JsonSerializable
         if (!empty($row["imagePath"])) {
             $product->setImagePath($row["imagePath"]);
         }
+        if (!empty($row["unitSize"])) {
+            $product->setUnitSize($row["unitSize"]);
+        }
         return $product;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUnitSize()
+    {
+        return $this->unitSize;
+    }
+
+    /**
+     * @param mixed $unitSize
+     */
+    public function setUnitSize($unitSize)
+    {
+        $this->unitSize = $unitSize;
     }
 
     /**
@@ -198,7 +218,7 @@ class Product implements JsonSerializable
 
         }
 
-        return "1";
+        return $this->getUnitSize();
     }
 
     public function getPoundsWithUnit()

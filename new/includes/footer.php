@@ -21,7 +21,9 @@
                         <img />
                     </div>
                     <div class="col-md-7">
+                        <div class="vendor"></div>
                         <div class="desc"></div>
+                        <div class="price"></div>
                         <em>How Much?</em>
                         <select name="value">
                         </select>

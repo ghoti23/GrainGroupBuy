@@ -2732,12 +2732,21 @@ a.list-group-item.active:focus .list-group-item-text {
           transform: translate(0, 0);
 }
 
-.modal form em {
+.modal form em,
+.modal form .vendor,
+.modal form .price {
   display: block;
-  padding: 10px 0;
   font-style: normal;
   font-weight: 700;
   color: #333;
+}
+
+.modal form .price {
+  padding: 10px 0 0 0;
+}
+
+.modal form em {
+  padding: 10px 0;
 }
 
 .modal form select {
