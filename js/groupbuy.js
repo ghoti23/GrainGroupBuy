@@ -482,7 +482,7 @@ return(!i||i!==r&&!b.contains(r,i))&&(e.type=o.origType,n=o.handler.apply(this,a
 				current_order.html(resp);
 				product_modal.modal('hide')
 			},
-			url: "/new/add-item.php"
+			url: "add-item.php"
 		});
 
 		return false;
