@@ -53,52 +53,28 @@ $sub_title = "Current Group Buy";
             <div class="col-md-9">
                 <?php
                 if (isset($_SESSION['activeGroupBuy'])) {
-                    $grainTotal = $orderDao -> getAllOrdersTotalPoundsByType($_SESSION['activeGroupBuy'], 'grain');
-                    $hopTotal = $orderDao -> getAllOrdersTotalPoundsByType($_SESSION['activeGroupBuy'], 'hops');
-                    $supplyTotal = $orderDao -> getAllOrdersTotalSupplies($_SESSION['activeGroupBuy']);
+                    $totalMembers = $orderDao -> getNumberOfOrderMembers($_SESSION['activeGroupBuy']);
+                    $sizeTotal = $orderDao -> getAllOrdersTotalPounds($_SESSION['activeGroupBuy']);
+                    $orderTotal = $orderDao -> getEstimatedOrderTotal($_SESSION['activeGroupBuy']);
                     ?>
 
                     <article>
                         <div class="row-fluid stats clearfix heads-up">
-                            <?php if ($groupBuy->getHopsOnly() != 0 && $groupBuy->getGrainOnly() != 0) {?>
-                                <div class="col-md-4 stat">
-                                    Total Grains
-                                    <div class="icon"><img src="img/grain-icon.png" /></div>
-                                    <span><?php print number_format($grainTotal); ?> lbs</span>
-                                </div>
-                                <div class="col-md-4 stat">
-                                    Total Hops
-                                    <div class="icon"><img src="img/grain-icon.png" /></div>
-                                    <span><?php print number_format(round($hopTotal)); ?> lbs</span>
-                                </div>
-                                <div class="col-md-4 stat">
-                                    Total Supplies
-                                    <div class="icon"><img src="img/grain-icon.png" /></div>
-                                    <span><?php print number_format(round($supplyTotal)); ?></span>
-                                </div>
-                            <?php } elseif ($groupBuy->getHopsOnly() != 0) { ?>
-                                <div class="col-md-6 stat">
-                                    Total Hops
-                                    <div class="icon"><img src="img/grain-icon.png" /></div>
-                                    <span><?php print number_format(round($hopTotal)); ?> lbs</span>
-                                </div>
-                                <div class="col-md-6 stat">
-                                    Total Supplies
-                                    <div class="icon"><img src="img/grain-icon.png" /></div>
-                                    <span><?php print number_format(round($supplyTotal)); ?></span>
-                                </div>
-                            <?php } elseif ($groupBuy->getGrainOnly() != 0) { ?>
-                                <div class="col-md-6 stat">
-                                    Total Grains
-                                    <div class="icon"><img src="img/grain-icon.png" /></div>
-                                    <span><?php print number_format($grainTotal); ?> lbs</span>
-                                </div>
-                                <div class="col-md-6 stat">
-                                    Total Supplies
-                                    <div class="icon"><img src="img/grain-icon.png" /></div>
-                                    <span><?php print number_format(round($supplyTotal)); ?></span>
-                                </div>
-                            <?php } ?>
+                            <div class="col-md-4 stat">
+                                Members
+                                <div class="icon"><img src="img/grain-icon.png" /></div>
+                                <span><?php print number_format($totalMembers); ?></span>
+                            </div>
+                            <div class="col-md-4 stat">
+                                Quantity
+                                <div class="icon"><img src="img/grain-icon.png" /></div>
+                                <span><?php print number_format(round($sizeTotal)); ?> lbs</span>
+                            </div>
+                            <div class="col-md-4 stat">
+                                Est. Total
+                                <div class="icon"><img src="img/grain-icon.png" /></div>
+                                <span><?php print '$' . number_format($orderTotal, 2); ?></span>
+                            </div>
                         </div>
                     </article>
 

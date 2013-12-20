@@ -389,6 +389,46 @@ class orderDao {
         }
     }
 
+    public function getNumberOfOrderMembers ($groupBuyID) {
+        try {
+            $pdo = $this->pdoObject;
+            $sql = "select count(*) as total from (select email from user_order where groupBuyId = ? group by email) t";
+            $sth=$pdo->prepare($sql);
+            $sth->execute(array ($groupBuyID) );
+
+            $results = $sth->fetchAll();
+            if ($results != null) {
+                foreach ($results as $row) {
+                    return $row["total"];
+                }
+            } else {
+                return 0;
+            }
+        } catch (Exception $e) {
+            echo "Error: ". $e->getMessage();
+        }
+    }
+
+    public function getEstimatedOrderTotal ($groupBuyID) {
+        try {
+            $pdo = $this->pdoObject;
+            $sql = "select sum(product_total) as product_total from (select SUM(amount * price) as product_total from user_order join product on user_order.productID = product.id where groupBuyId = ? and type != 'grain' union select SUM(amount * pounds * price) as product_total from user_order join product on user_order.productID = product.id where groupBuyId = ? and type = 'grain') t";
+            $sth=$pdo->prepare($sql);
+            $sth->execute(array ($groupBuyID, $groupBuyID) );
+
+            $results = $sth->fetchAll();
+            if ($results != null) {
+                foreach ($results as $row) {
+                    return $row["product_total"];
+                }
+            } else {
+                return 0;
+            }
+        } catch (Exception $e) {
+            echo "Error: ". $e->getMessage();
+        }
+    }
+
     public function getAllOrdersTotalPoundsByType ($groupBuyID, $type) {
         try {
             $pdo = $this->pdoObject;
