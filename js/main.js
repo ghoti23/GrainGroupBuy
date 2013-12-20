@@ -81,7 +81,7 @@
 				current_order.html(resp);
 				product_modal.modal('hide')
 			},
-			url: "/new/add-item.php"
+			url: "add-item.php"
 		});
 
 		return false;
